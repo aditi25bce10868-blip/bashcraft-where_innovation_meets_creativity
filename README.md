@@ -1,6 +1,6 @@
 #  BashCraft Club 
 
- Where Innovation Meets Creativity
+> Where Innovation Meets Creativity
 
  >Learn from FAANG & Big 4 Professionals
 
@@ -53,7 +53,7 @@ bashcraft/
 | `--font-body`     | `'Inter', sans-serif`        | Body copy       |
 | `--font-accent`   | `'Poppins', sans-serif`      | Labels, tags    |
 
-Apply the gradient text utility class anywhere: `<span className="gradient-text">BashCraft</span>`
+
 
 ---
 
@@ -76,7 +76,7 @@ Create `src/components/YourComponent.jsx` (and optionally `YourComponent.module.
 - **React 18** — UI library
 - **Vite 5** — Build tool & dev server
 - **React Router 6** — Client-side routing
-- **Framer Motion** — Animations (already installed)
+- **Framer Motion** — Animations 
 - **CSS Modules** — Scoped component styles
 
 ---
