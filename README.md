@@ -1,90 +1,215 @@
-#  BashCraft Club 
+#  BashCraft Club
 
 > Where Innovation Meets Creativity
 
- >Learn from FAANG & Big 4 Professionals
+> Connect with FAANG & Big 4 professionals — mentorship, live sessions, and career guidance.
 
-## Getting Started
+![Stack](https://img.shields.io/badge/React-18-61DAFB?style=flat&logo=react)
+![Stack](https://img.shields.io/badge/Vite-5-646CFF?style=flat&logo=vite)
+![Stack](https://img.shields.io/badge/Node.js-Express-339933?style=flat&logo=node.js)
 
-```bash
-# 1. Install dependencies
-npm install
-
-# 2. Start the dev server
-npm run dev
-```
-
-Then open [http://localhost:5173](http://localhost:5173) in your browser.
 
 ---
 
-## Project Structure
+## 📁 Project Structure
 
 ```
 bashcraft/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── assets/          # Images, icons, fonts
-│   ├── components/      # Reusable UI components (Navbar, Modal, Button…)
-│   ├── pages/           # Full page components (Home, About, Events…)
-│   ├── App.jsx          # Root component with routes
-│   ├── main.jsx         # React entry point
-│   └── index.css        # Global styles & CSS variables
+│
+├── 📁 src/                              ← Frontend (React + Vite)
+│   ├── components/
+│   │   ├── Navbar.jsx                   ← Sticky nav with Register & Login
+│   │   ├── Navbar.module.css
+│   │   ├── modals/
+│   │   │   ├── RegisterModal.jsx        ← Registration form
+│   │   │   ├── LoginModal.jsx           ← Email login → certificate redirect
+│   │   │   └── Modal.module.css
+│   │   └── certificate/
+│   │       ├── CertificatePage.jsx      ← Full-screen cert view + print
+│   │       └── Certificate.module.css
+│   ├── context/
+│   │   └── ModalContext.jsx             ← Global modal open/close state
+│   ├── hooks/
+│   │   └── useAuth.js                   ← Read/clear logged-in user
+│   ├── services/
+│   │   └── api.js                       ← All fetch() calls to backend
+│   ├── pages/
+│   │   └── Home.jsx                     ← Landing page (add sections here)
+│   ├── assets/                          ← Images, icons, logos
+│   ├── App.jsx                          ← Routes + modal providers
+│   ├── main.jsx                         ← React entry point
+│   └── index.css                        ← CSS variables & global base styles
+│
+├── 📁 backend/                          ← Backend (Node.js + Express)
+│   ├── config/
+│   │   └── db.js                        ← Database connection config
+│   ├── models/
+│   │   └── Attendee.js                  ← Data model: name, email, college, certId
+│   ├── routes/
+│   │   ├── auth.js                      ← POST /register, POST /login
+│   │   └── certificate.js              ← GET /certificate/:email
+│   ├── middleware/
+│   │   └── errorHandler.js             ← Global error handler
+│   ├── server.js                        ← Express app entry point
+│   ├── package.json
+│   └── .env.example                     ← Copy → .env, fill in DB credentials
+│
 ├── index.html
 ├── vite.config.js
-└── package.json
+├── package.json
+├── .env.example                         ← Copy → .env, set VITE_API_URL
+├── PROJECT_LEADER_GUIDE.md             ← Full guide for the project lead
+└── README.md                            ← You are here
 ```
 
 ---
 
-## CSS Variables (Defined in `src/index.css`)
+## ⚙️ Local Setup
 
-| Variable          | Value                        | Use             |
-|-------------------|------------------------------|-----------------|
-| `--primary`       | `#E8430A`                    | Orange accent   |
-| `--secondary`     | `#F26419`                    | Orange gradient |
-| `--bg-dark`       | `#050505`                    | Page background |
-| `--bg-charcoal`   | `#111111`                    | Card background |
-| `--text-primary`  | `#ffffff`                    | Main text       |
-| `--text-secondary`| `rgba(255,255,255,0.7)`      | Muted text      |
-| `--glass-border`  | `rgba(255,255,255,0.1)`      | Card borders    |
-| `--font-display`  | `'Space Grotesk', sans-serif`| Headings        |
-| `--font-body`     | `'Inter', sans-serif`        | Body copy       |
-| `--font-accent`   | `'Poppins', sans-serif`      | Labels, tags    |
+### Prerequisites
+- Node.js v18+
+- A database account (MongoDB Atlas or Firebase — TBD by backend team)
 
+### Step 1 — Clone & install
 
+```bash
+# Frontend dependencies
+cd bashcraft
+npm install
+
+# Backend dependencies
+cd backend
+npm install
+```
+
+### Step 2 — Environment files
+
+**Frontend** — create `bashcraft/.env`:
+```env
+VITE_API_URL=http://localhost:5000/api
+```
+
+**Backend** — create `bashcraft/backend/.env`:
+```env
+PORT=5000
+DB_URI=<your_database_connection_string>
+CLIENT_URL=http://localhost:5173
+```
+
+> Backend team: fill `DB_URI` based on whichever database is chosen.
+
+### Step 3 — Run (two terminals)
+
+```bash
+# Terminal 1 — Backend
+cd bashcraft/backend
+npm run dev        # http://localhost:5000
+
+# Terminal 2 — Frontend
+cd bashcraft
+npm run dev        # http://localhost:5173
+```
 
 ---
 
-## How to Add a New Page
 
-1. Create `src/pages/YourPage.jsx`
-2. Add a route in `src/App.jsx`:
-   ```jsx
-   <Route path="/your-page" element={<YourPage />} />
-   ```
 
-## How to Add a New Component
+## 🎨 Design System
 
-Create `src/components/YourComponent.jsx` (and optionally `YourComponent.module.css`).
+All design tokens live in `src/index.css` as CSS variables.
+
+| Variable | Value | Usage |
+|----------|-------|-------|
+| `--primary` | `#E8430A` | Orange accent, buttons, highlights |
+| `--secondary` | `#F26419` | Gradient end, hover states |
+| `--bg-dark` | `#050505` | Page background |
+| `--bg-charcoal` | `#111111` | Card / modal background |
+| `--text-primary` | `#ffffff` | Main text |
+| `--text-secondary` | `rgba(255,255,255,0.7)` | Muted / subtitle text |
+| `--glass-border` | `rgba(255,255,255,0.1)` | Card borders |
+| `--font-display` | `'Space Grotesk'` | Headings, logo |
+| `--font-body` | `'Inter'` | Body copy, inputs |
+| `--font-accent` | `'Poppins'` | Labels, tags, signatures |
+
+
+
+**Open modals from any component:**
+```jsx
+import { useModal } from '../context/ModalContext'
+
+const { openRegister, openLogin } = useModal()
+<button onClick={openRegister}>Join Us</button>
+```
 
 ---
 
-## Tech Stack
+## 🧩 How to Add a New Page
 
-- **React 18** — UI library
-- **Vite 5** — Build tool & dev server
-- **React Router 6** — Client-side routing
-- **Framer Motion** — Animations 
-- **CSS Modules** — Scoped component styles
+1. Create `src/pages/NewPage.jsx`
+2. Register the route in `src/App.jsx`:
+
+```jsx
+import NewPage from './pages/NewPage.jsx'
+// inside <Routes>:
+<Route path="/new-page" element={<NewPage />} />
+```
+
+## 🧩 How to Add a New Component
+
+```
+src/components/MyComponent.jsx
+src/components/MyComponent.module.css   ← scoped styles
+```
+
+Never use hardcoded hex values — always reference `var(--primary)` etc.
 
 ---
 
-## Available Scripts
+## 🚀 Deployment
 
-| Command          | Description              |
-|------------------|--------------------------|
-| `npm run dev`    | Start dev server         |
-| `npm run build`  | Production build         |
-| `npm run preview`| Preview production build |
+### Frontend → Vercel
+1. Push to GitHub
+2. Import repo on [vercel.com](https://vercel.com), set root to `bashcraft/`
+3. Add env var: `VITE_API_URL` = your deployed backend URL
+4. Deploy
+
+### Backend → Render
+1. New Web Service on [render.com](https://render.com), root = `bashcraft/backend`
+2. Build: `npm install` · Start: `node server.js`
+3. Add env vars: `Database_URI`, `CLIENT_URL` (Vercel URL), `PORT=5000`
+4. Deploy
+
+---
+
+## 🛠️ Available Scripts
+
+### Frontend (`bashcraft/`)
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start dev server at localhost:5173 |
+| `npm run build` | Production build to `dist/` |
+| `npm run preview` | Preview production build locally |
+
+### Backend (`bashcraft/backend/`)
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start with nodemon (auto-restart) |
+| `npm start` | Start without nodemon (production) |
+
+---
+
+
+
+## 📚 Tech Stack
+
+| Layer | Technology |
+|-------|------------|
+| Frontend | React 18, Vite 5, React Router 6, Framer Motion |
+| Styling | CSS Modules + CSS Variables |
+| Backend | Node.js, Express 4 |
+| Database | TBD by team |
+| Deployment | Vercel (frontend) + Render (backend) |
+
+---
+
+*Built with 🔥 by the BashCraft team.*
