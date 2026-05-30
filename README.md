@@ -12,56 +12,66 @@
 ---
 
 ## 📁 Project Structure
-
 ```
 bashcraft/
 │
 ├── 📁 src/                              ← Frontend (React + Vite)
 │   ├── components/
-│   │   ├── Navbar.jsx                   ← Sticky nav with Register & Login
+│   │   ├── Navbar.jsx                   ← Sticky navigation
 │   │   ├── Navbar.module.css
 │   │   ├── modals/
 │   │   │   ├── RegisterModal.jsx        ← Registration form
-│   │   │   ├── LoginModal.jsx           ← Email login → certificate redirect
+│   │   │   ├── LoginModal.jsx           ← User login form
 │   │   │   └── Modal.module.css
-│   │   └── certificate/
-│   │       ├── CertificatePage.jsx      ← Full-screen cert view + print
-│   │       └── Certificate.module.css
+│   │
 │   ├── context/
-│   │   └── ModalContext.jsx             ← Global modal open/close state
+│   │   └── ModalContext.jsx             ← Global modal state
+│   │
 │   ├── hooks/
-│   │   └── useAuth.js                   ← Read/clear logged-in user
+│   │   └── useAuth.js                   ← Auth utilities
+│   │
 │   ├── services/
-│   │   └── api.js                       ← All fetch() calls to backend
+│   │   └── api.js                       ← Backend API calls
+│   │
 │   ├── pages/
-│   │   └── Home.jsx                     ← Landing page (add sections here)
-│   ├── assets/                          ← Images, icons, logos
-│   ├── App.jsx                          ← Routes + modal providers
+│   │   ├── Home.jsx                     ← Landing page
+│   │   ├── About.jsx                    ← About BashCraft event
+│   │   ├── Speakers.jsx                 ← Speaker showcase section
+│   │   ├── Instructions.jsx             ← Event guidelines & instructions
+│   │   ├── Contact.jsx                  ← Contact details & form
+│   │   └── Login.jsx                    ← Dedicated login page
+│   │
+│   ├── assets/                          ← Images, logos, icons
+│   │
+│   ├── App.jsx                          ← Routes & providers
 │   ├── main.jsx                         ← React entry point
-│   └── index.css                        ← CSS variables & global base styles
+│   └── index.css                        ← Global styles
 │
 ├── 📁 backend/                          ← Backend (Node.js + Express)
 │   ├── config/
-│   │   └── db.js                        ← Database connection config
+│   │   └── db.js                        ← Database configuration
+│   │
 │   ├── models/
-│   │   └── Attendee.js                  ← Data model: name, email, college, certId
+│   │   └── Attendee.js                  ← name, email, college, etc.
+│   │
 │   ├── routes/
-│   │   ├── auth.js                      ← POST /register, POST /login
-│   │   └── certificate.js              ← GET /certificate/:email
+│   │   └── auth.js                      ← POST /register, POST /login
+│   │
 │   ├── middleware/
-│   │   └── errorHandler.js             ← Global error handler
-│   ├── server.js                        ← Express app entry point
+│   │   └── errorHandler.js              ← Global error handler
+│   │
+│   ├── server.js                        ← Express entry point
 │   ├── package.json
-│   └── .env.example                     ← Copy → .env, fill in DB credentials
+│   └── .env.example                     ← Backend environment template
 │
 ├── index.html
 ├── vite.config.js
 ├── package.json
-├── .env.example                         ← Copy → .env, set VITE_API_URL
-├── PROJECT_LEADER_GUIDE.md             ← Full guide for the project lead
-└── README.md                            ← You are here
-```
+├── .env.example                         ← Frontend environment template
+├── README.md
 
+
+```
 ---
 
 ## ⚙️ Local Setup
