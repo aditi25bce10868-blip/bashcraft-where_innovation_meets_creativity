@@ -1,6 +1,8 @@
-# 🔥 BashCraft Club — React App
+#  BashCraft Club 
 
-> Learn from FAANG & Big 4 Professionals
+ Where Innovation Meets Creativity
+
+ >Learn from FAANG & Big 4 Professionals
 
 ## Getting Started
 
