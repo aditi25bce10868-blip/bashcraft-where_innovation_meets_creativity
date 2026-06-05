@@ -1,38 +1,38 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 // Pages — each teammate owns one file
-import Home        from './pages/Home';
-import About       from './pages/About';
-import Speakers    from './pages/Speakers';
+import Home         from './pages/Home';
+import About        from './pages/About';
+import Speakers     from './pages/Speakers';
 import Instructions from './pages/Instructions';
-import  Contact    from './pages/Contact';
-import  Login      from  './pages/Login';
+import Contact      from './pages/Contact';
+import Login        from './pages/Login';
+import Timeline     from './pages/Timeline';
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/"          element={<Home />}      />
-        <Route path="/about"     element={<About />}     />
-        <Route path="/speakers"  element={<Speakers />}  />
-        <Route path="/instructions"  element={< Instructions/>}  />
-        <Route path="/contact"   element={<Contact />}   />
-        <Route path="/login"     element={<Login/>}    />
+    <Routes>
+      <Route path="/"             element={<Home />}         />
+      <Route path="/about"        element={<About />}        />
+      <Route path="/speakers"     element={<Speakers />}     />
+      <Route path="/instructions" element={<Instructions />} />
+      <Route path="/contact"      element={<Contact />}      />
+      <Route path="/login"        element={<Login />}        />
+      <Route path="/schedule"     element={<Timeline />}     />
 
-        {/* 404 — swap with a proper NotFound page when ready */}
-        <Route path="*" element={
-          <div style={{ display:'grid', placeItems:'center', minHeight:'100vh',
-                        fontFamily:'var(--font-display)', color:'var(--text-secondary)' }}>
-            <div style={{ textAlign:'center' }}>
-              <p style={{ fontSize:'4rem', margin:0 }}>404</p>
-              <p>Page not found</p>
-              <a href="/" style={{ color:'var(--primary)', marginTop:'1rem', display:'block' }}>
-                ← Back to home
-              </a>
-            </div>
+      {/* 404 */}
+      <Route path="*" element={
+        <div style={{ display:'grid', placeItems:'center', minHeight:'100vh',
+                      fontFamily:'var(--font-display)', color:'var(--text-secondary)' }}>
+          <div style={{ textAlign:'center' }}>
+            <p style={{ fontSize:'4rem', margin:0 }}>404</p>
+            <p>Page not found</p>
+            <a href="/" style={{ color:'var(--primary)', marginTop:'1rem', display:'block' }}>
+              ← Back to home
+            </a>
           </div>
-        } />
-      </Routes>
-    </BrowserRouter>
+        </div>
+      } />
+    </Routes>
   );
 }
