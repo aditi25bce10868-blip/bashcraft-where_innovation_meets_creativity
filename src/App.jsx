@@ -1,6 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
 
-// Pages — each teammate owns one file
 import Home         from './pages/Home';
 import About        from './pages/About';
 import Speakers     from './pages/Speakers';
