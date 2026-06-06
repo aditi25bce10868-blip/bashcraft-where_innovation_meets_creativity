@@ -1,8 +1,208 @@
+<<<<<<< HEAD
 export default function Timeline() {
   return (
     <main style={{ minHeight: '100vh', display: 'grid', placeItems: 'center',
                    fontFamily: 'var(--font-display)', color: 'var(--text-secondary)' }}>
       <p>Timeline page — coming soon</p>
     </main>
+=======
+// Timeline page — assign to: Raunak Sharma
+import { useEffect, useRef } from 'react';
+import './Timeline.css';
+
+const events = [
+  { id: 'e0', side: 'L', date: 'June 1, 2026',            time: null,        title: 'Registration Opens',   desc: 'Sign up early to secure your spot. Limited seats available for this exclusive session.' },
+  { id: 'e1', side: 'R', date: 'June 10, 2026',           time: '10:00 AM',  title: 'Opening Ceremony',     desc: 'Welcome address and introduction to our distinguished panel of speakers.' },
+  { id: 'e2', side: 'L', date: 'June 10, 2026',           time: '11:00 AM',  title: 'Speaker Sessions',     desc: 'In-depth presentations from industry experts sharing their experiences and insights.' },
+  { id: 'e3', side: 'R', date: 'June 10, 2026',           time: '2:00 PM',   title: 'Live Q&A',             desc: 'Interactive session where you can ask questions directly to our speakers.' },
+  { id: 'e4', side: 'L', date: 'June 10, 2026',           time: '4:00 PM',   title: 'Closing & Networking', desc: 'Wrap-up, key takeaways, and virtual networking opportunities.' },
+];
+
+function buildTitle(text) {
+  return text.split(' ').map((word, i) => (
+    <span key={i} className="tl-ww">
+      <span className="tl-w">{word}</span>
+    </span>
+  ));
+}
+
+export default function Timeline() {
+  const tlRef    = useRef(null);
+  const svgRef   = useRef(null);
+  const trackRef = useRef(null);
+  const progRef  = useRef(null);
+  const cardRefs = useRef([]);
+  const fracsRef = useRef([]);
+  const doneRef  = useRef(new Set());
+  const pLenRef  = useRef(0);
+
+  const CARD_H = 148;
+  const SLOT   = 300;
+  const TOP    = 30;
+  const BOT    = 80;
+
+  function cy(i) { return TOP + i * SLOT + CARD_H / 2; }
+  function totalH() { return TOP + events.length * SLOT + BOT; }
+
+  function build() {
+    const W = window.innerWidth;
+    const H = totalH();
+
+    // position cards
+    cardRefs.current.forEach((el, i) => {
+      if (el) el.style.top = (cy(i) - CARD_H / 2) + 'px';
+    });
+
+    if (tlRef.current)  tlRef.current.style.height  = H + 'px';
+    if (svgRef.current) {
+      svgRef.current.setAttribute('height', H);
+      svgRef.current.setAttribute('viewBox', `0 0 ${W} ${H}`);
+    }
+
+    const L  = W * 0.41;
+    const R  = W * 0.59;
+    const fL = W * 0.02;
+    const fR = W * 0.98;
+    const cx = W * 0.5;
+
+    const y0=cy(0), y1=cy(1), y2=cy(2), y3=cy(3), y4=cy(4);
+
+    let d = `M ${L} ${y0}`;
+    d += ` C ${fL} ${y0+(y1-y0)*0.3}, ${fR} ${y0+(y1-y0)*0.7}, ${R} ${y1}`;
+    d += ` C ${fR} ${y1+(y2-y1)*0.3}, ${fL} ${y1+(y2-y1)*0.7}, ${L} ${y2}`;
+    d += ` C ${fL} ${y2+(y3-y2)*0.3}, ${fR} ${y2+(y3-y2)*0.7}, ${R} ${y3}`;
+    d += ` C ${fR} ${y3+(y4-y3)*0.3}, ${fL} ${y3+(y4-y3)*0.7}, ${L} ${y4}`;
+    d += ` C ${fL} ${y4+(H-y4)*0.5}, ${cx} ${H-BOT*0.3}, ${cx} ${H}`;
+
+    if (trackRef.current) trackRef.current.setAttribute('d', d);
+    if (progRef.current)  progRef.current.setAttribute('d', d);
+
+    const pe = progRef.current;
+    const pLen = pe.getTotalLength();
+    pLenRef.current = pLen;
+    pe.style.strokeDasharray  = pLen;
+    pe.style.strokeDashoffset = pLen;
+
+    // compute trigger fractions — card 0 at start, rest by bounding box sampling
+    fracsRef.current = events.map((ev, i) => {
+      if (i === 0) return 0;
+      const el = cardRefs.current[i];
+      if (!el) return (i + 1) / events.length;
+      const cardTop    = parseFloat(el.style.top);
+      const cardBottom = cardTop + CARD_H;
+      const cardLeft   = ev.side === 'L' ? W * 0.03 : W * 0.59;
+      const cardRight  = ev.side === 'L' ? W * 0.41 : W * 0.97;
+      const STEPS = 2000;
+      for (let s = 0; s <= STEPS; s++) {
+        const f  = s / STEPS;
+        const pt = pe.getPointAtLength(f * pLen);
+        if (pt.x >= cardLeft && pt.x <= cardRight && pt.y >= cardTop && pt.y <= cardBottom) return f;
+      }
+      // fallback: closest y
+      let best = 1, bestD = Infinity;
+      for (let s = 0; s <= STEPS; s++) {
+        const f  = s / STEPS;
+        const pt = pe.getPointAtLength(f * pLen);
+        const dist = Math.abs(pt.y - (cardTop + CARD_H / 2));
+        if (dist < bestD) { bestD = dist; best = f; }
+      }
+      return best;
+    });
+  }
+
+  function onScroll() {
+    const tl   = tlRef.current;
+    const prog = progRef.current;
+    if (!tl || !prog) return;
+
+    const rect      = tl.getBoundingClientRect();
+    const scrolled  = -rect.top;
+    const available = tl.offsetHeight - window.innerHeight;
+    const p         = Math.min(1, Math.max(0, scrolled / Math.max(1, available)));
+    const pLen      = pLenRef.current;
+
+    prog.style.strokeDashoffset = pLen - p * pLen;
+
+    fracsRef.current.forEach((frac, i) => {
+      if (!doneRef.current.has(i) && p >= frac) {
+        doneRef.current.add(i);
+        cardRefs.current[i]?.classList.add('tl-on');
+      }
+    });
+  }
+
+  useEffect(() => {
+    build();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', () => {
+      doneRef.current.clear();
+      cardRefs.current.forEach(el => el?.classList.remove('tl-on'));
+      build();
+      onScroll();
+    });
+    onScroll();
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+    };
+  }, []);
+
+  return (
+    <>
+      {/* ── Hero ── */}
+      <section className="tl-hero">
+        <span className="tl-badge">📅 Schedule</span>
+        <h1 className="tl-hero-title">
+          Event<br /><span>Timeline.</span>
+        </h1>
+        <p className="tl-hero-sub">
+          Mark your calendar and don't miss any part of this exciting event.
+        </p>
+        <div className="tl-scroll-hint">
+          <div className="tl-mouse"><div className="tl-wheel" /></div>
+          scroll
+        </div>
+      </section>
+
+      {/* ── Timeline ── */}
+      <div className="tl-wrap" ref={tlRef}>
+        <svg
+          className="tl-svg"
+          ref={svgRef}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            id="tl-track"
+            ref={trackRef}
+            fill="none"
+            stroke="rgba(242,100,25,0.12)"
+            strokeWidth="7"
+            strokeLinecap="round"
+          />
+          <path
+            id="tl-prog"
+            ref={progRef}
+            fill="none"
+            stroke="#F26419"
+            strokeWidth="7"
+            strokeLinecap="round"
+          />
+        </svg>
+
+        {events.map((ev, i) => (
+          <div
+            key={ev.id}
+            className={`tl-card ${ev.side === 'L' ? 'tl-L' : 'tl-R'}`}
+            ref={el => (cardRefs.current[i] = el)}
+          >
+            <p className="tl-date">
+              {ev.date}{ev.time ? ` | ${ev.time}` : ''}
+            </p>
+            <h3 className="tl-title">{buildTitle(ev.title)}</h3>
+            <p className="tl-desc">{ev.desc}</p>
+          </div>
+        ))}
+      </div>
+    </>
+>>>>>>> 4c7d5d5b2eba7c5015953f630ab1799460fdef7d
   );
 }
