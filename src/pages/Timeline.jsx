@@ -1,3 +1,11 @@
+<<<<<<< HEAD
+export default function Timeline() {
+  return (
+    <main style={{ minHeight: '100vh', display: 'grid', placeItems: 'center',
+                   fontFamily: 'var(--font-display)', color: 'var(--text-secondary)' }}>
+      <p>Timeline page — coming soon</p>
+    </main>
+=======
 // Timeline page — assign to: Raunak Sharma
 import { useEffect, useRef } from 'react';
 import './Timeline.css';
@@ -195,5 +203,6 @@ export default function Timeline() {
         ))}
       </div>
     </>
+>>>>>>> 4c7d5d5b2eba7c5015953f630ab1799460fdef7d
   );
 }
