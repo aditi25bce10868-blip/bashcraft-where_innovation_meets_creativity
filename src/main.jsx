@@ -2,12 +2,17 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import App from './App.jsx'
+import { ModalProvider } from './context/ModalContext.jsx'
+import Footer from './components/Footer.jsx'
 import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <ModalProvider>
+        <App />
+        <Footer />
+      </ModalProvider>
     </BrowserRouter>
   </React.StrictMode>,
 )
