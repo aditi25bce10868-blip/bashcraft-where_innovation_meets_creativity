@@ -259,7 +259,7 @@ function ScannerHeading() {
       <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "clamp(2.4rem,6vw,4.5rem)", lineHeight: 1.25, color: "var(--text-primary)", position: "absolute", top: 0, left: 0, right: 0, margin: 0, padding: "4px 0", filter: "blur(0px)", textShadow: "0 0 18px rgba(232,67,10,0.5), 0 0 36px rgba(232,67,10,0.2)", clipPath: `inset(0 ${done ? 0 : revealRight}% 0 0)`, transition: done ? "clip-path 0.5s ease" : "none", pointerEvents: "none", overflow: "visible", whiteSpace: "normal" }}>
         Where Innovation Meets Creativity
       </h2>
-      {scanning && (() => {
+      {scanning && !window.matchMedia("(max-width: 768px)").matches && (() => {
         const bracketLeft = `clamp(0px, calc(${scanPct}% - ${BRACKET_W / 2}px), calc(100% - ${BRACKET_W}px))`;
         return (
           <div style={{ position: "absolute", top: "4px", bottom: "4px", left: bracketLeft, width: `${BRACKET_W}px`, pointerEvents: "none" }}>
