@@ -78,9 +78,32 @@
   text-decoration: none;
 }
 
+/* FIX 3 — mobile footer: remove excess space */
 @media (max-width: 900px) {
-  .container { flex-direction: column; align-items: center; text-align: center; }
-  .right { order: 3; }
-  .left { order: 1; }
+  .footer {
+    padding: 2rem 1.5rem 1.5rem; /* reduced bottom padding */
+  }
+  .container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.2rem; /* was 2rem — tightened */
+  }
+  .right {
+    order: 3;
+    margin-bottom: 0; /* no extra bottom margin */
+  }
+  .left {
+    order: 1;
+  }
   .social { justify-content: center; }
+  .tagline { margin-bottom: 0.75rem; }
+  .linksList { gap: 0.4rem; }
+}
+.brandIcon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  object-fit: contain;
+  background: rgba(232,67,10,0.15); /* keep the orange bg if logo has transparency */
 }
