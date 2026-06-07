@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styles from './Footer.module.css'
+import logo from '../assets/bsclogo.png'
 
 export default function Footer() {
   return (
@@ -8,7 +9,7 @@ export default function Footer() {
       <div className={styles.container}>
         <div className={styles.left}>
           <div className={styles.logoRow}>
-            <span className={styles.logoIcon}>🔥</span>
+            <img src={logo} alt="BashCraft" className={styles.logoIcon} />
             <span className={styles.brand}>BashCraft Club</span>
           </div>
 
