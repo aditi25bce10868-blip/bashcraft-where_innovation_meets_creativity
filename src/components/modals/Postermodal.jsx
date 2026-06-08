@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import styles from './PosterModal.module.css'
+import styles from './Postermodal.module.css'
 import poster from '../../assets/poster.jpeg' 
 
 export default function PosterModal() {
