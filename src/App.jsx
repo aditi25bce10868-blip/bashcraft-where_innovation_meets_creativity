@@ -1,17 +1,18 @@
-import { Routes, Route } from 'react-router-dom';
-
-import Home         from './pages/Home';
-import About        from './pages/About';
-import Speakers     from './pages/Speakers';
-import Timeline     from './pages/Timeline';
-import Instructions from './pages/Instructions';
-import Contact      from './pages/Contact';
-import Login        from './pages/Login';
-import Navbar       from './components/Navbar.jsx';
+import { Routes, Route } from 'react-router-dom'
+import PosterModal  from './components/modals/Postermodal'
+import Home         from './pages/Home'
+import About        from './pages/About'
+import Speakers     from './pages/Speakers'
+import Timeline     from './pages/Timeline'
+import Instructions from './pages/Instructions'
+import Contact      from './pages/Contact'
+import Login        from './pages/Login'
+import Navbar       from './components/Navbar.jsx'
 
 export default function App() {
   return (
     <>
+      <PosterModal />
       <Navbar />
       <Routes>
         <Route path="/"             element={<Home />}         />
@@ -36,5 +37,5 @@ export default function App() {
         } />
       </Routes>
     </>
-  );
+  )
 }
