@@ -1,21 +1,19 @@
-<<<<<<< HEAD
-export default function Timeline() {
-  return (
-    <main style={{ minHeight: '100vh', display: 'grid', placeItems: 'center',
-                   fontFamily: 'var(--font-display)', color: 'var(--text-secondary)' }}>
-      <p>Timeline page — coming soon</p>
-    </main>
-=======
 // Timeline page — assign to: Raunak Sharma
 import { useEffect, useRef } from 'react';
 import './Timeline.css';
 
 const events = [
-  { id: 'e0', side: 'L', date: 'June 1, 2026',            time: null,        title: 'Registration Opens',   desc: 'Sign up early to secure your spot. Limited seats available for this exclusive session.' },
-  { id: 'e1', side: 'R', date: 'June 10, 2026',           time: '10:00 AM',  title: 'Opening Ceremony',     desc: 'Welcome address and introduction to our distinguished panel of speakers.' },
-  { id: 'e2', side: 'L', date: 'June 10, 2026',           time: '11:00 AM',  title: 'Speaker Sessions',     desc: 'In-depth presentations from industry experts sharing their experiences and insights.' },
-  { id: 'e3', side: 'R', date: 'June 10, 2026',           time: '2:00 PM',   title: 'Live Q&A',             desc: 'Interactive session where you can ask questions directly to our speakers.' },
-  { id: 'e4', side: 'L', date: 'June 10, 2026',           time: '4:00 PM',   title: 'Closing & Networking', desc: 'Wrap-up, key takeaways, and virtual networking opportunities.' },
+  // DAY 1 — 13 Jun
+  { id: 'e0', side: 'L', date: 'June 13, 2026', time: '2:30 PM - 3:15 PM',  title: 'UI/UX Designer',   desc: 'Speaker to be announced. Stay tuned for updates.' },
+  { id: 'e1', side: 'R', date: 'June 13, 2026', time: '3:30 PM - 4:15 PM',  title: 'AI + Prompt',      desc: 'Mukesh Kala shares insights on AI and prompt engineering.' },
+  { id: 'e2', side: 'L', date: 'June 13, 2026', time: '4:30 PM - 5:15 PM',  title: 'Manager / VP',     desc: 'Azmina Poddar on leadership, management and career growth.' },
+  { id: 'e3', side: 'R', date: 'June 13, 2026', time: '5:30 PM - 6:15 PM',  title: 'HR',               desc: 'Ashish Mittal on hiring, human resources and workplace culture.' },
+  // DAY 2 — 14 Jun
+  { id: 'e4', side: 'L', date: 'June 14, 2026', time: '11:00 AM - 11:45 AM', title: 'Mechanical',       desc: 'Speaker to be announced. Stay tuned for updates.' },
+  { id: 'e5', side: 'R', date: 'June 14, 2026', time: '12:00 PM - 12:45 PM', title: 'Software',         desc: 'Saptarshi De on software engineering and industry trends.' },
+  { id: 'e6', side: 'L', date: 'June 14, 2026', time: '1:00 PM - 1:45 PM',   title: 'Quant Finance',    desc: 'Harshil Chaudhary on quantitative finance and analytics.' },
+  { id: 'e7', side: 'R', date: 'June 14, 2026', time: '3:00 PM - 3:45 PM',   title: 'Automobile',       desc: 'Parul Pradhan on the automobile industry and innovation.' },
+  { id: 'e8', side: 'L', date: 'June 14, 2026', time: '4:00 PM - 4:45 PM',   title: 'Core Engineering', desc: 'Speaker to be announced. Stay tuned for updates.' },
 ];
 
 function buildTitle(text) {
@@ -48,7 +46,6 @@ export default function Timeline() {
     const W = window.innerWidth;
     const H = totalH();
 
-    // position cards
     cardRefs.current.forEach((el, i) => {
       if (el) el.style.top = (cy(i) - CARD_H / 2) + 'px';
     });
@@ -65,14 +62,19 @@ export default function Timeline() {
     const fR = W * 0.98;
     const cx = W * 0.5;
 
-    const y0=cy(0), y1=cy(1), y2=cy(2), y3=cy(3), y4=cy(4);
+    const y0=cy(0), y1=cy(1), y2=cy(2), y3=cy(3), y4=cy(4),
+          y5=cy(5), y6=cy(6), y7=cy(7), y8=cy(8);
 
     let d = `M ${L} ${y0}`;
     d += ` C ${fL} ${y0+(y1-y0)*0.3}, ${fR} ${y0+(y1-y0)*0.7}, ${R} ${y1}`;
     d += ` C ${fR} ${y1+(y2-y1)*0.3}, ${fL} ${y1+(y2-y1)*0.7}, ${L} ${y2}`;
     d += ` C ${fL} ${y2+(y3-y2)*0.3}, ${fR} ${y2+(y3-y2)*0.7}, ${R} ${y3}`;
     d += ` C ${fR} ${y3+(y4-y3)*0.3}, ${fL} ${y3+(y4-y3)*0.7}, ${L} ${y4}`;
-    d += ` C ${fL} ${y4+(H-y4)*0.5}, ${cx} ${H-BOT*0.3}, ${cx} ${H}`;
+    d += ` C ${fL} ${y4+(y5-y4)*0.3}, ${fR} ${y4+(y5-y4)*0.7}, ${R} ${y5}`;
+    d += ` C ${fR} ${y5+(y6-y5)*0.3}, ${fL} ${y5+(y6-y5)*0.7}, ${L} ${y6}`;
+    d += ` C ${fL} ${y6+(y7-y6)*0.3}, ${fR} ${y6+(y7-y6)*0.7}, ${R} ${y7}`;
+    d += ` C ${fR} ${y7+(y8-y7)*0.3}, ${fL} ${y7+(y8-y7)*0.7}, ${L} ${y8}`;
+    d += ` C ${fL} ${y8+(H-y8)*0.5}, ${cx} ${H-BOT*0.3}, ${cx} ${H}`;
 
     if (trackRef.current) trackRef.current.setAttribute('d', d);
     if (progRef.current)  progRef.current.setAttribute('d', d);
@@ -83,7 +85,6 @@ export default function Timeline() {
     pe.style.strokeDasharray  = pLen;
     pe.style.strokeDashoffset = pLen;
 
-    // compute trigger fractions — card 0 at start, rest by bounding box sampling
     fracsRef.current = events.map((ev, i) => {
       if (i === 0) return 0;
       const el = cardRefs.current[i];
@@ -98,7 +99,6 @@ export default function Timeline() {
         const pt = pe.getPointAtLength(f * pLen);
         if (pt.x >= cardLeft && pt.x <= cardRight && pt.y >= cardTop && pt.y <= cardBottom) return f;
       }
-      // fallback: closest y
       let best = 1, bestD = Infinity;
       for (let s = 0; s <= STEPS; s++) {
         const f  = s / STEPS;
@@ -148,7 +148,6 @@ export default function Timeline() {
 
   return (
     <>
-      {/* ── Hero ── */}
       <section className="tl-hero">
         <span className="tl-badge">📅 Schedule</span>
         <h1 className="tl-hero-title">
@@ -163,29 +162,10 @@ export default function Timeline() {
         </div>
       </section>
 
-      {/* ── Timeline ── */}
       <div className="tl-wrap" ref={tlRef}>
-        <svg
-          className="tl-svg"
-          ref={svgRef}
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            id="tl-track"
-            ref={trackRef}
-            fill="none"
-            stroke="rgba(242,100,25,0.12)"
-            strokeWidth="7"
-            strokeLinecap="round"
-          />
-          <path
-            id="tl-prog"
-            ref={progRef}
-            fill="none"
-            stroke="#F26419"
-            strokeWidth="7"
-            strokeLinecap="round"
-          />
+        <svg className="tl-svg" ref={svgRef} xmlns="http://www.w3.org/2000/svg">
+          <path id="tl-track" ref={trackRef} fill="none" stroke="rgba(242,100,25,0.12)" strokeWidth="7" strokeLinecap="round" />
+          <path id="tl-prog"  ref={progRef}  fill="none" stroke="#F26419" strokeWidth="7" strokeLinecap="round" />
         </svg>
 
         {events.map((ev, i) => (
@@ -194,15 +174,12 @@ export default function Timeline() {
             className={`tl-card ${ev.side === 'L' ? 'tl-L' : 'tl-R'}`}
             ref={el => (cardRefs.current[i] = el)}
           >
-            <p className="tl-date">
-              {ev.date}{ev.time ? ` | ${ev.time}` : ''}
-            </p>
+            <p className="tl-date">{ev.date}{ev.time ? ` | ${ev.time}` : ''}</p>
             <h3 className="tl-title">{buildTitle(ev.title)}</h3>
             <p className="tl-desc">{ev.desc}</p>
           </div>
         ))}
       </div>
     </>
->>>>>>> 4c7d5d5b2eba7c5015953f630ab1799460fdef7d
   );
 }
