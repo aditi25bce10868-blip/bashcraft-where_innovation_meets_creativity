@@ -90,7 +90,7 @@
 .tl-wrap {
   position: relative;
   width: 100%;
-  overflow: hidden;
+  /* overflow: hidden removed — was blocking touch/mobile scroll */
   background: var(--bg-dark);
 }
 
@@ -227,4 +227,6 @@
   .tl-hero-title {
     font-size: clamp(2.8rem, 12vw, 4rem);
   }
+
+
 }
