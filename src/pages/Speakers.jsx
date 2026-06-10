@@ -230,5 +230,4 @@ function SpeakerCard({ speaker, index, hoveredIndex, setHoveredIndex }) {
           </svg>
         </a>
         
-        <a
-          href={
+       
