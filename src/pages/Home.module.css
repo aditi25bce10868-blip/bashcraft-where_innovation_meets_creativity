@@ -1,5 +1,6 @@
 /* Base container with image-matching background */
 /* Base container with image-matching background */
+/* Base container with image-matching background */
 .homeContainer {
   min-height: calc(100vh - 80px);
   background: radial-gradient(circle at 20% 30%, 
@@ -483,7 +484,6 @@
     display: inline-block;
     margin-bottom: 1.2rem;
     font-size: 0.85rem;
-    /* ensure it's never clipped by overflow */
     position: relative;
     z-index: 2;
   }
