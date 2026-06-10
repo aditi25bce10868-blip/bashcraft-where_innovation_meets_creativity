@@ -1,4 +1,5 @@
 /* Base container with image-matching background */
+/* Base container with image-matching background */
 .homeContainer {
   min-height: calc(100vh - 80px);
   background: radial-gradient(circle at 20% 30%, 
@@ -396,6 +397,59 @@
   letter-spacing: 0.3px;
 }
 
+/* =========================
+   Sponsor Section
+========================= */
+.sponsorSection {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.sponsorDivider {
+  width: 100%;
+  height: 1px;
+  margin: 1.5rem 0;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(232, 67, 10, 0.5),
+    transparent
+  );
+}
+
+.sponsorTitle {
+  color: var(--primary);
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+}
+
+.sponsorCard {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(232, 67, 10, 0.25);
+  border-radius: 24px;
+  padding: 1.5rem;
+  backdrop-filter: blur(12px);
+  transition: all 0.3s ease;
+}
+
+.sponsorCard:hover {
+  transform: translateY(-5px);
+  border-color: var(--primary);
+  box-shadow:
+    0 0 20px rgba(232, 67, 10, 0.25),
+    0 0 40px rgba(232, 67, 10, 0.15);
+}
+
+.sponsorLogo {
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
+
 /* ═══════════════════════
    RESPONSIVE
 ═══════════════════════ */
@@ -441,6 +495,14 @@
 
   .careersWrapper {
     margin-bottom: 1.2rem;
+  }
+
+  /* Sponsor mobile styles merged here */
+  .sponsorLogo {
+    max-width: 220px;
+  }
+  .sponsorTitle {
+    font-size: 1.2rem;
   }
 }
 
