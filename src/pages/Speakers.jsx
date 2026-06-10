@@ -1,27 +1,37 @@
 import { useState } from "react";
 import styles from "./Speakers.module.css";
 
+// Speaker images
+import azminaPoddar    from '../assets/azminaPoddar.jpeg';
+import ashishMittal    from '../assets/ashishMittal.jpeg';
+import maheshKumarSingh from '../assets/maheshKumarSingh.jpeg';
+import harshilChoudhry from '../assets/harshilChoudhry.jpeg';
+import mukeshKala      from '../assets/mukeshKala.jpeg';
+import saptarshiDe     from '../assets/saptarshiDe.jpeg';
+import avinashBussa    from '../assets/avinashBussa.png';
+import parulPradhan    from '../assets/parulPradhan.jpeg';
+
 const speakers = [
   {
     id: 1,
     name: "Azmina Poddar",
     role: "Managing Director",
-    company: "JPMorganChase",
-    companyColor: "#8B4513",
+    company: "JPMorgan Chase",
+    color: "#8B4513",
+    img: azminaPoddar,
     bio: "Transformative design leader with 25+ years of experience. Author of 'Designer's are Oxymoron' and former design leader at IBM, BCG, and Accenture.",
-    avatar: "../assets/azminaPoddar.jpeg",
     linkedin: "https://www.linkedin.com/in/azmina-poddar-azyoulikeit-9283bb7?utm_source=share_via&utm_content=profile&utm_medium=member_ios",
     social: "https://x.com/verylooni?s=20",
     website: "https://rupapublications.co.in/author-detail/azmina-poddar",
   },
   {
     id: 2,
-    name: "Dr. Ashish Mittal",
-    role: "Group - CHRO",
+    name: "Ashish Mittal",
+    role: "Group CHRO",
     company: "Sreenidhi Educational Group",
-    companyColor: "#6B21A8",
+    color: "#6B21A8",
+    img: ashishMittal,
     bio: "27 years of global HR experience. Recognized as Forbes India Top 50 HR Leaders & Asia's 100 Power Leaders in HR.",
-    avatar: "../assets/ashishMittal.jpeg",
     linkedin: "https://www.linkedin.com/in/mrashishmittal?utm_source=share_via&utm_content=profile&utm_medium=member_ios",
     social: "https://www.instagram.com/itsashishmittal/?hl=en",
     website: "https://www.facebook.com/itsashishmittal/",
@@ -31,9 +41,9 @@ const speakers = [
     name: "Mahesh Kumar Singh",
     role: "Senior Specialist",
     company: "Ericsson",
-    companyColor: "#0082F0",
+    color: "#0082F0",
+    img: maheshKumarSingh,
     bio: "Specialist in Ericsson 5G SA & NSA, LTE, VOLTE, Cloud, and AI technologies.",
-    avatar: "../assets/maheshKumarSingh.jpeg",
     linkedin: "https://www.linkedin.com/in/mahesh-kumar-singh-14ab2844/",
     social: "https://twitter.com",
     website: "https://www.linkedin.com/safety/go/?url=http%3A%2F%2Fwww.ericsson.com&urlhash=Pdx9&mt=8icABNHId2rKF0Pp18mpuud-_Fg1QP4LEpXBO9kkOOIR2hs__a-enZs3b55wtGUaK9FkWXTeL0wh5Bbpvxy-sCd6HyBa&isSdui=true&lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BtOF6i14nQtagROzMfAp0lQ%3D%3D",
@@ -43,9 +53,9 @@ const speakers = [
     name: "Harshil Choudhry",
     role: "Director of AI",
     company: "Morgan Stanley",
-    companyColor: "#005EB8",
+    color: "#005EB8",
+    img: harshilChoudhry,
     bio: "Director of AI at Morgan Stanley, driving artificial intelligence initiatives and strategy.",
-    avatar: "../assets/harshilChoudhry.jpeg ",
     linkedin: "https://www.linkedin.com/in/harshil-chaudhary?utm_source=share_via&utm_content=profile&utm_medium=member_ios",
     social: "https://www.linkedin.com/safety/go/?url=github.com%2Fharshil-chaudhary&urlhash=qte0&mt=ruiIRiMW0looRAO3BDz2ygdOoUTcnaEAgkHa4zNgm50TpjC_4KGj0BmZ1nogHAC1TjxSZjQuavAQUFDNxeNiPoAW2gFy&isSdui=true&lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3Bjy19vYBqRYy%2BOSzH%2BVOHmg%3D%3D",
     website: "https://www.linkedin.com/safety/go/?url=https%3A%2F%2Fmedium.com%2F%40harshilchaudhary8&urlhash=_q8h&mt=YKR4ZSVFUQiXLIHrZUGpikXBOeluj_x79XIZDkVmxeyb6mO6A5ILcHACW0m2RwcJhNjWgzVzHSq7e5TQ1ZcwVgdu6BrJ&isSdui=true&lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3Bjy19vYBqRYy%2BOSzH%2BVOHmg%3D%3D",
@@ -55,9 +65,9 @@ const speakers = [
     name: "Mukesh Kala",
     role: "Hyper Automation Practice Head",
     company: "Boundaryless Group",
-    companyColor: "#003B7A",
+    color: "#003B7A",
+    img: mukeshKala,
     bio: "5x UiPath MVP, LinkedIn Top Voice, and creator of the popular YouTube channel 'Tutorials by Mukesh Kala'.",
-    avatar: "../assets/mukeshKala.jpeg",
     linkedin: "https://www.linkedin.com/in/mukeshkala/",
     social: "https://www.linkedin.com/safety/go/?url=https%3A%2F%2Fyoutube.com%2Fc%2FTutorialsbyMukeshKala&urlhash=mOiQ&mt=wYCT6Vt54hdiWeVX8NsL6zgGJ8sOgCAq93B9xC4RtE1SX611OvnYxpbwbX1wFvev2_17Il7XCiiYRRB1wgR2iDjAju7E&isSdui=true&lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3Bg5f7y6xKShucjQ3ubLSPlg%3D%3D",
     website: "https://www.linkedin.com/safety/go/?url=https%3A%2F%2Fwww.mukeshkala.com&urlhash=z4Po&mt=k6oi2SAJqlk8_vwC8mD_LoDBkofCcosz8aGGLTE80CZFcIFac_GGZD4sQY2Nfrd2COOa9kdk8ldeoZgDF3RPVyYx9TGX&isSdui=true&lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3Bg5f7y6xKShucjQ3ubLSPlg%3D%3D",
@@ -65,11 +75,11 @@ const speakers = [
   {
     id: 6,
     name: "Saptarshi De",
-    role: "SDE - 2",
+    role: "SDE-2",
     company: "Amazon",
-    companyColor: "#FF9900",
+    color: "#FF9900",
+    img: saptarshiDe,
     bio: "Software Development Engineer II at Amazon, building scalable software solutions.",
-    avatar: "../assets/saptarshiDe.jpeg ",
     linkedin: "https://www.linkedin.com/in/saptarshi-de-5a244b139?utm_source=share_via&utm_content=profile&utm_medium=member_ios",
     social: "https://twitter.com/SaptarshiDy",
     website: "https://twitter.com/SaptarshiDy",
@@ -79,9 +89,9 @@ const speakers = [
     name: "Avinash Bussa",
     role: "Senior UI Designer",
     company: "QuillBot",
-    companyColor: "#16A34A",
+    color: "#16A34A",
+    img: avinashBussa,
     bio: "Crafting intuitive and beautiful user experiences at QuillBot, shaping how people write and learn.",
-    avatar: "",
     linkedin: "https://www.linkedin.com/in/avinash-bussa?utm_source=share_via&utm_content=profile&utm_medium=member_android",
     social: "https://avinashbussa.medium.com/",
     website: "https://www.avinashbussa.com/",
@@ -91,9 +101,9 @@ const speakers = [
     name: "Parul pradhan sharma",
     role: "Deputy General Manager – Services & Technologies",
     company: "Mercedes-Benz R&D",
-    companyColor: "#00ADEF", 
+    color: "#00ADEF",
+    img: parulPradhan,
     bio: "Design-driven strategic leader with 23+ years of experience in automotive innovation. IIT Mumbai & IIM Bangalore alum, TEDx speaker, and mobility patent holder.",
-    avatar: "../assets/parulPradhan.jpeg", 
     linkedin: "https://www.linkedin.com/in/parul-pradhan-sharma?utm_source=share_via&utm_content=profile&utm_medium=member_ios",
     social: "https://www.youtube.com/watch?v=DJW1aLpVdGQ",
     website: "https://www.linkedin.com/in/parul-pradhan-sharma",
@@ -170,12 +180,12 @@ function SpeakerCard({ speaker, index, hoveredIndex, setHoveredIndex }) {
       onMouseEnter={() => setHoveredIndex(index)}
       onMouseLeave={() => setHoveredIndex(null)}
     >
-      {/* Avatar */}
+      {/* Avatar Wrapper */}
       <div className={styles.avatarWrapper}>
         <div className={styles.avatarRing} />
-        {!imgFailed && speaker.avatar ? (
+        {!imgFailed && speaker.img ? (
           <img
-            src={speaker.avatar}
+            src={speaker.img}
             alt={speaker.name}
             className={styles.avatar}
             onError={() => setImgFailed(true)}
@@ -185,15 +195,15 @@ function SpeakerCard({ speaker, index, hoveredIndex, setHoveredIndex }) {
         )}
       </div>
 
-      {/* Info */}
+      {/* Info Section */}
       <div className={styles.info}>
         <h3 className={styles.name}>{speaker.name}</h3>
         <p className={styles.role}>{speaker.role}</p>
 
-        {/* Company badge */}
+        {/* Company Badge */}
         <span
           className={styles.companyBadge}
-          style={{ color: speaker.companyColor }}
+          style={{ color: speaker.color }}
         >
           {speaker.company}
         </span>
@@ -221,72 +231,4 @@ function SpeakerCard({ speaker, index, hoveredIndex, setHoveredIndex }) {
         </a>
         
         <a
-          href={speaker.social}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={styles.socialBtn}
-          aria-label={`${speaker.name} Social Profile`}
-        >
-          {renderSocialIcon(speaker.social)}
-        </a>
-
-        <a
-          href={speaker.website}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={styles.socialBtn}
-          aria-label={`${speaker.name} Website`}
-        >
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
-            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
-          </svg>
-        </a>
-      </div>
-
-      <div className={styles.cardGlow} aria-hidden="true" />
-    </div>
-  );
-}
-
-export default function Speakers() {
-  const [hoveredIndex, setHoveredIndex] = useState(null);
-  const infiniteSpeakers = [...speakers, ...speakers];
-
-  return (
-    <section className={styles.section} id="speakers" role="region" aria-roledescription="carousel">
-      <div className={styles.gridBg} aria-hidden="true" />
-
-      <div className={styles.headerWrapper}>
-        <span className={styles.eyebrow}>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-            <circle cx="9" cy="7" r="4" />
-            <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-          </svg>
-          Meet The Experts
-        </span>
-
-        <h2 className={styles.heading}>Industry Leaders &amp; Mentors</h2>
-        <p className={styles.subheading}>
-          Learn from professionals who've navigated successful careers at the world's most innovative companies.
-        </p>
-      </div>
-
-      <div className={styles.sliderContainer}>
-        <div className={styles.scrollTrack}>
-          {infiniteSpeakers.map((speaker, i) => (
-            <SpeakerCard 
-              key={`${speaker.id}-node-${i}`}
-              speaker={speaker}
-              index={i}
-              hoveredIndex={hoveredIndex}
-              setHoveredIndex={setHoveredIndex}
-            />
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
+          href={
