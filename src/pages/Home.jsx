@@ -1,24 +1,18 @@
-// Home page — assign to: [your name]
-// Wrap your content in <Navbar /> ... <Footer /> once those components exist.
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useModal } from '../context/ModalContext';
-import { SPEAKERS, COMPANY_COLORS } from '../constants/speakers'; // adjust path as needed
+import { SPEAKERS, COMPANY_COLORS } from '../constants/speakers';
+import InterviewBuddy from '../assets/interviewBuddy.jpeg';
 import styles from './Home.module.css';
 
 const Home = () => {
   const { openRegister, openLogin } = useModal();
 
   const [timeLeft, setTimeLeft] = useState({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
+    days: 0, hours: 0, minutes: 0, seconds: 0,
   });
 
-  // Event date: June 13, 2026, 10:00:00
   const eventDate = new Date(2026, 5, 13, 10, 0, 0).getTime();
 
   useEffect(() => {
@@ -30,21 +24,22 @@ const Home = () => {
         setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
         return;
       }
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-      setTimeLeft({ days, hours, minutes, seconds });
+      setTimeLeft({
+        days:    Math.floor(distance / (1000 * 60 * 60 * 24)),
+        hours:   Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+        minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
+        seconds: Math.floor((distance % (1000 * 60)) / 1000),
+      });
     }, 1000);
     return () => clearInterval(timer);
   }, [eventDate]);
 
   const fadeUp = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+    hidden:   { opacity: 0, y: 30 },
+    visible:  { opacity: 1, y: 0, transition: { duration: 0.6 } },
   };
   const staggerContainer = {
-    hidden: { opacity: 0 },
+    hidden:  { opacity: 0 },
     visible: { opacity: 1, transition: { staggerChildren: 0.2 } },
   };
 
@@ -55,8 +50,10 @@ const Home = () => {
       animate="visible"
       variants={staggerContainer}
     >
+      {/* ── HERO GRID ── */}
       <div className={styles.heroGrid}>
-        {/* Left Column – Main Content */}
+
+        {/* Left Column */}
         <motion.div className={styles.heroContent} variants={fadeUp}>
           <span className={styles.liveBadge}>🎙️ Live Online Event</span>
           <h1 className={styles.mainTitle}>
@@ -76,25 +73,20 @@ const Home = () => {
               <h3>Event Starts In</h3>
             </div>
             <div className={styles.countdown}>
-              <div className={styles.timeBlock}>
-                <span className={styles.timeNumber}>{String(timeLeft.days).padStart(2, '0')}</span>
-                <span className={styles.timeLabel}>Days</span>
-              </div>
-              <span className={styles.timeSeparator}>:</span>
-              <div className={styles.timeBlock}>
-                <span className={styles.timeNumber}>{String(timeLeft.hours).padStart(2, '0')}</span>
-                <span className={styles.timeLabel}>Hours</span>
-              </div>
-              <span className={styles.timeSeparator}>:</span>
-              <div className={styles.timeBlock}>
-                <span className={styles.timeNumber}>{String(timeLeft.minutes).padStart(2, '0')}</span>
-                <span className={styles.timeLabel}>Mins</span>
-              </div>
-              <span className={styles.timeSeparator}>:</span>
-              <div className={styles.timeBlock}>
-                <span className={styles.timeNumber}>{String(timeLeft.seconds).padStart(2, '0')}</span>
-                <span className={styles.timeLabel}>Secs</span>
-              </div>
+              {[
+                { val: timeLeft.days,    label: 'Days' },
+                { val: timeLeft.hours,   label: 'Hours' },
+                { val: timeLeft.minutes, label: 'Mins' },
+                { val: timeLeft.seconds, label: 'Secs' },
+              ].map(({ val, label }, i) => (
+                <React.Fragment key={label}>
+                  {i > 0 && <span className={styles.timeSeparator}>:</span>}
+                  <div className={styles.timeBlock}>
+                    <span className={styles.timeNumber}>{String(val).padStart(2, '0')}</span>
+                    <span className={styles.timeLabel}>{label}</span>
+                  </div>
+                </React.Fragment>
+              ))}
             </div>
             <p className={styles.timerFootnote}>✨ Don't miss this opportunity! ✨</p>
           </div>
@@ -113,25 +105,22 @@ const Home = () => {
           <div className={styles.buttonGroup}>
             <motion.button
               className={`${styles.btn} ${styles.btnPrimary}`}
-             onClick={() => window.open("https://docs.google.com/forms/d/e/1FAIpQLSd85y98TEpgxMvsAgo74sDCuXnaOPfb2nJCsnSBGsxu8-Ib3A/viewform?usp=header", "_blank")}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              onClick={() => window.open("https://docs.google.com/forms/d/e/1FAIpQLSd85y98TEpgxMvsAgo74sDCuXnaOPfb2nJCsnSBGsxu8-Ib3A/viewform?usp=header", "_blank")}
+              whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
             >
               Register Now
             </motion.button>
             <motion.button
               className={`${styles.btn} ${styles.btnSecondary}`}
               onClick={openLogin}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
             >
               Login
             </motion.button>
             <Link to="/speakers">
               <motion.button
                 className={`${styles.btn} ${styles.btnOutline}`}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
               >
                 Explore Speakers
               </motion.button>
@@ -148,7 +137,7 @@ const Home = () => {
           </div>
         </motion.div>
 
-        {/* Right Column – Real Featured Speakers */}
+        {/* Right Column — Featured Speakers only, no sponsor */}
         <motion.div className={styles.heroVisual} variants={fadeUp}>
           <div className={styles.speakerGrid}>
             <h3 className={styles.speakerTitle}>✨ Featured Speakers ✨</h3>
@@ -165,32 +154,76 @@ const Home = () => {
                         loading="lazy"
                       />
                     </div>
-                   <h4>{speaker.name}</h4>
-<p>{speaker.role}</p>
-<span
-  className={styles.companyBadge}
-  style={{ backgroundColor: companyColor, display: 'inline-flex', alignItems: 'center', gap: '4px' }}
->
-  {speaker.companyLogo && (
-    <img
-      src={speaker.companyLogo}
-      alt={speaker.company}
-      style={{ width: '14px', height: '14px', objectFit: 'contain', borderRadius: '2px' }}
-    />
-  )}
-  {speaker.company}
-</span>
-
-                    
+                    <h4>{speaker.name}</h4>
+                    <p>{speaker.role}</p>
+                    <span
+                      className={styles.companyBadge}
+                      style={{
+                        backgroundColor: companyColor,
+                        display: 'inline-flex', alignItems: 'center', gap: '4px',
+                      }}
+                    >
+                      {speaker.companyLogo && (
+                        <img
+                          src={speaker.companyLogo}
+                          alt={speaker.company}
+                          style={{ width: '14px', height: '14px', objectFit: 'contain', borderRadius: '2px' }}
+                        />
+                      )}
+                      {speaker.company}
+                    </span>
                   </div>
                 );
               })}
             </div>
           </div>
         </motion.div>
+
       </div>
+
+      {/* ── SPONSOR STRIP ── */}
+      <motion.div
+        variants={fadeUp}
+        style={{
+          width: '100%',
+          padding: '56px 48px',
+          borderTop: '1px solid rgba(255,255,255,0.06)',
+          borderBottom: '1px solid rgba(255,255,255,0.06)',
+          background: 'linear-gradient(135deg, rgba(232,67,10,0.04) 0%, transparent 50%, rgba(232,67,10,0.04) 100%)',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: '28px',
+          position: 'relative',
+          overflow: 'hidden',
+          boxSizing: 'border-box',
+        }}
+      >
+
+        <div style={{ position: 'absolute', left: '20%', top: '50%', transform: 'translateY(-50%)', width: '300px', height: '300px', background: 'radial-gradient(circle, rgba(232,67,10,0.08), transparent 70%)', filter: 'blur(60px)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', right: '20%', top: '50%', transform: 'translateY(-50%)', width: '300px', height: '300px', background: 'radial-gradient(circle, rgba(120,80,255,0.06), transparent 70%)', filter: 'blur(60px)', pointerEvents: 'none' }} />
+
+        {/* Label row */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '16px', zIndex: 1 }}>
+          <div className={styles.sponsorLines} style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.2))' }} />
+          <p style={{ fontFamily: 'var(--font-accent)', fontSize: '0.78rem', letterSpacing: '0.22em', textTransform: 'uppercase', color: 'var(--text-secondary)', margin: 0, textAlign: 'center' }}>
+            🏆 &nbsp; Proudly Sponsored By
+          </p>
+          <div className={styles.sponsorLines} style={{ background: 'linear-gradient(90deg, rgba(255,255,255,0.2), transparent)' }} />
+        </div>
+
+        {/* Logo card */}
+        <div className={styles.sponsorLogo}>
+          <img src={InterviewBuddy} alt="Interview Buddy — Official Sponsor" />
+        </div>
+
+        <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', margin: 0, fontFamily: 'var(--font-body)', letterSpacing: '0.02em', zIndex: 1, textAlign: 'center' }}>
+          Empowering students with real-world interview preparation
+        </p>
+      </motion.div>
+
     </motion.div>
   );
-
 };
+
 export default Home;
