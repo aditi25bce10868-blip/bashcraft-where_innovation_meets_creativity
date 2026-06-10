@@ -6,6 +6,7 @@
   min-height: 100vh;
   background: var(--bg-dark);
   color: var(--text-primary);
+  overflow-x: hidden;
 }
 
 /* HERO SECTION */
@@ -173,6 +174,7 @@
   font-size: 0.95rem;
 
   transition: all 0.3s ease;
+  box-sizing: border-box;
 }
 
 .contact-form input::placeholder,
@@ -312,43 +314,7 @@
     0 0 40px rgba(232,67,10,0.2);
 }
 
-/* RESPONSIVE */
-
-@media (max-width: 900px) {
-
-  .contact-section {
-    grid-template-columns: 1fr;
-  }
-
-  .contact-hero {
-    padding-top: 6rem;
-  }
-
-  .contact-hero h1 {
-    font-size: 3rem;
-  }
-
-  .join-club h2 {
-    font-size: 2rem;
-  }
-}
-
-@media (max-width: 600px) {
-
-  .contact-info,
-  .contact-form {
-    padding: 1.5rem;
-  }
-
-  .social-links {
-    flex-wrap: wrap;
-  }
-
-  .contact-hero h1 {
-    font-size: 2.5rem;
-  }
-}
-/* ── Form feedback banners ───────────────────────────────────── */
+/* ── Form feedback banners ── */
 .form-feedback {
   display: flex;
   align-items: center;
@@ -372,7 +338,7 @@
   color: #ef4444;
 }
 
-/* ── Button states ───────────────────────────────────────────── */
+/* ── Button states ── */
 button[type="submit"] {
   display: flex;
   align-items: center;
@@ -387,7 +353,7 @@ button[type="submit"]:disabled {
   transform: none !important;
 }
 
-/* ── Spinner ─────────────────────────────────────────────────── */
+/* ── Spinner ── */
 .spinner {
   display: inline-block;
   width: 16px;
@@ -403,9 +369,122 @@ button[type="submit"]:disabled {
   to { transform: rotate(360deg); }
 }
 
-/* ── Disabled inputs ─────────────────────────────────────────── */
+/* ── Disabled inputs ── */
 input:disabled,
 textarea:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 900px) {
+  .contact-section {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-hero {
+    padding: 6rem 1.5rem 3rem;
+  }
+
+  .contact-hero h1 {
+    font-size: 2.8rem;
+  }
+
+  .join-club h2 {
+    font-size: 2rem;
+  }
+
+  .map-section {
+    padding-bottom: 4rem;
+  }
+}
+
+@media (max-width: 600px) {
+  /* Hero — reduce big top padding that causes empty space */
+  .contact-hero {
+    padding: 4.5rem 1rem 2rem;
+  }
+
+  .contact-hero h1 {
+    font-size: 2rem;
+  }
+
+  .contact-hero p {
+    font-size: 0.92rem;
+  }
+
+  /* Cards */
+  .contact-info,
+  .contact-form {
+    padding: 1.4rem;
+    border-radius: 18px;
+  }
+
+  .contact-info h2,
+  .contact-form h2 {
+    font-size: 1.4rem;
+    margin-bottom: 1.4rem;
+  }
+
+  /* Info rows */
+  .info-card {
+    gap: 0.75rem;
+    margin-bottom: 1.3rem;
+  }
+
+  .contact-icon {
+    font-size: 1.2rem;
+  }
+
+  /* Socials */
+  .social-links {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .social-links a {
+    width: 46px;
+    height: 46px;
+    font-size: 1.1rem;
+  }
+
+  /* Form inputs */
+  .contact-form input,
+  .contact-form textarea {
+    font-size: 0.9rem;
+    padding: 0.85rem;
+  }
+
+  .contact-form textarea {
+    min-height: 130px;
+  }
+
+  /* Map */
+  .map-section {
+    padding-bottom: 3rem;
+  }
+
+  .map-section h2 {
+    font-size: 1.6rem;
+  }
+
+  .map-container iframe {
+    height: 300px;
+  }
+
+  /* CTA */
+  .join-club {
+    padding: 3.5rem 1rem;
+  }
+
+  .join-club h2 {
+    font-size: 1.6rem;
+  }
+
+  .join-club p {
+    font-size: 0.92rem;
+  }
 }
