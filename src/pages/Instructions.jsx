@@ -6,7 +6,6 @@ const tags = [
   "🧠 Creative Minds",
   "🌱 Beginners Welcome",
   "🏆 Competitive Spirits",
-  "🤝 Team Players",
 ];
 
 const flipCards = [
@@ -219,6 +218,7 @@ function FeeCard() {
           onMouseLeave={e => { e.currentTarget.style.background = "#FF6B47"; e.currentTarget.style.transform = "translateY(0)"; }}
           onMouseDown={e => { e.currentTarget.style.transform = "scale(.98)"; }}
           onMouseUp={e => { e.currentTarget.style.transform = "translateY(-2px)"; }}
+          onClick={() => window.open("https://docs.google.com/forms/d/e/1FAIpQLSd85y98TEpgxMvsAgo74sDCuXnaOPfb2nJCsnSBGsxu8-Ib3A/viewform?usp=header", "_blank")}
         >
           Register Now — ₹29 only
         </button>
