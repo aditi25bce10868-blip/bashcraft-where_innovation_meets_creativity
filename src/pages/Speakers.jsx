@@ -114,8 +114,10 @@ export default function SpeakerCard({ speaker, index, hoveredIndex, setHoveredIn
   const [imgFailed, setImgFailed] = useState(false);
   const isHovered = hoveredIndex === index;
 
+  // Safe splitting behavior to skip double or trailing spaces
   const initials = speaker.name
-    .split(" ")
+    .trim()
+    .split(/\s+/)
     .map((n) => n[0])
     .join("")
     .toUpperCase();
