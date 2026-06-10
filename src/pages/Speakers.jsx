@@ -2,14 +2,14 @@ import { useState } from "react";
 import styles from "./Speakers.module.css";
 
 // Speaker images
-import azminaPoddar    from '../assets/azminaPoddar.jpeg';
-import ashishMittal    from '../assets/ashishMittal.jpeg';
+import azminaPoddar from '../assets/azminaPoddar.jpeg';
+import ashishMittal from '../assets/ashishMittal.jpeg';
 import maheshKumarSingh from '../assets/maheshKumarSingh.jpeg';
 import harshilChoudhry from '../assets/harshilChoudhry.jpeg';
-import mukeshKala      from '../assets/mukeshKala.jpeg';
-import saptarshiDe     from '../assets/saptarshiDe.jpeg';
-import avinashBussa    from '../assets/avinashBussa.png';
-import parulPradhan    from '../assets/parulPradhan.jpeg';
+import mukeshKala from '../assets/mukeshKala.jpeg';
+import saptarshiDe from '../assets/saptarshiDe.jpeg';
+import avinashBussa from '../assets/avinashBussa.png';
+import parulPradhan from '../assets/parulPradhan.jpeg';
 
 const speakers = [
   {
@@ -110,7 +110,7 @@ const speakers = [
   },
 ];
 
-function SpeakerCard({ speaker, index, hoveredIndex, setHoveredIndex }) {
+export default function SpeakerCard({ speaker, index, hoveredIndex, setHoveredIndex }) {
   const [imgFailed, setImgFailed] = useState(false);
   const isHovered = hoveredIndex === index;
 
@@ -145,7 +145,7 @@ function SpeakerCard({ speaker, index, hoveredIndex, setHoveredIndex }) {
     if (lowerUrl.includes("youtube.com") || lowerUrl.includes("youtu.be")) {
       return (
         <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-          <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93 Bell .502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+          <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
         </svg>
       );
     }
@@ -216,18 +216,46 @@ function SpeakerCard({ speaker, index, hoveredIndex, setHoveredIndex }) {
 
       {/* Social links */}
       <div className={styles.socials}>
-        <a
-          href={speaker.linkedin}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={styles.socialBtn}
-          aria-label={`${speaker.name} LinkedIn`}
-        >
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-            <rect x="2" y="9" width="4" height="12" />
-            <circle cx="4" cy="4" r="2" />
-          </svg>
-        </a>
-        
-       
+        {speaker.linkedin && (
+          <a
+            href={speaker.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.socialBtn}
+            aria-label={`${speaker.name} LinkedIn`}
+          >
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+              <rect x="2" y="9" width="4" height="12" />
+              <circle cx="4" cy="4" r="2" />
+            </svg>
+          </a>
+        )}
+
+        {speaker.social && (
+          <a
+            href={speaker.social}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.socialBtn}
+            aria-label={`${speaker.name} Secondary Social Link`}
+          >
+            {renderSocialIcon(speaker.social)}
+          </a>
+        )}
+
+        {speaker.website && (
+          <a
+            href={speaker.website}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.socialBtn}
+            aria-label={`${speaker.name} Website`}
+          >
+            {renderSocialIcon(speaker.website)}
+          </a>
+        )}
+      </div>
+    </div>
+  );
+}
