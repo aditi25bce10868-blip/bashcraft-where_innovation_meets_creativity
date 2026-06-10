@@ -165,6 +165,68 @@ function CheckItem({ item, delay }) {
   );
 }
 
+/* ── Registration Fee Card ── */
+function FeeCard() {
+  const [ref, visible] = useReveal(0.1);
+  const perks = [
+    "Full event access — all sessions included",
+    "Certificate of participation",
+    "Networking with mentors & peers",
+  ];
+  return (
+    <section ref={ref} style={{ maxWidth: 560, margin: "0 auto 64px", position: "relative", zIndex: 1, opacity: visible ? 1 : 0, transform: visible ? "translateY(0)" : "translateY(36px)", transition: "opacity .7s ease, transform .7s ease" }}>
+      <div style={{
+        background: "#181818", border: "1.5px solid #FF6B47", borderRadius: 20,
+        padding: "36px 32px 30px", position: "relative", overflow: "hidden",
+        animation: "shimmer 4s ease-in-out infinite",
+      }}>
+        {/* corner stamp */}
+        <div style={{ position: "absolute", top: 18, right: 20, background: "rgba(255,107,71,.1)", border: "1px solid rgba(255,107,71,.3)", borderRadius: 8, padding: "5px 10px", fontSize: 11, color: "#FF8C6B", fontWeight: 600, letterSpacing: ".04em" }}>
+          LIMITED SEATS
+        </div>
+
+        {/* badge */}
+        <div style={{ display: "inline-flex", alignItems: "center", gap: 7, background: "rgba(255,107,71,.12)", border: "1px solid rgba(255,107,71,.35)", borderRadius: 999, padding: "5px 14px", fontSize: 12, color: "#FF8C6B", marginBottom: 22 }}>
+          <span style={{ width: 7, height: 7, background: "#FF6B47", borderRadius: "50%", display: "inline-block", animation: "pulseRing 1.8s ease-in-out infinite" }} />
+          Registration Fee
+        </div>
+
+        {/* big price */}
+        <div style={{ display: "flex", alignItems: "baseline", gap: 6, marginBottom: 4, animation: "floatIcon 3.5s ease-in-out infinite" }}>
+          <span style={{ fontSize: 28, fontWeight: 700, color: "#FF6B47", lineHeight: 1 }}>₹</span>
+          <span style={{ fontSize: 72, fontWeight: 800, color: "#fff", letterSpacing: "-.04em", lineHeight: 1 }}>29</span>
+        </div>
+        <p style={{ fontSize: 13, color: "#666", marginBottom: 20 }}>
+          one-time · <span style={{ color: "#FF8C6B", fontWeight: 600 }}>fully worth it</span>
+        </p>
+
+        <hr style={{ border: "none", borderTop: "1px solid #272727", margin: "18px 0" }} />
+
+        {/* perks */}
+        <ul style={{ listStyle: "none", padding: 0, margin: "0 0 24px", display: "flex", flexDirection: "column", gap: 10 }}>
+          {perks.map((p, i) => (
+            <li key={i} style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 13.5, color: "#bbb", opacity: visible ? 1 : 0, transform: visible ? "translateX(0)" : "translateX(-14px)", transition: `opacity .5s ${0.1 + i * 0.1}s ease, transform .5s ${0.1 + i * 0.1}s ease` }}>
+              <span style={{ width: 22, height: 22, borderRadius: "50%", background: "rgba(255,107,71,.12)", border: "1px solid rgba(255,107,71,.35)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, fontSize: 11, color: "#FF6B47" }}>✓</span>
+              {p}
+            </li>
+          ))}
+        </ul>
+
+        {/* CTA */}
+        <button
+          style={{ width: "100%", background: "#FF6B47", color: "#fff", border: "none", borderRadius: 12, padding: "14px 0", fontSize: 15, fontWeight: 700, cursor: "pointer", letterSpacing: ".01em", transition: "background .2s, transform .15s" }}
+          onMouseEnter={e => { e.currentTarget.style.background = "#e85a36"; e.currentTarget.style.transform = "translateY(-2px)"; }}
+          onMouseLeave={e => { e.currentTarget.style.background = "#FF6B47"; e.currentTarget.style.transform = "translateY(0)"; }}
+          onMouseDown={e => { e.currentTarget.style.transform = "scale(.98)"; }}
+          onMouseUp={e => { e.currentTarget.style.transform = "translateY(-2px)"; }}
+        >
+          Register Now — ₹29 only
+        </button>
+      </div>
+    </section>
+  );
+}
+
 /* ── Main component ── */
 export default function InstructionsPage() {
   const [heroRef, heroVisible] = useReveal(0.05);
@@ -186,6 +248,7 @@ export default function InstructionsPage() {
         @keyframes borderGlow  { 0%,100%{border-color:rgba(255,107,71,.22)} 50%{border-color:rgba(255,107,71,.7)} }
         @keyframes scanLine    { from{top:-60px} to{top:110%} }
         @keyframes heroGlow    { 0%,100%{text-shadow:0 0 0 transparent} 50%{text-shadow:0 2px 40px rgba(255,107,71,.18)} }
+        @keyframes floatIcon   { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)} }
 
         .badge-dot       { animation: pulseRing 1.8s ease-in-out infinite; }
 
@@ -352,6 +415,11 @@ export default function InstructionsPage() {
           ))}
         </div>
       </section>
+
+      <GlowDivider delay="0s" />
+
+      {/* ── REGISTRATION FEE ── */}
+      <FeeCard />
 
       <GlowDivider delay="0s" />
 

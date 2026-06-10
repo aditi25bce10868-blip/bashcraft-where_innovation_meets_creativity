@@ -1,3 +1,6 @@
+// Home page — assign to: [your name]
+// Wrap your content in <Navbar /> ... <Footer /> once those components exist.
+
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -110,7 +113,7 @@ const Home = () => {
           <div className={styles.buttonGroup}>
             <motion.button
               className={`${styles.btn} ${styles.btnPrimary}`}
-              onClick={openRegister}
+             onClick={() => window.open("https://docs.google.com/forms/d/e/1FAIpQLSd85y98TEpgxMvsAgo74sDCuXnaOPfb2nJCsnSBGsxu8-Ib3A/viewform?usp=header", "_blank")}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -178,6 +181,6 @@ const Home = () => {
       </div>
     </motion.div>
   );
-};
 
+};
 export default Home;

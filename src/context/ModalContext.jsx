@@ -5,7 +5,9 @@ const ModalContext = createContext(null)
 export function ModalProvider({ children }) {
   const [activeModal, setActiveModal] = useState(null) // 'register' | 'login' | null
 
-  const openRegister = () => setActiveModal('register')
+ const openRegister = () => {
+  window.open("https://docs.google.com/forms/d/e/1FAIpQLSd85y98TEpgxMvsAgo74sDCuXnaOPfb2nJCsnSBGsxu8-Ib3A/viewform?usp=header", "_blank")
+}
   const openLogin    = () => setActiveModal('login')
   const closeModal   = () => setActiveModal(null)
 
