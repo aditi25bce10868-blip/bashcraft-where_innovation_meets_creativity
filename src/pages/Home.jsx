@@ -165,13 +165,23 @@ const Home = () => {
                         loading="lazy"
                       />
                     </div>
-                    <h4>{speaker.name}</h4>
-                    <p>
-                      {speaker.role}{' '}
-                      <span className={styles.companyBadge} style={{ backgroundColor: companyColor }}>
-                        {speaker.company}
-                      </span>
-                    </p>
+                   <h4>{speaker.name}</h4>
+<p>{speaker.role}</p>
+<span
+  className={styles.companyBadge}
+  style={{ backgroundColor: companyColor, display: 'inline-flex', alignItems: 'center', gap: '4px' }}
+>
+  {speaker.companyLogo && (
+    <img
+      src={speaker.companyLogo}
+      alt={speaker.company}
+      style={{ width: '14px', height: '14px', objectFit: 'contain', borderRadius: '2px' }}
+    />
+  )}
+  {speaker.company}
+</span>
+
+                    
                   </div>
                 );
               })}
