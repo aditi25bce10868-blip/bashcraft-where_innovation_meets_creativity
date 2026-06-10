@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import styles from "./Speakers.module.css";
 
 // Speaker images
@@ -246,17 +246,41 @@ function SpeakerCard({ speaker, index, hoveredIndex, setHoveredIndex }) {
 
 // ─── Speakers (default export) ───────────────────────────────────────────────
 
-const CARD_WIDTH = 260; // px — must match .card width in CSS
-const CARD_GAP   = 24;  // px — must match gap in CSS
-const SCROLL_BY  = CARD_WIDTH + CARD_GAP;
+const CARD_WIDTH  = 260; // px — must match .card width in CSS
+const CARD_GAP    = 24;  // px — must match gap in CSS
+const SCROLL_BY   = CARD_WIDTH + CARD_GAP;
+const AUTO_SPEED  = 1;   // px per rAF tick (~60fps)
 
 export default function Speakers() {
-  const [hoveredIndex, setHoveredIndex] = useState(null);
-  const trackRef = useRef(null);
+  const [hoveredIndex, setHoveredIndex]   = useState(null);
+  const containerRef = useRef(null);
+  const isPaused     = useRef(false);
+  const rafRef       = useRef(null);
+
+  // Auto-scroll: duplicated list in CSS makes seamless loop.
+  // We reset to 0 when we've scrolled exactly halfway (one full copy).
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    const tick = () => {
+      if (!isPaused.current && el) {
+        el.scrollLeft += AUTO_SPEED;
+        // Halfway point = width of one copy of the list
+        if (el.scrollLeft >= el.scrollWidth / 2) {
+          el.scrollLeft = 0;
+        }
+      }
+      rafRef.current = requestAnimationFrame(tick);
+    };
+
+    rafRef.current = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafRef.current);
+  }, []);
 
   const scroll = (direction) => {
-    if (!trackRef.current) return;
-    trackRef.current.scrollBy({
+    if (!containerRef.current) return;
+    containerRef.current.scrollBy({
       left: direction === "left" ? -SCROLL_BY : SCROLL_BY,
       behavior: "smooth",
     });
@@ -275,14 +299,30 @@ export default function Speakers() {
         </svg>
       </button>
 
-      {/* Scrollable track */}
-      <div className={styles.sliderContainer} ref={trackRef}>
+      {/* Scrollable track — pauses auto-scroll on hover */}
+      <div
+        className={styles.sliderContainer}
+        ref={containerRef}
+        onMouseEnter={() => { isPaused.current = true; }}
+        onMouseLeave={() => { isPaused.current = false; }}
+      >
         <div className={styles.scrollTrack}>
+          {/* Original list */}
           {speakers.map((speaker, index) => (
             <SpeakerCard
-              key={speaker.id}
+              key={`a-${speaker.id}`}
               speaker={speaker}
               index={index}
+              hoveredIndex={hoveredIndex}
+              setHoveredIndex={setHoveredIndex}
+            />
+          ))}
+          {/* Duplicate list for seamless infinite loop */}
+          {speakers.map((speaker, index) => (
+            <SpeakerCard
+              key={`b-${speaker.id}`}
+              speaker={speaker}
+              index={speakers.length + index}
               hoveredIndex={hoveredIndex}
               setHoveredIndex={setHoveredIndex}
             />
