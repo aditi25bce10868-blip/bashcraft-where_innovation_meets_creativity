@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import interviewBuddy from '../assets/interviewBuddy.jpeg'
 
 const MISSION_PILLARS = [
   { emoji: "✨", text: "Create meaningful experiences for participants" },
@@ -18,41 +19,81 @@ const SPECIAL_CARDS = [
 
 const HIGHLIGHTS = [
   {
-    // Industry professional / mentor speaking to students — relevant to title
     image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&q=100&fit=crop",
     title: "Learn From Industry Professionals",
-    outcomes: ["Gain hands-on project experience.", "Access to in-house and global internships.", "Develop skills in emerging technologies.", "Showcase innovation in competitions.", "Build a strong professional network."],
+    outcomes: [
+      "Live online sessions with speakers from JPMorgan Chase, Ericsson & Morgan Stanley.",
+      "Insights from Amazon, Mercedes-Benz R&D and QuillBot professionals.",
+      "Hear from leaders at Boundaryless Group and Sreenidhi Educational Group.",
+      "Real career stories from people working at the top of their fields.",
+      "Direct Q&A with industry experts across multiple domains.",
+    ],
   },
   {
     image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=800&q=100&fit=crop",
-    title: "Exciting Activities & Sessions",
-    outcomes: ["Live coding sessions and workshops.", "Hands-on project-based learning.", "Guest talks from industry leaders.", "Interactive Q&A and panel discussions.", "Real-world problem solving challenges."],
+    title: "Multi-Slot Two-Day Event",
+    outcomes: [
+      "Spread across 2 full days — 13th & 14th June 2026.",
+      "Multiple speaker slots covering diverse domains and industries.",
+      "Sessions on AI, Finance, HR, UI/UX, Engineering & Leadership.",
+      "Structured schedule so you never miss a session that matters to you.",
+      "Attend all slots or pick the ones most relevant to your career.",
+    ],
   },
   {
     image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&q=100&fit=crop",
     title: "Challenges & Competitions",
-    outcomes: ["Compete in hackathons and contests.", "Win exciting prizes and recognition.", "Test your skills under pressure.", "Collaborate with top student teams.", "Get featured on BashCraft leaderboard."],
+    outcomes: [
+      "Participate in an exciting quiz competition across sessions.",
+      "Test your knowledge on tech, business and industry trends.",
+      "Prizes for quiz winners — details to be announced soon!",
+      
+    ],
   },
   {
     image: "https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=800&q=100&fit=crop",
     title: "Networking Opportunities",
-    outcomes: ["Connect with like-minded students.", "Meet recruiters and professionals.", "Expand your professional circle.", "Build relationships beyond the event.", "Join an active alumni community."],
+    outcomes: [
+      "Connect directly with professionals from 8+ top companies.",
+      "Expand your network beyond your college and city.",
+      "Meet students with similar interests and career goals.",
+      "Build relationships that go beyond the event.",
+      "Join the growing BashCraft alumni and professional community.",
+    ],
   },
   {
     image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=100&fit=crop",
     title: "Fun & Engaging Experiences",
-    outcomes: ["Enjoy games, surprises and fun zones.", "Experience a vibrant community vibe.", "Create unforgettable memories.", "Participate in cultural activities.", "Celebrate achievements together."],
+    outcomes: [
+      "Enjoy a vibrant and energetic online event atmosphere.",
+      "Interactive polls, live reactions and audience engagement.",
+      "Surprise elements and special moments across both days.",
+      "Be part of a community that celebrates curiosity and growth.",
+      "Walk away with memories, connections and new perspectives.",
+    ],
   },
   {
-    image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=100&fit=crop",
-    title: "Collaborate & Build",
-    outcomes: ["Work on shared goals with peers.", "Exchange ideas across disciplines.", "Turn collaboration into outcomes.", "Build MVPs and working prototypes.", "Pitch your ideas to mentors."],
+    image: interviewBuddy,
+    title: "Sponsored by InterviewBuddy",
+    contain:true,
+    outcomes: [
+      "BashNex'26 is proudly sponsored by InterviewBuddy.",
+      "InterviewBuddy helps students practice real interview scenarios.",
+      "Exclusive benefits and offers for all registered participants.",
+      "Bridging the gap between students and industry-ready skills.",
+      "More sponsor announcements coming soon — stay tuned!",
+    ],
   },
   {
-    // Certificate / award ceremony — relevant to rewards title
-    image: "https://images.unsplash.com/photo-1667967699372-1c26d40dec46?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGF3YXJkc3xlbnwwfHwwfHx8MA%3D%3D",
-    title: "Memorable Moments & Rewards",
-    outcomes: ["Verified certificate for all participants.", "Walk away with lifelong connections.", "Earn rewards and special mentions.", "Take home exclusive BashCraft merch.", "Featured on official BashCraft page."],
+    image: "https://images.unsplash.com/photo-1667967699372-1c26d40dec46?w=600&auto=format&fit=crop&q=60",
+    title: "E-Certificates for Everyone",
+    outcomes: [
+      "Every registered participant receives a verified e-certificate.",
+      "Certificate issued by BashCraft Club, VIT Bhopal.",
+      "Shareable on LinkedIn and your resume — add real value.",
+      "Recognizes your participation across both days of the event.",
+      "A credential that reflects your commitment to learning.",
+    ],
   },
 ];
 
@@ -145,7 +186,7 @@ function SpecialCard({ emoji, title, desc, index, visible }) {
   );
 }
 
-function FlipCard({ image, title, outcomes, index, visible }) {
+function FlipCard({ image, title, outcomes, index, visible,contain }) {
   const [hov, setHov] = useState(false);
   const revealX = index % 3 === 0 ? -80 : index % 3 === 1 ? 0 : 80;
   return (
@@ -166,7 +207,19 @@ function FlipCard({ image, title, outcomes, index, visible }) {
           : "0 8px 32px rgba(0,0,0,.45), 0 12px 36px 2px rgba(232,67,10,.38)",
         transition: "all .35s ease", minHeight: "420px",
       }}>
-        <img src={image} alt={title} style={{ width: "100%", height: "420px", objectFit: "cover", transform: hov ? "scale(1.12)" : "scale(1)", transition: "transform .7s ease" }} />
+       <img
+  src={image}
+  alt={title}
+  style={{
+    width: "100%",
+    height: "420px",
+    objectFit: contain ? "contain" : "cover",
+    background: contain ? "#f0f0f0" : "transparent",
+    padding: contain ? "20px" : "0",
+    transform: hov ? "scale(1.12)" : "scale(1)",
+    transition: "transform .7s ease"
+  }}
+/>
         <div style={{ position: "absolute", inset: 0, background: "linear-gradient(120deg, transparent 35%, rgba(255,255,255,.18) 50%, transparent 65%)", transform: hov ? "translateX(120%)" : "translateX(-120%)", transition: "transform .9s ease", pointerEvents: "none" }} />
         <div style={{ position: "absolute", inset: 0, background: hov ? "linear-gradient(to top, rgba(0,0,0,.92) 20%, rgba(0,0,0,.15) 70%)" : "linear-gradient(to top, rgba(0,0,0,.78) 22%, rgba(0,0,0,.05) 60%)", transition: "all .35s ease" }} />
         <div style={{ position: "absolute", inset: 0, background: hov ? "radial-gradient(circle at center, rgba(232,67,10,.30) 0%, rgba(232,67,10,.15) 35%, transparent 75%)" : "radial-gradient(circle at center, rgba(232,67,10,.08) 0%, transparent 70%)", transition: ".35s ease" }} />
@@ -286,10 +339,7 @@ function AboutEventSection() {
       </div>
       <div style={{ maxWidth: "820px", margin: "0 auto", display: "flex", flexDirection: "column", gap: "24px", textAlign: "center" }}>
         <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-secondary)", margin: 0 }}>
-          BashCraft proudly presents an exciting event designed to bring together innovation,
-          creativity, collaboration, and unforgettable experiences. Whether you're looking to
-          learn something new, challenge yourself, network with like-minded people, or simply
-          enjoy the experience — this event offers something for everyone.
+          BashCraft proudly presents <strong style={{ color: "var(--text-primary)" }}>BashNex'26 — The Spectrum of Tech</strong>, a two-day live online speaker session on 13th & 14th June 2026. Featuring professionals from JPMorgan Chase, Ericsson, Morgan Stanley, Amazon, Mercedes-Benz R&D, QuillBot, Boundaryless Group and Sreenidhi Educational Group — this is your chance to learn directly from the best.
         </p>
         <blockquote style={{ borderLeft: "3px solid var(--primary)", paddingLeft: "20px", fontStyle: "italic", fontSize: "0.95rem", lineHeight: 1.7, color: "var(--primary)", fontFamily: "var(--font-accent)", margin: "0 auto", textAlign: "left" }}>
           This isn't just another event — it's a platform where ideas meet opportunities and passion turns into action.
@@ -342,7 +392,7 @@ function HighlightsSection() {
           Event Highlights
         </h2>
         <p style={{ maxWidth: "700px", margin: "0 auto", fontSize: "1rem", lineHeight: 1.8, color: "var(--text-secondary)", opacity: visible ? 1 : 0, transform: visible ? "translateY(0)" : "translateY(28px)", transition: "opacity 0.6s ease 300ms, transform 0.6s ease 300ms" }}>
-          Discover the exclusive opportunities waiting for you at this event.
+          Discover the exclusive opportunities waiting for you at BashNex'26.
         </p>
       </div>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "28px", textAlign: "left" }}>
