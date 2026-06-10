@@ -1,4 +1,4 @@
-/* Base container with image-matching background */
+
 .homeContainer {
   min-height: calc(100vh - 80px);
   background: radial-gradient(circle at 20% 30%, 
@@ -6,7 +6,7 @@
     rgba(5, 5, 5, 1) 80%),
     var(--bg-dark);
   background-blend-mode: overlay;
-  padding: 4rem 2rem;
+  padding: 2rem 2rem;
   position: relative;
   overflow-x: hidden;
 }
@@ -32,10 +32,11 @@
 .heroGrid {
   max-width: 1400px;
   margin: 0 auto;
+  padding-top: 80px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 4rem;
-  align-items: center;
+  align-items: start;
 }
 
 .heroContent {
@@ -396,6 +397,7 @@
   letter-spacing: 0.3px;
 }
 
+
 /* ═══════════════════════
    RESPONSIVE
 ═══════════════════════ */
@@ -454,4 +456,70 @@
   .speakerCards { grid-template-columns: 1fr; }
   .speakerTitle { font-size: 1.3rem; }
   .speakerImageWrapper { width: 70px; height: 70px; }
+}
+/* ── Sponsor strip ── */
+.sponsorStrip {
+  width: 100%;
+  padding: 56px 48px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  background: linear-gradient(135deg, rgba(232,67,10,0.04) 0%, transparent 50%, rgba(232,67,10,0.04) 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.sponsorLines {
+  height: 1px;
+  width: 80px;
+}
+
+.sponsorLogo {
+  background: rgba(255,255,255,0.97);
+  border-radius: 20px;
+  padding: 28px 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 60px rgba(232,67,10,0.15), 0 12px 40px rgba(0,0,0,0.4);
+  border: 1px solid rgba(255,255,255,0.2);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.sponsorLogo:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 0 80px rgba(232,67,10,0.25), 0 20px 60px rgba(0,0,0,0.45);
+}
+
+.sponsorLogo img {
+  height: 72px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  max-width: 220px;
+}
+
+@media (max-width: 600px) {
+  .sponsorStrip {
+    padding: 36px 20px;
+    gap: 20px;
+  }
+
+  .sponsorLines {
+    display: none;
+  }
+
+  .sponsorLogo {
+    padding: 20px 32px;
+  }
+
+  .sponsorLogo img {
+    height: 52px;
+  }
 }
