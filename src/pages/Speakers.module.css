@@ -74,17 +74,77 @@
   margin: 0 auto;
 }
 
-/* ===== Grid Layout ===== */
+/* ===== Slider Wrapper (positions arrows over the track edges) ===== */
 
-.grid {
+.sliderWrapper {
   position: relative;
   z-index: 1;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  width: 100%;
+}
+
+/* ===== Arrow Buttons ===== */
+
+.arrowBtn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(30, 30, 30, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #cccccc;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease,
+              transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  /* Override browser button defaults */
+  padding: 0;
+  outline: none;
+}
+
+.arrowBtn:hover {
+  background: rgba(255, 107, 43, 0.2);
+  border-color: rgba(255, 107, 43, 0.5);
+  color: #ff6b2b;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.arrowLeft {
+  left: 8px;
+}
+
+.arrowRight {
+  right: 8px;
+}
+
+/* ===== Slider Container ===== */
+
+.sliderContainer {
+  width: 100%;
+  overflow-x: auto;
+  /* Hide scrollbar — navigation is via arrows only */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  /* Horizontal padding so first/last cards don't hide behind arrows */
+  padding: 0 56px;
+  box-sizing: border-box;
+}
+
+.sliderContainer::-webkit-scrollbar {
+  display: none;
+}
+
+/* ===== Scroll Track ===== */
+
+.scrollTrack {
+  display: flex;
   gap: 24px;
-  padding: 20px 40px;
-  max-width: 1280px;
-  margin: 0 auto;
+  padding: 20px 0;
+  width: max-content;
 }
 
 /* ===== Card ===== */
@@ -104,27 +164,15 @@
               border-color 0.3s ease,
               background 0.3s ease;
   overflow: hidden;
-  height: 380px; /* Fixed height keeps bio slide-in contained */
+  width: 260px;
+  height: 380px;
+  flex-shrink: 0;
 }
 
 .cardHovered {
   transform: translateY(-6px);
   border-color: rgba(255, 107, 43, 0.35);
   background: #1a1a1a;
-}
-
-/* Orange glow that appears on hover */
-.cardGlow {
-  position: absolute;
-  inset: 0;
-  border-radius: 20px;
-  box-shadow: 0 0 0 1px rgba(255, 107, 43, 0);
-  transition: box-shadow 0.3s ease;
-  pointer-events: none;
-}
-
-.cardHovered .cardGlow {
-  box-shadow: 0 0 40px rgba(255, 107, 43, 0.08);
 }
 
 /* ===== Tag badge ===== */
@@ -151,7 +199,6 @@
   flex-shrink: 0;
 }
 
-/* Animated ring */
 .avatarRing {
   position: absolute;
   inset: -3px;
@@ -209,23 +256,20 @@
   font-weight: 400;
 }
 
+/* Company badge now uses background color (solid pill) to match the reference image */
 .companyBadge {
   display: inline-block;
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 11px;
+  font-weight: 700;
   padding: 4px 14px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  /* color set inline; background-color set inline via speaker.color */
+  color: #ffffff !important;
   margin-bottom: 14px;
-  transition: background 0.2s ease;
+  letter-spacing: 0.02em;
 }
 
-.cardHovered .companyBadge {
-  background: rgba(255, 255, 255, 0.08);
-}
-
-/* Bio — slides in cleanly */
+/* Bio — slides in on hover */
 .bio {
   font-size: 12.5px;
   color: #5a5a6a;
@@ -249,7 +293,7 @@
 .socials {
   display: flex;
   gap: 10px;
-  margin-top: auto; /* Push links to bottom safely */
+  margin-top: auto;
   padding-top: 10px;
 }
 
@@ -277,45 +321,58 @@
 
 /* ===== Responsive ===== */
 
-@media (max-width: 1024px) {
-  .grid {
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 20px;
-    padding: 20px 24px;
-  }
-}
-
 @media (max-width: 768px) {
   .section {
     padding: 70px 0 90px;
   }
-  .grid {
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 16px;
-    padding: 20px 16px;
+
+  .sliderContainer {
+    padding: 0 44px;
   }
+
+  .arrowLeft {
+    left: 4px;
+  }
+
+  .arrowRight {
+    right: 4px;
+  }
+
+  .scrollTrack {
+    gap: 16px;
+  }
+
   .card {
+    width: 220px;
     height: 350px;
   }
+
   .heading {
     font-size: 32px;
   }
 }
 
 @media (max-width: 480px) {
-  .grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    padding: 16px 12px;
+  .sliderContainer {
+    padding: 0 36px;
   }
+
+  .arrowBtn {
+    width: 32px;
+    height: 32px;
+  }
+
   .card {
     padding: 24px 16px 20px;
+    width: 180px;
     height: 330px;
   }
+
   .avatarWrapper {
     width: 72px;
     height: 72px;
   }
+
   .name {
     font-size: 14px;
   }
