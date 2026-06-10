@@ -74,53 +74,17 @@
   margin: 0 auto;
 }
 
-/* ===== Auto-Scroll Slider Container ===== */
+/* ===== Grid Layout ===== */
 
-.sliderContainer {
+.grid {
   position: relative;
   z-index: 1;
-  width: 100%;
-  overflow-x: auto;
-  display: flex;
-  
-  /* Hides scrollbars */
-  -ms-overflow-style: none;  
-  scrollbar-width: none;  
-}
-
-.sliderContainer::-webkit-scrollbar {
-  display: none;
-}
-
-.scrollTrack {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 24px;
-  padding: 20px 12px;
-  width: max-content;
-  
-  /* Constant loop movement */
-  animation: scrollMarquee 30s linear infinite; 
-  
-  /* The physics engine: handles the snap back curve when hover is broken */
-  transition: transform 0.5s cubic-bezier(0.25, 1.15, 0.45, 1.05);
-}
-
-/* Slammed Brakes Effect:
-  Pauses the global timeline loop, then overshoots the transform forward 
-  via negative X axis, settling down cleanly via the track's springy transition.
-*/
-.sliderContainer:hover .scrollTrack {
-  animation-play-state: paused;
-  transform: translateX(-14px);
-}
-
-@keyframes scrollMarquee {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%); 
-  }
+  padding: 20px 40px;
+  max-width: 1280px;
+  margin: 0 auto;
 }
 
 /* ===== Card ===== */
@@ -140,9 +104,7 @@
               border-color 0.3s ease,
               background 0.3s ease;
   overflow: hidden;
-  width: 260px; 
-  height: 380px; /* Fixed standard height prevents row breaking on expansion */
-  flex-shrink: 0;
+  height: 380px; /* Fixed height keeps bio slide-in contained */
 }
 
 .cardHovered {
@@ -315,15 +277,24 @@
 
 /* ===== Responsive ===== */
 
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+    padding: 20px 24px;
+  }
+}
+
 @media (max-width: 768px) {
   .section {
     padding: 70px 0 90px;
   }
-  .scrollTrack {
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     gap: 16px;
+    padding: 20px 16px;
   }
   .card {
-    width: 220px;
     height: 350px;
   }
   .heading {
@@ -332,9 +303,13 @@
 }
 
 @media (max-width: 480px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    padding: 16px 12px;
+  }
   .card {
     padding: 24px 16px 20px;
-    width: 180px;
     height: 330px;
   }
   .avatarWrapper {
