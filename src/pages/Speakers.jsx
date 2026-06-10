@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import styles from "./Speakers.module.css";
 
 // Speaker images
@@ -10,7 +10,6 @@ import mukeshKala from '../assets/mukeshKala.jpeg';
 import saptarshiDe from '../assets/saptarshiDe.jpeg';
 import avinashBussa from '../assets/avinashBussa.png';
 import parulPradhan from '../assets/parulPradhan.jpeg';
-
 
 export const speakers = [
   {
@@ -111,7 +110,7 @@ export const speakers = [
   },
 ];
 
-// ─── SpeakerCard ────────────────────────────────────────────────────────────
+// ─── SpeakerCard ─────────────────────────────────────────────────────────────
 
 function SpeakerCard({ speaker, index, hoveredIndex, setHoveredIndex }) {
   const [imgFailed, setImgFailed] = useState(false);
@@ -170,7 +169,6 @@ function SpeakerCard({ speaker, index, hoveredIndex, setHoveredIndex }) {
       );
     }
 
-    // FIX #5: Added Facebook icon case
     if (lowerUrl.includes("facebook.com")) {
       return (
         <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -179,7 +177,6 @@ function SpeakerCard({ speaker, index, hoveredIndex, setHoveredIndex }) {
       );
     }
 
-    // Generic fallback icon
     return (
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <circle cx="12" cy="12" r="4" />
@@ -213,7 +210,7 @@ function SpeakerCard({ speaker, index, hoveredIndex, setHoveredIndex }) {
       <div className={styles.info}>
         <h3 className={styles.name}>{speaker.name}</h3>
         <p className={styles.role}>{speaker.role}</p>
-        <span className={styles.companyBadge} style={{ color: speaker.color }}>
+        <span className={styles.companyBadge} style={{ backgroundColor: speaker.color }}>
           {speaker.company}
         </span>
         <p className={`${styles.bio} ${isHovered ? styles.bioVisible : ""}`}>
@@ -224,13 +221,7 @@ function SpeakerCard({ speaker, index, hoveredIndex, setHoveredIndex }) {
       {/* Socials */}
       <div className={styles.socials}>
         {speaker.linkedin && (
-          <a
-            href={speaker.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.socialBtn}
-            aria-label={`${speaker.name} LinkedIn`}
-          >
+          <a href={speaker.linkedin} target="_blank" rel="noopener noreferrer" className={styles.socialBtn} aria-label={`${speaker.name} LinkedIn`}>
             <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
               <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
               <rect x="2" y="9" width="4" height="12" />
@@ -238,27 +229,13 @@ function SpeakerCard({ speaker, index, hoveredIndex, setHoveredIndex }) {
             </svg>
           </a>
         )}
-
         {speaker.social && (
-          <a
-            href={speaker.social}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.socialBtn}
-            aria-label={`${speaker.name} Secondary Social Link`}
-          >
+          <a href={speaker.social} target="_blank" rel="noopener noreferrer" className={styles.socialBtn} aria-label={`${speaker.name} Secondary Social Link`}>
             {renderSocialIcon(speaker.social)}
           </a>
         )}
-
         {speaker.website && (
-          <a
-            href={speaker.website}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.socialBtn}
-            aria-label={`${speaker.name} Website`}
-          >
+          <a href={speaker.website} target="_blank" rel="noopener noreferrer" className={styles.socialBtn} aria-label={`${speaker.name} Website`}>
             {renderSocialIcon(speaker.website)}
           </a>
         )}
@@ -267,22 +244,62 @@ function SpeakerCard({ speaker, index, hoveredIndex, setHoveredIndex }) {
   );
 }
 
-// ─── Speakers (default export) ──────────────────────────────────────────────
+// ─── Speakers (default export) ───────────────────────────────────────────────
+
+const CARD_WIDTH = 260; // px — must match .card width in CSS
+const CARD_GAP   = 24;  // px — must match gap in CSS
+const SCROLL_BY  = CARD_WIDTH + CARD_GAP;
 
 export default function Speakers() {
   const [hoveredIndex, setHoveredIndex] = useState(null);
+  const trackRef = useRef(null);
+
+  const scroll = (direction) => {
+    if (!trackRef.current) return;
+    trackRef.current.scrollBy({
+      left: direction === "left" ? -SCROLL_BY : SCROLL_BY,
+      behavior: "smooth",
+    });
+  };
 
   return (
-    <div className={styles.grid}>
-      {speakers.map((speaker, index) => (
-        <SpeakerCard
-          key={speaker.id}
-          speaker={speaker}
-          index={index}
-          hoveredIndex={hoveredIndex}
-          setHoveredIndex={setHoveredIndex}
-        />
-      ))}
+    <div className={styles.sliderWrapper}>
+      {/* Left arrow */}
+      <button
+        className={`${styles.arrowBtn} ${styles.arrowLeft}`}
+        onClick={() => scroll("left")}
+        aria-label="Scroll left"
+      >
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <polyline points="15 18 9 12 15 6" />
+        </svg>
+      </button>
+
+      {/* Scrollable track */}
+      <div className={styles.sliderContainer} ref={trackRef}>
+        <div className={styles.scrollTrack}>
+          {speakers.map((speaker, index) => (
+            <SpeakerCard
+              key={speaker.id}
+              speaker={speaker}
+              index={index}
+              hoveredIndex={hoveredIndex}
+              setHoveredIndex={setHoveredIndex}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* Right arrow */}
+      <button
+        className={`${styles.arrowBtn} ${styles.arrowRight}`}
+        onClick={() => scroll("right")}
+        aria-label="Scroll right"
+      >
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <polyline points="9 18 15 12 9 6" />
+        </svg>
+      </button>
     </div>
   );
 }
