@@ -1,168 +1,111 @@
-import React, { useState, useEffect, useRef } from 'react'
-import { Link, useLocation } from 'react-router-dom'
-import { useModal } from '../context/ModalContext.jsx'
-import styles from './Navbar.module.css'
-import logo from '../assets/bsclogo.png'
-
-
-const NAV_LINKS = [
-  { label: 'Home',         to: '/' },
-  { label: 'About Event',  to: '/about' },
-  { label: 'Speakers',     to: '/speakers' },
-  { label: 'Timeline',     to: '/timeline' },
-  { label: 'Instructions', to: '/instructions' },
-  { label: 'Contact',      to: '/contact' },
-]
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
+import { NAV_LINKS } from '../constants/navLinks';
+import { GOOGLE_FORM_URL } from '../constants/socials';
 
 export default function Navbar() {
-  const { openRegister } = useModal()
-  const location = useLocation()
-  const [menuOpen, setMenuOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
-  const menuRef = useRef(null)
+  const location = useLocation();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  // Close menu on route change
-  useEffect(() => { setMenuOpen(false) }, [location.pathname])
-
-  // Scroll shadow
+  // Close mobile menu on route change
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 10)
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+    setMobileMenuOpen(false);
+  }, [location.pathname]);
 
-  // Close on outside click
-  useEffect(() => {
-    if (!menuOpen) return
-    const handler = (e) => {
-      if (menuRef.current && !menuRef.current.contains(e.target)) {
-        setMenuOpen(false)
-      }
-    }
-    document.addEventListener('mousedown', handler)
-    document.addEventListener('touchstart', handler)
-    return () => {
-      document.removeEventListener('mousedown', handler)
-      document.removeEventListener('touchstart', handler)
-    }
-  }, [menuOpen])
-
-  // Lock body scroll when menu open
-  useEffect(() => {
-    document.body.style.overflow = menuOpen ? 'hidden' : ''
-    return () => { document.body.style.overflow = '' }
-  }, [menuOpen])
+  const isActive = (path) => {
+    return location.pathname === path;
+  };
 
   return (
     <>
-      <header className={`${styles.navbar} ${scrolled ? styles.scrolled : ''}`}>
-        <div className={styles.navInner}>
+      <header className="fixed top-0 left-0 w-full h-[68px] z-50 bg-pitch-black/70 backdrop-blur-md border-b-2 border-stark-white flex items-center justify-between px-4 md:px-gutter">
+        {/* Left Side: Brand Wordmark */}
+        <Link
+          to="/"
+          className="font-display-xl text-2xl md:text-3xl font-extrabold tracking-tighter text-stark-white hover:text-vibrant-scarlet transition-none shrink-0"
+        >
+          BASHCRAFT<span className="text-vibrant-scarlet">.</span>
+        </Link>
 
-          {/* Brand */}
-          <Link to="/" className={styles.brand}>
-            <img src={logo} alt="BashCraft" className={styles.brandIcon} />
-            <span className={styles.brandName}>BashCraft</span>
-          </Link>
-
-          {/* Desktop nav links */}
-          <nav className={styles.navLinks}>
-            {NAV_LINKS.map((link) => (
+        {/* Right Side: Nav Links */}
+        <nav className="hidden md:flex items-center space-x-8 font-mono-label text-sm uppercase">
+          {NAV_LINKS.map((link) => {
+            const active = isActive(link.path);
+            return (
               <Link
                 key={link.label}
-                className={`${styles.navLink} ${location.pathname === link.to ? styles.active : ''}`}
-                to={link.to}
+                to={link.path}
+                className={`transition-none hover:text-vibrant-scarlet hover:opacity-100 ${
+                  active
+                    ? 'text-vibrant-scarlet border-b-2 border-vibrant-scarlet pb-1 opacity-100 font-bold'
+                    : 'text-stark-white opacity-70'
+                }`}
               >
                 {link.label}
               </Link>
-            ))}
-          </nav>
+            );
+          })}
+        </nav>
 
-          {/* Desktop actions */}
-          <div className={styles.actions}>
-            <Link className={styles.navButtonOutline} to="/login">Login</Link>
-            <button className={styles.navButton} onClick={openRegister} type="button">Register</button>
-          </div>
-
-          {/* Mobile hamburger (three dots) */}
+        {/* Mobile Hamburger Menu Toggle */}
+        <div className="flex md:hidden items-center">
           <button
-            className={`${styles.menuToggle} ${menuOpen ? styles.menuToggleOpen : ''}`}
-            onClick={() => setMenuOpen(o => !o)}
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="text-stark-white p-1 focus:outline-none"
             aria-label="Toggle menu"
-            type="button"
           >
-            <span className={styles.dot} />
-            <span className={styles.dot} />
-            <span className={styles.dot} />
+            <span className="material-symbols-outlined text-3xl">
+              {mobileMenuOpen ? 'close' : 'menu'}
+            </span>
           </button>
-
         </div>
       </header>
 
-      {/* Mobile drawer overlay */}
-      <div
-        className={`${styles.overlay} ${menuOpen ? styles.overlayVisible : ''}`}
-        onClick={() => setMenuOpen(false)}
-        aria-hidden="true"
-      />
-
-      {/* Mobile drawer */}
-      <div
-        ref={menuRef}
-        className={`${styles.drawer} ${menuOpen ? styles.drawerOpen : ''}`}
-        aria-hidden={!menuOpen}
-      >
-        {/* Drawer header */}
-        <div className={styles.drawerHeader}>
-          <div className={styles.drawerBrand}>
-           <img src={logo} alt="BashCraft" className={styles.brandIcon} />
-            <span className={styles.brandName}>BashCraft</span>
-          </div>
-          <button
-            className={styles.closeBtn}
-            onClick={() => setMenuOpen(false)}
-            aria-label="Close menu"
-            type="button"
+      {/* Mobile Brutalist Fullscreen Drawer */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: '-100%' }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: '-100%' }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            className="fixed inset-0 z-40 bg-pitch-black/95 backdrop-blur-lg border-b-4 border-vibrant-scarlet pt-24 pb-12 px-6 flex flex-col justify-between"
           >
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-              <path d="M2 2l14 14M16 2L2 16" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-            </svg>
-          </button>
-        </div>
+            <div className="space-y-8">
+              <span className="font-mono-label text-xs text-vibrant-scarlet uppercase">// NAVIGATION_MATRIX</span>
+              <div className="flex flex-col space-y-6">
+                {NAV_LINKS.map((link) => (
+                  <Link
+                    key={link.label}
+                    to={link.path}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={`font-display-xl text-4xl font-extrabold uppercase transition-none ${
+                      isActive(link.path) ? 'text-vibrant-scarlet' : 'text-stark-white hover:text-vibrant-scarlet'
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
 
-        {/* Drawer nav links */}
-        <nav className={styles.drawerNav}>
-          {NAV_LINKS.map((link, i) => (
-            <Link
-              key={link.label}
-              className={`${styles.drawerLink} ${location.pathname === link.to ? styles.drawerLinkActive : ''}`}
-              to={link.to}
-              style={{ animationDelay: menuOpen ? `${i * 55}ms` : '0ms' }}
-            >
-              <span className={styles.drawerLinkLabel}>{link.label}</span>
-              <svg className={styles.drawerArrow} width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </Link>
-          ))}
-        </nav>
-
-        {/* Drawer actions */}
-        <div className={styles.drawerActions}>
-          <Link className={styles.drawerLogin} to="/login" onClick={() => setMenuOpen(false)}>
-            Login
-          </Link>
-          <button
-            className={styles.drawerRegister}
-            onClick={() => { openRegister(); setMenuOpen(false) }}
-            type="button"
-          >
-            Register
-          </button>
-        </div>
-
-        {/* Decorative glow */}
-        <div className={styles.drawerGlow} aria-hidden="true" />
-      </div>
+            <div className="border-t border-stark-white/20 pt-6 space-y-4">
+              <a
+                href={GOOGLE_FORM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-center w-full border-2 border-vibrant-scarlet py-4 font-mono-label font-bold text-vibrant-scarlet uppercase glitch-hover"
+              >
+                JOIN US NOW ↗
+              </a>
+              <div className="text-center font-mono-label text-xs text-stark-white/50">
+                © 2025 BASHCRAFT CLUB. ALL RIGHTS RESERVED.
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
-  )
+  );
 }

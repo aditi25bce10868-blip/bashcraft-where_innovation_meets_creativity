@@ -1,87 +1,181 @@
-/* BashCraft Global Styles */
-:root {
-  --primary: #E8430A;
-  --secondary: #F26419;
-  --bg-dark: #050505;
-  --bg-charcoal: #111111;
-  --bg-card: rgba(17, 17, 17, 0.7);
-  --text-primary: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.7);
-  --glass: rgba(255, 255, 255, 0.05);
-  --glass-border: rgba(255, 255, 255, 0.1);
-  --glow-orange: rgba(232, 67, 10, 0.5);
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-  --font-display: 'Space Grotesk', sans-serif;
-  --font-body: 'Inter', sans-serif;
-  --font-accent: 'Poppins', sans-serif;
+/* ============================================================
+   BashCraft Club — Obsidian Scarlet Global Styles
+   ============================================================ */
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    /* Lenis handles smooth scroll — disable native */
+    scroll-behavior: auto;
+  }
+
+  body {
+    font-family: 'Hanken Grotesk', sans-serif;
+    background-color: #000000;
+    color: #e2e2e2;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  img {
+    max-width: 100%;
+    display: block;
+  }
+
+  button {
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-family: inherit;
+  }
+
+  /* Focus states — scarlet 2px outline for keyboard users */
+  *:focus-visible {
+    outline: 2px solid #FF0000;
+    outline-offset: 2px;
+  }
 }
 
-*,
-*::before,
-*::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+@layer components {
+  /* Bordered card/button with instant scarlet fill on hover */
+  .border-box-hover {
+    @apply border-2 border-stark-white;
+    transition: none;
+  }
+  .border-box-hover:hover {
+    @apply bg-vibrant-scarlet border-vibrant-scarlet text-pitch-black;
+    transition: none;
+  }
 
-html {
-  scroll-behavior: smooth;
-}
+  /* Glitch-style instant color swap hover */
+  .glitch-hover {
+    transition: none;
+  }
+  .glitch-hover:hover {
+    background-color: #FF0000;
+    color: #000000;
+    border-color: #FF0000;
+    transition: none;
+  }
 
-body {
-  font-family: var(--font-body);
-  background: var(--bg-dark);
-  color: var(--text-primary);
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+  /* Hanging mono label on a bordered container */
+  .hanging-label {
+    @apply absolute top-0 left-0 -translate-y-1/2 bg-pitch-black px-2 font-mono-label text-vibrant-scarlet;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
 
-a {
-  text-decoration: none;
-  color: inherit;
-}
+  /* Section divider pattern */
+  .section-divider {
+    @apply py-section-padding px-gutter mx-auto border-t border-stark-white;
+    max-width: 1440px;
+  }
 
-ul {
-  list-style: none;
-}
+  /* Page container */
+  .page-container {
+    @apply px-gutter mx-auto;
+    max-width: 1440px;
+  }
 
-img {
-  max-width: 100%;
-  display: block;
-}
+  /* Brutalist button base */
+  .btn-brutalist {
+    @apply border-2 border-stark-white px-8 py-4 font-button-text text-button-text uppercase text-stark-white;
+    transition: none;
+    letter-spacing: 0.05em;
+  }
+  .btn-brutalist:hover {
+    @apply bg-vibrant-scarlet border-vibrant-scarlet text-pitch-black;
+    transition: none;
+  }
 
-button {
-  cursor: pointer;
-  border: none;
-  background: none;
-  font-family: inherit;
+  /* Scarlet accent button */
+  .btn-scarlet {
+    @apply border-2 border-vibrant-scarlet px-8 py-4 font-button-text text-button-text uppercase text-vibrant-scarlet;
+    transition: none;
+  }
+  .btn-scarlet:hover {
+    @apply bg-vibrant-scarlet text-pitch-black;
+    transition: none;
+  }
+
+  /* Mono tag label */
+  .mono-tag {
+    @apply font-mono-label text-mono-label uppercase text-vibrant-scarlet;
+    letter-spacing: 0.05em;
+  }
+
+  /* Outlined / stroke-only text */
+  .text-outline {
+    -webkit-text-stroke: 2px #FFFFFF;
+    -webkit-text-fill-color: transparent;
+  }
+  .text-outline-scarlet {
+    -webkit-text-stroke: 2px #FF0000;
+    -webkit-text-fill-color: transparent;
+  }
 }
 
 /* Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
 }
-
 ::-webkit-scrollbar-track {
-  background: var(--bg-dark);
+  background: #000000;
 }
-
 ::-webkit-scrollbar-thumb {
-  background: var(--primary);
-  border-radius: 3px;
+  background: #FF0000;
 }
 
 /* Selection */
 ::selection {
-  background: var(--primary);
-  color: #fff;
+  background: #FF0000;
+  color: #000000;
 }
 
-/* Gradient Text Utility */
-.gradient-text {
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+/* Reduced motion — disable translates, keep only opacity */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Lenis smooth scroll */
+html.lenis, html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
 }

@@ -1,435 +1,160 @@
-import { useState, useEffect, useRef } from "react";
-import interviewBuddy from '../assets/interviewBuddy.jpeg'
-
-const MISSION_PILLARS = [
-  { emoji: "✨", text: "Create meaningful experiences for participants" },
-  { emoji: "💡", text: "Encourage creativity and innovation" },
-  { emoji: "🎪", text: "Build stronger student communities" },
-  { emoji: "🤝", text: "Provide opportunities to learn and collaborate" },
-  { emoji: "🚀", text: "Promote growth beyond classrooms" },
-];
-
-const SPECIAL_CARDS = [
-  { emoji: "🎮", title: "Interactive Experience", desc: "Participate in engaging activities designed to keep you involved and energised throughout." },
-  { emoji: "🔭", title: "Learn & Explore", desc: "Gain new knowledge, discover fresh ideas, and explore opportunities that help you grow." },
-  { emoji: "🌐", title: "Connect With Others", desc: "Meet students with similar interests, expand your network, and join an active community." },
-  { emoji: "⚡", title: "Challenge Yourself", desc: "Push your limits, compete, solve problems, and discover your true potential." },
-  { emoji: "🏆", title: "Learn From Professionals", desc: "Gain practical knowledge and guidance from experienced industry experts and mentors." },
-];
-
-const HIGHLIGHTS = [
-  {
-    image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&q=100&fit=crop",
-    title: "Learn From Industry Professionals",
-    outcomes: [
-      "Live online sessions with speakers from JPMorgan Chase, Ericsson & Morgan Stanley.",
-      "Insights from Amazon, Mercedes-Benz R&D and QuillBot professionals.",
-      "Hear from leaders at Boundaryless Group and Sreenidhi Educational Group.",
-      "Real career stories from people working at the top of their fields.",
-      "Direct Q&A with industry experts across multiple domains.",
-    ],
-  },
-  {
-    image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=800&q=100&fit=crop",
-    title: "Multi-Slot Two-Day Event",
-    outcomes: [
-      "Spread across 2 full days — 13th & 14th June 2026.",
-      "Multiple speaker slots covering diverse domains and industries.",
-      "Sessions on AI, Finance, HR, UI/UX, Engineering & Leadership.",
-      "Structured schedule so you never miss a session that matters to you.",
-      "Attend all slots or pick the ones most relevant to your career.",
-    ],
-  },
-  {
-    image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&q=100&fit=crop",
-    title: "Challenges & Competitions",
-    outcomes: [
-      "Participate in an exciting quiz competition across sessions.",
-      "Test your knowledge on tech, business and industry trends.",
-      "Prizes for quiz winners — details to be announced soon!",
-      
-    ],
-  },
-  {
-    image: "https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=800&q=100&fit=crop",
-    title: "Networking Opportunities",
-    outcomes: [
-      "Connect directly with professionals from 8+ top companies.",
-      "Expand your network beyond your college and city.",
-      "Meet students with similar interests and career goals.",
-      "Build relationships that go beyond the event.",
-      "Join the growing BashCraft alumni and professional community.",
-    ],
-  },
-  {
-    image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=100&fit=crop",
-    title: "Fun & Engaging Experiences",
-    outcomes: [
-      "Enjoy a vibrant and energetic online event atmosphere.",
-      "Interactive polls, live reactions and audience engagement.",
-      "Surprise elements and special moments across both days.",
-      "Be part of a community that celebrates curiosity and growth.",
-      "Walk away with memories, connections and new perspectives.",
-    ],
-  },
-  {
-    image: interviewBuddy,
-    title: "Sponsored by InterviewBuddy",
-    contain:true,
-    outcomes: [
-      "BashNex'26 is proudly sponsored by InterviewBuddy.",
-      "InterviewBuddy helps students practice real interview scenarios.",
-      "Exclusive benefits and offers for all registered participants.",
-      "Bridging the gap between students and industry-ready skills.",
-      "More sponsor announcements coming soon — stay tuned!",
-    ],
-  },
-  {
-    image: "https://images.unsplash.com/photo-1667967699372-1c26d40dec46?w=600&auto=format&fit=crop&q=60",
-    title: "E-Certificates for Everyone",
-    outcomes: [
-      "Every registered participant receives a verified e-certificate.",
-      "Certificate issued by BashCraft Club, VIT Bhopal.",
-      "Shareable on LinkedIn and your resume — add real value.",
-      "Recognizes your participation across both days of the event.",
-      "A credential that reflects your commitment to learning.",
-    ],
-  },
-];
-
-function useReveal(threshold = 0.08, rootMargin = "0px 0px -80px 0px") {
-  const ref = useRef(null);
-  const [visible, setVisible] = useState(false);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const obs = new IntersectionObserver(
-      ([e]) => setVisible(e.isIntersecting),
-      { threshold, rootMargin }
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, []);
-  return [ref, visible];
-}
-
-function PillBadge({ emoji, label }) {
-  return (
-    <span style={{
-      display: "inline-flex", alignItems: "center", gap: "6px",
-      padding: "6px 16px", borderRadius: "999px",
-      border: "1px solid var(--glass-border)",
-      background: "var(--glass)", color: "var(--primary)",
-      fontSize: "0.82rem", fontFamily: "var(--font-accent)", letterSpacing: "0.02em",
-    }}>
-      {emoji && <span>{emoji}</span>}{label}
-    </span>
-  );
-}
-
-function PillarCard({ emoji, text, index, visible }) {
-  const [hov, setHov] = useState(false);
-  const [mousePos, setMousePos] = useState({ x: 50, y: 50 });
-  return (
-    <div
-      onMouseEnter={() => setHov(true)}
-      onMouseLeave={() => setHov(false)}
-      onMouseMove={(e) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        setMousePos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
-      }}
-      style={{
-        position: "relative", overflow: "hidden",
-        background: hov ? "rgba(232,67,10,0.08)" : "rgba(255,255,255,0.04)",
-        border: `1px solid ${hov ? "var(--primary)" : "var(--glass-border)"}`,
-        borderRadius: "14px", padding: "20px 16px",
-        display: "flex", flexDirection: "column", gap: "10px",
-        fontSize: "0.86rem", color: "var(--text-secondary)", lineHeight: 1.55,
-        opacity: visible ? 1 : 0,
-        transform: visible ? hov ? "translateY(-8px) scale(1.03)" : "translateY(0) scale(1)" : "translateY(30px) scale(0.96)",
-        boxShadow: hov ? "0 20px 40px rgba(0,0,0,0.35)" : "0 10px 25px rgba(0,0,0,0.15)",
-        transition: `opacity 0.7s ease ${400 + index * 120}ms, transform 0.8s cubic-bezier(0.25,1,0.5,1) ${400 + index * 120}ms, border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease`,
-      }}
-    >
-      <div style={{ position: "absolute", inset: 0, pointerEvents: "none",
-        background: hov ? `radial-gradient(180px circle at ${mousePos.x}px ${mousePos.y}px, rgba(232,67,10,0.18), transparent 60%)` : "none" }} />
-      <span style={{ fontSize: "1.6rem", transform: hov ? "scale(1.15)" : "scale(1)", transition: "transform .25s ease" }}>{emoji}</span>
-      <span style={{ position: "relative", zIndex: 2 }}>{text}</span>
-    </div>
-  );
-}
-
-function SpecialCard({ emoji, title, desc, index, visible }) {
-  const [hov, setHov] = useState(false);
-  return (
-    <div
-      onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)}
-      style={{
-        position: "relative", overflow: "hidden",
-        background: hov ? "rgba(232,67,10,0.08)" : "rgba(255,255,255,0.04)",
-        border: `1px solid ${hov ? "var(--primary)" : "var(--glass-border)"}`,
-        borderRadius: "16px", padding: "28px 20px",
-        display: "flex", flexDirection: "column", gap: "12px",
-        opacity: visible ? 1 : 0,
-        transform: visible ? hov ? "translateY(-10px)" : "translateY(0)" : "translateY(50px)",
-        boxShadow: hov ? "0 20px 40px rgba(0,0,0,0.35)" : "0 10px 24px rgba(0,0,0,0.15)",
-        transition: `opacity 0.7s ease ${350 + index * 120}ms, transform 0.8s cubic-bezier(0.25,1,0.5,1) ${350 + index * 120}ms, border-color .25s ease, background .25s ease, box-shadow .25s ease`,
-      }}
-    >
-      <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "2px",
-        background: hov ? "linear-gradient(90deg, transparent, var(--primary), transparent)" : "transparent",
-        transition: "all .25s ease" }} />
-      <span style={{ fontSize: "1.8rem", transform: hov ? "translateY(-2px) scale(1.1)" : "translateY(0) scale(1)", transition: "transform .25s ease" }}>{emoji}</span>
-      <h4 style={{ fontFamily: "var(--font-display)", fontSize: "1rem", fontWeight: 600, color: "var(--text-primary)", margin: 0 }}>{title}</h4>
-      <p style={{ fontSize: "0.84rem", lineHeight: 1.7, color: "var(--text-secondary)", margin: 0 }}>{desc}</p>
-    </div>
-  );
-}
-
-function FlipCard({ image, title, outcomes, index, visible,contain }) {
-  const [hov, setHov] = useState(false);
-  const revealX = index % 3 === 0 ? -80 : index % 3 === 1 ? 0 : 80;
-  return (
-    <div
-      onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)}
-      style={{
-        opacity: visible ? 1 : 0,
-        transform: visible ? hov ? "translateY(-18px) scale(1.02)" : "translateY(0) scale(1)" : `translate(${revealX}px, 80px) scale(.9)`,
-        transition: `opacity 1s ease ${500 + index * 150}ms, transform 1s cubic-bezier(.16,1,.3,1) ${500 + index * 150}ms`,
-      }}
-    >
-      <div style={{
-        position: "relative", overflow: "hidden", borderRadius: "20px",
-        border: hov ? "1px solid var(--primary)" : "1px solid var(--glass-border)",
-        borderBottom: "2px solid rgba(232,67,10,0.9)",
-        boxShadow: hov
-          ? "0 30px 70px rgba(0,0,0,.55), 0 0 0 1px rgba(232,67,10,.35), 0 0 30px rgba(232,67,10,.35), 0 0 70px rgba(232,67,10,.15), 0 12px 40px 4px rgba(232,67,10,.55)"
-          : "0 8px 32px rgba(0,0,0,.45), 0 12px 36px 2px rgba(232,67,10,.38)",
-        transition: "all .35s ease", minHeight: "420px",
-      }}>
-       <img
-  src={image}
-  alt={title}
-  style={{
-    width: "100%",
-    height: "420px",
-    objectFit: contain ? "contain" : "cover",
-    background: contain ? "#f0f0f0" : "transparent",
-    padding: contain ? "20px" : "0",
-    transform: hov ? "scale(1.12)" : "scale(1)",
-    transition: "transform .7s ease"
-  }}
-/>
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(120deg, transparent 35%, rgba(255,255,255,.18) 50%, transparent 65%)", transform: hov ? "translateX(120%)" : "translateX(-120%)", transition: "transform .9s ease", pointerEvents: "none" }} />
-        <div style={{ position: "absolute", inset: 0, background: hov ? "linear-gradient(to top, rgba(0,0,0,.92) 20%, rgba(0,0,0,.15) 70%)" : "linear-gradient(to top, rgba(0,0,0,.78) 22%, rgba(0,0,0,.05) 60%)", transition: "all .35s ease" }} />
-        <div style={{ position: "absolute", inset: 0, background: hov ? "radial-gradient(circle at center, rgba(232,67,10,.30) 0%, rgba(232,67,10,.15) 35%, transparent 75%)" : "radial-gradient(circle at center, rgba(232,67,10,.08) 0%, transparent 70%)", transition: ".35s ease" }} />
-        <div style={{ position: "absolute", left: "22px", right: "22px", bottom: hov ? "24px" : "18px", transition: "all .35s ease" }}>
-          <h3 style={{ fontFamily: "var(--font-display)", fontSize: "1.15rem", fontWeight: 700, color: "#fff", marginBottom: hov ? "16px" : "0", textShadow: "0 2px 10px rgba(0,0,0,.8)", transition: "all .35s ease" }}>{title}</h3>
-          <div style={{ opacity: hov ? 1 : 0, transform: hov ? "translateY(0)" : "translateY(20px)", maxHeight: hov ? "220px" : "0px", overflow: "hidden", transition: "all .35s ease" }}>
-            <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "10px" }}>
-              {outcomes.map((o, i) => (
-                <li key={i} style={{ display: "flex", gap: "10px", color: "rgba(255,255,255,.88)", fontSize: ".84rem", lineHeight: 1.5 }}>
-                  <span style={{ color: "var(--primary)", fontWeight: 700, flexShrink: 0 }}>✓</span>{o}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-        <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "2px", background: hov ? "linear-gradient(90deg, transparent, var(--primary), transparent)" : "transparent", transition: ".3s ease" }} />
-      </div>
-    </div>
-  );
-}
-
-function ScannerHeading() {
-  const [phase, setPhase]     = useState("idle");
-  const [scanPct, setScanPct] = useState(0);
-  const wrapRef  = useRef(null);
-  const rafRef   = useRef(null);
-  const BRACKET_W = 130;
-
-  const startScan = () => {
-    cancelAnimationFrame(rafRef.current);
-    setScanPct(0);
-    setPhase("scanning");
-    const DURATION = 3000;
-    const startTs = performance.now();
-    const tick = (ts) => {
-      const pct = Math.min(((ts - startTs) / DURATION) * 100, 100);
-      setScanPct(pct);
-      if (pct < 100) {
-        rafRef.current = requestAnimationFrame(tick);
-      } else {
-        setPhase("done");
-        rafRef.current = setTimeout(() => {
-          setScanPct(0);
-          setPhase("idle");
-          requestAnimationFrame(() => startScan());
-        }, 1800);
-      }
-    };
-    rafRef.current = requestAnimationFrame(tick);
-  };
-
-  useEffect(() => {
-    const el = wrapRef.current;
-    if (!el) return;
-    const obs = new IntersectionObserver(([e]) => {
-      if (e.isIntersecting) {
-        cancelAnimationFrame(rafRef.current);
-        clearTimeout(rafRef.current);
-        setPhase("idle");
-        setScanPct(0);
-        rafRef.current = requestAnimationFrame(() => startScan());
-      }
-    }, { threshold: 0.3 });
-    obs.observe(el);
-    return () => { obs.disconnect(); cancelAnimationFrame(rafRef.current); clearTimeout(rafRef.current); };
-  }, []);
-
-  const scanning = phase === "scanning";
-  const done     = phase === "done";
-  const revealRight = Math.max(0, 100 - scanPct);
-
-  return (
-    <div ref={wrapRef} style={{ position: "relative", userSelect: "none", display: "block", width: "100%", overflow: "visible", textAlign: "center" }}>
-      <div style={{ position: "absolute", inset: 0, overflow: "hidden", pointerEvents: "none" }}>
-        {[...Array(10)].map((_, i) => (
-          <div key={i} style={{
-            position: "absolute",
-            width: i % 3 === 0 ? "3px" : "2px", height: i % 3 === 0 ? "3px" : "2px",
-            borderRadius: "50%",
-            background: i % 4 === 0 ? "rgba(232,67,10,0.7)" : i % 4 === 1 ? "rgba(120,80,255,0.6)" : "rgba(255,255,255,0.4)",
-            left: `${(i * 17 + 5) % 100}%`, top: `${(i * 23 + 10) % 100}%`,
-            animation: `bcParticle ${3 + (i % 3)}s ease-in-out ${i * 0.4}s infinite`,
-          }} />
-        ))}
-      </div>
-      <div style={{ position: "absolute", left: "50%", top: "50%", transform: "translate(-50%,-50%)", width: "120%", height: "200%", background: "radial-gradient(ellipse at center, rgba(232,67,10,0.06) 0%, rgba(100,60,255,0.04) 50%, transparent 70%)", pointerEvents: "none" }} />
-      <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "clamp(2.4rem,6vw,4.5rem)", lineHeight: 1.25, color: "var(--text-primary)", filter: done ? "blur(0px)" : "blur(16px)", opacity: done ? 1 : 0.35, transition: done ? "filter 0.9s ease, opacity 0.9s ease" : "none", margin: 0, padding: "4px 0", display: "block" }}>
-        Where Innovation Meets Creativity
-      </h2>
-      <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "clamp(2.4rem,6vw,4.5rem)", lineHeight: 1.25, color: "var(--text-primary)", position: "absolute", top: 0, left: 0, right: 0, margin: 0, padding: "4px 0", filter: "blur(0px)", textShadow: "0 0 18px rgba(232,67,10,0.5), 0 0 36px rgba(232,67,10,0.2)", clipPath: `inset(0 ${done ? 0 : revealRight}% 0 0)`, transition: done ? "clip-path 0.5s ease" : "none", pointerEvents: "none", overflow: "visible", whiteSpace: "normal" }}>
-        Where Innovation Meets Creativity
-      </h2>
-      {scanning && !window.matchMedia("(max-width: 768px)").matches && (() => {
-        const bracketLeft = `clamp(0px, calc(${scanPct}% - ${BRACKET_W / 2}px), calc(100% - ${BRACKET_W}px))`;
-        return (
-          <div style={{ position: "absolute", top: "4px", bottom: "4px", left: bracketLeft, width: `${BRACKET_W}px`, pointerEvents: "none" }}>
-            <div style={{ position: "absolute", inset: 0, background: "linear-gradient(90deg, transparent 10%, rgba(232,67,10,0.05) 50%, transparent 90%)" }} />
-            <div style={{ position: "absolute", top: 0, left: 0, width: "14px", height: "14px", borderTop: "2px solid rgba(255,255,255,0.9)", borderLeft: "2px solid rgba(255,255,255,0.9)", filter: "drop-shadow(0 0 4px rgba(255,255,255,0.7))" }} />
-            <div style={{ position: "absolute", top: 0, right: 0, width: "14px", height: "14px", borderTop: "2px solid rgba(255,255,255,0.9)", borderRight: "2px solid rgba(255,255,255,0.9)", filter: "drop-shadow(0 0 4px rgba(255,255,255,0.7))" }} />
-            <div style={{ position: "absolute", bottom: 0, left: 0, width: "14px", height: "14px", borderBottom: "2px solid rgba(255,255,255,0.9)", borderLeft: "2px solid rgba(255,255,255,0.9)", filter: "drop-shadow(0 0 4px rgba(255,255,255,0.7))" }} />
-            <div style={{ position: "absolute", bottom: 0, right: 0, width: "14px", height: "14px", borderBottom: "2px solid rgba(255,255,255,0.9)", borderRight: "2px solid rgba(255,255,255,0.9)", filter: "drop-shadow(0 0 4px rgba(255,255,255,0.7))" }} />
-          </div>
-        );
-      })()}
-    </div>
-  );
-}
-
-function AboutEventSection() {
-  return (
-    <section style={{ maxWidth: "1200px", margin: "0 auto", padding: "80px 48px" }}>
-      <div style={{ marginBottom: "20px" }}>
-        <PillBadge label="About the Event" />
-      </div>
-      <div style={{ padding: "0 40px", marginBottom: "48px" }}>
-        <ScannerHeading />
-      </div>
-      <div style={{ maxWidth: "820px", margin: "0 auto", display: "flex", flexDirection: "column", gap: "24px", textAlign: "center" }}>
-        <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-secondary)", margin: 0 }}>
-          BashCraft proudly presents <strong style={{ color: "var(--text-primary)" }}>BashNex'26 — The Spectrum of Tech</strong>, a two-day live online speaker session on 13th & 14th June 2026. Featuring professionals from JPMorgan Chase, Ericsson, Morgan Stanley, Amazon, Mercedes-Benz R&D, QuillBot, Boundaryless Group and Sreenidhi Educational Group — this is your chance to learn directly from the best.
-        </p>
-        <blockquote style={{ borderLeft: "3px solid var(--primary)", paddingLeft: "20px", fontStyle: "italic", fontSize: "0.95rem", lineHeight: 1.7, color: "var(--primary)", fontFamily: "var(--font-accent)", margin: "0 auto", textAlign: "left" }}>
-          This isn't just another event — it's a platform where ideas meet opportunities and passion turns into action.
-        </blockquote>
-      </div>
-    </section>
-  );
-}
-
-function MissionSection() {
-  const [ref1, vis1] = useReveal(0.15, "0px 0px -60px 0px");
-  const [ref2, vis2] = useReveal(0.15, "0px 0px -60px 0px");
-  return (
-    <section style={{ position: "relative", overflow: "hidden", background: "var(--bg-charcoal)", padding: "96px 48px" }}>
-      <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-        <div ref={ref1}>
-          <div style={{ display: "flex", justifyContent: "center", marginBottom: "20px", opacity: vis1 ? 1 : 0, transform: vis1 ? "translateY(0)" : "translateY(20px)", transition: "opacity 0.6s ease 0ms, transform 0.6s ease 0ms" }}>
-            <PillBadge emoji="🚀" label="Our Mission" />
-          </div>
-          <p style={{ maxWidth: "760px", fontSize: "1.15rem", lineHeight: 1.9, color: "var(--text-primary)", margin: "0 auto 48px", textAlign: "center", opacity: vis1 ? 1 : 0, transform: vis1 ? "translateY(0)" : "translateY(24px)", transition: "opacity 0.7s ease 200ms, transform 0.7s ease 200ms" }}>
-            At Bashcraft, we believe that learning should be interactive, communities should be engaging, and opportunities should be accessible to everyone.
-          </p>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "20px", marginBottom: "72px" }}>
-            {MISSION_PILLARS.map((p, i) => <PillarCard key={i} {...p} index={i} visible={vis1} />)}
-          </div>
-        </div>
-        <div ref={ref2}>
-          <div style={{ marginBottom: "32px", display: "flex", justifyContent: "center", opacity: vis2 ? 1 : 0, transform: vis2 ? "translateY(0)" : "translateY(20px)", transition: "opacity 0.6s ease 0ms, transform 0.6s ease 0ms" }}>
-            <PillBadge emoji="⭐" label="What Makes This Event Special?" />
-          </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "20px" }}>
-            {SPECIAL_CARDS.map((c, i) => <SpecialCard key={i} {...c} index={i} visible={vis2} />)}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function HighlightsSection() {
-  const [ref, visible] = useReveal(0.04);
-  return (
-    <section ref={ref} style={{ position: "relative", overflow: "hidden", padding: "100px 48px", maxWidth: "1300px", margin: "0 auto", textAlign: "center" }}>
-      <div style={{ position: "absolute", top: "-40px", left: "50%", transform: "translateX(-50%)", width: "320px", height: "320px", background: "radial-gradient(circle, rgba(232,67,10,.18), transparent 70%)", filter: "blur(70px)", pointerEvents: "none", zIndex: 0 }} />
-      <div style={{ position: "relative", zIndex: 2, marginBottom: "60px" }}>
-        <div style={{ display: "flex", justifyContent: "center", opacity: visible ? 1 : 0, transform: visible ? "translateY(0)" : "translateY(20px)", transition: "opacity 0.5s ease 0ms, transform 0.5s ease 0ms" }}>
-          <PillBadge emoji="✨" label="What's In Store" />
-        </div>
-        <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "clamp(2.2rem,4vw,3.4rem)", margin: "18px 0 14px", color: "var(--text-primary)", opacity: visible ? 1 : 0, transform: visible ? "translateY(0)" : "translateY(28px)", transition: "opacity 0.6s ease 150ms, transform 0.6s ease 150ms" }}>
-          Event Highlights
-        </h2>
-        <p style={{ maxWidth: "700px", margin: "0 auto", fontSize: "1rem", lineHeight: 1.8, color: "var(--text-secondary)", opacity: visible ? 1 : 0, transform: visible ? "translateY(0)" : "translateY(28px)", transition: "opacity 0.6s ease 300ms, transform 0.6s ease 300ms" }}>
-          Discover the exclusive opportunities waiting for you at BashNex'26.
-        </p>
-      </div>
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "28px", textAlign: "left" }}>
-        {HIGHLIGHTS.map((h, i) => <FlipCard key={i} {...h} index={i} visible={visible} />)}
-      </div>
-    </section>
-  );
-}
+import React from 'react';
+import { motion } from 'framer-motion';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 export default function About() {
+  const pillars = [
+    {
+      num: '01',
+      icon: 'palette',
+      title: 'ELITE UX/UI',
+      desc: 'Crafting pixel-perfect, high-contrast, brutalist user interfaces and seamless user flows that set new industry standards.',
+    },
+    {
+      num: '02',
+      icon: 'lightbulb',
+      title: 'DESIGN THINKING',
+      desc: 'Approaching real-world problems with structured product strategy, rapid user research, and iterative prototyping.',
+    },
+    {
+      num: '03',
+      icon: 'terminal',
+      title: 'DIGITAL SKILLS',
+      desc: 'Empowering engineers and designers with advanced technical toolsets, code architecture, and digital craftsmanship.',
+    },
+  ];
+
   return (
     <>
-      <style>{`
-        @keyframes bcParticle {
-          0%,100% { transform: translateY(0) scale(1); opacity: 0.5; }
-          50%      { transform: translateY(-10px) scale(1.4); opacity: 1; }
-        }
-        @media (max-width: 1100px) {
-          .bc-pillars,.bc-special { grid-template-columns: repeat(3,1fr) !important; }
-          .bc-highlights          { grid-template-columns: repeat(2,1fr) !important; }
-        }
-        @media (max-width: 768px) {
-          .bc-about-grid { grid-template-columns:1fr !important; padding:48px 24px !important; }
-          .bc-mission    { padding:56px 24px !important; }
-          .bc-pillars,.bc-special { grid-template-columns:repeat(2,1fr) !important; }
-          .bc-highlights-wrap { padding:56px 24px !important; }
-          .bc-highlights { grid-template-columns:1fr !important; }
-        }
-        @media (max-width:480px) {
-          .bc-pillars,.bc-special { grid-template-columns:1fr !important; }
-        }
-      `}</style>
-      <main style={{ background: "var(--bg-dark)", color: "var(--text-primary)", overflowX: "hidden" }}>
-        <AboutEventSection />
-        <MissionSection />
-        <HighlightsSection />
-      </main>
+      <Navbar />
+
+      <motion.main
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.4 }}
+        className="bg-pitch-black text-stark-white pt-[68px]"
+      >
+        {/* ==========================================
+            1. HERO HEADER
+           ========================================== */}
+        <section className="relative min-h-[716px] flex flex-col justify-end p-gutter border-b-2 border-stark-white overflow-hidden group">
+          {/* Background image (grayscale -> color on hover) */}
+          <div className="absolute inset-0 z-0 opacity-40 group-hover:opacity-60 transition-opacity duration-500">
+            <img
+              src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=1600&auto=format&fit=crop&q=80"
+              alt="About Background"
+              className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-pitch-black via-pitch-black/60 to-transparent" />
+          </div>
+
+          <div className="relative z-10 max-w-[1440px] w-full mx-auto space-y-6 pb-12">
+            <span className="font-mono-label text-xs sm:text-sm text-vibrant-scarlet uppercase tracking-widest border border-vibrant-scarlet px-4 py-1.5 bg-pitch-black/80 inline-block">
+              SYSTEM_INIT // 001
+            </span>
+            <h1 className="font-display-xl text-5xl sm:text-7xl md:text-8xl lg:text-[120px] font-extrabold tracking-tighter uppercase leading-[0.95]">
+              SYSTEM <span className="text-vibrant-scarlet">OVERVIEW</span>
+            </h1>
+            <p className="font-mono-label text-sm sm:text-base text-stark-white/70 max-w-xl uppercase">
+              // DECODING THE ARCHITECTURE OF CREATIVITY & ENGINEERING
+            </p>
+          </div>
+        </section>
+
+        {/* ==========================================
+            2. MANIFESTO STRIP
+           ========================================== */}
+        <section className="section-divider">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+            <div className="lg:col-span-4 space-y-2">
+              <span className="font-mono-label text-xs text-vibrant-scarlet uppercase">// 002 // MANIFESTO</span>
+              <h2 className="font-display-xl text-3xl sm:text-4xl font-extrabold uppercase">
+                THE_DIRECTIVE
+              </h2>
+            </div>
+
+            <div className="lg:col-span-8 space-y-8">
+              <h3 className="font-display-xl text-3xl sm:text-5xl font-extrabold uppercase leading-tight">
+                NO FLUFF. <span className="text-vibrant-scarlet">JUST ENGINEERING.</span>
+              </h3>
+              <p className="font-body-md text-xl text-stark-white/90 leading-relaxed">
+                Bashcraft Club is a high-impact creative community focused on building elite UX/UI design, product thinking, and digital creativity skills — bringing together developers, designers, and innovators through workshops, design sprints, hackathons, and speaker sessions.
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-stark-white/20 font-mono-label text-xs text-stark-white/60 uppercase">
+                <div>
+                  [ CORE_MOTTO ]<br />
+                  <span className="text-stark-white text-sm font-bold">PRECISION OVER POPULARITY</span>
+                </div>
+                <div>
+                  [ TARGET_OUTCOME ]<br />
+                  <span className="text-stark-white text-sm font-bold">WORLD-CLASS DIGITAL CRAFTSMANSHIP</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ==========================================
+            3. 3-PILLAR BENTO GRID
+           ========================================== */}
+        <section className="section-divider space-y-12">
+          <div className="space-y-2">
+            <span className="font-mono-label text-xs text-vibrant-scarlet uppercase">// 003 // FOUNDATIONAL PILLARS</span>
+            <h2 className="font-display-xl text-4xl sm:text-6xl font-extrabold tracking-tighter uppercase">
+              THE <span className="text-outline">TRINITY</span>
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {pillars.map((pillar) => (
+              <motion.div
+                key={pillar.num}
+                whileHover={{ scale: 1.03 }}
+                transition={{ duration: 0.15 }}
+                className="border-2 border-stark-white bg-surface-container p-8 flex flex-col justify-between min-h-[360px] group hover:bg-vibrant-scarlet hover:border-vibrant-scarlet hover:text-pitch-black transition-none cursor-pointer"
+              >
+                {/* Top Row: Numbered Tag + Icon */}
+                <div className="flex justify-between items-center">
+                  <span className="font-mono-label text-sm text-vibrant-scarlet group-hover:text-pitch-black font-bold">
+                    [ {pillar.num} ]
+                  </span>
+                  <span className="material-symbols-outlined text-4xl text-stark-white group-hover:text-pitch-black">
+                    {pillar.icon}
+                  </span>
+                </div>
+
+                {/* Bottom: Heading + Body */}
+                <div className="space-y-4 pt-12">
+                  <h3 className="font-display-xl text-2xl sm:text-3xl font-extrabold uppercase">
+                    {pillar.title}
+                  </h3>
+                  <p className="font-body-md text-sm text-stark-white/70 group-hover:text-pitch-black/90">
+                    {pillar.desc}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+
+        {/* ==========================================
+            4. FULL-WIDTH IMAGE BREAKOUT (EXECUTE)
+           ========================================== */}
+        <section className="relative h-[614px] w-full border-y-2 border-stark-white overflow-hidden flex items-center justify-center">
+          <img
+            src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1600&auto=format&fit=crop&q=80"
+            alt="Execute Breakout"
+            className="absolute inset-0 w-full h-full object-cover grayscale"
+          />
+          <div className="absolute inset-0 bg-pitch-black/50" />
+          <h2 className="relative z-10 font-display-xl text-7xl sm:text-9xl md:text-[180px] font-extrabold text-stark-white uppercase tracking-tighter mix-blend-difference select-none">
+            EXECUTE
+          </h2>
+        </section>
+      </motion.main>
+
+      <Footer />
     </>
   );
 }

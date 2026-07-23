@@ -1,41 +1,57 @@
-import { Routes, Route } from 'react-router-dom'
-import PosterModal  from './components/modals/Postermodal'
-import Home         from './pages/Home'
-import About        from './pages/About'
-import Speakers     from './pages/Speakers'
-import Timeline     from './pages/Timeline'
-import Instructions from './pages/Instructions'
-import Contact      from './pages/Contact'
-import Login        from './pages/Login'
-import Navbar       from './components/Navbar.jsx'
+import React, { useEffect } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
+import Home from './pages/Home';
+import About from './pages/About';
+import Events from './pages/Events';
+import Team from './pages/Team';
+import Contact from './pages/Contact';
+import { initLenis } from './lib/lenis';
 
 export default function App() {
+  const location = useLocation();
+
+  useEffect(() => {
+    const lenis = initLenis();
+    return () => {
+      // Lenis instance lifecycle
+    };
+  }, []);
+
+  // Scroll to top on route change
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
   return (
-    <>
-      <PosterModal />
-      <Navbar />
-      <Routes>
-        <Route path="/"             element={<Home />}         />
-        <Route path="/about"        element={<About />}        />
-        <Route path="/speakers"     element={<Speakers />}     />
-        <Route path="/timeline"     element={<Timeline />}     />
-        <Route path="/schedule"     element={<Timeline />}     />
-        <Route path="/instructions" element={<Instructions />} />
-        <Route path="/contact"      element={<Contact />}      />
-        <Route path="/login"        element={<Login />}        />
-        <Route path="*" element={
-          <div style={{ display:'grid', placeItems:'center', minHeight:'100vh',
-                        fontFamily:'var(--font-display)', color:'var(--text-secondary)' }}>
-            <div style={{ textAlign:'center' }}>
-              <p style={{ fontSize:'4rem', margin:0 }}>404</p>
-              <p>Page not found</p>
-              <a href="/" style={{ color:'var(--primary)', marginTop:'1rem', display:'block' }}>
-                ← Back to home
-              </a>
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/events" element={<Events />} />
+        <Route path="/team" element={<Team />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route
+          path="*"
+          element={
+            <div className="min-h-screen bg-pitch-black text-stark-white flex items-center justify-center p-gutter text-center">
+              <div className="space-y-6">
+                <span className="font-mono-label text-xs text-vibrant-scarlet uppercase">// 404_ERROR</span>
+                <h1 className="font-display-xl text-8xl font-extrabold text-outline">404</h1>
+                <p className="font-mono-label text-sm text-stark-white/70 uppercase">
+                  RESOURCE_NOT_FOUND // THE VOID CLAIMS THIS LINK
+                </p>
+                <a
+                  href="/"
+                  className="inline-block border-2 border-stark-white px-6 py-3 font-mono-label text-xs font-bold uppercase border-box-hover glitch-hover"
+                >
+                  ← RETURN TO TERMINAL
+                </a>
+              </div>
             </div>
-          </div>
-        } />
+          }
+        />
       </Routes>
-    </>
-  )
+    </AnimatePresence>
+  );
 }

@@ -1,220 +1,113 @@
-import React, { useState, useRef } from "react";
-import emailjs from "@emailjs/browser";
-import {
-  FaInstagram,
-  FaLinkedin,
-  FaDiscord,
-  FaEnvelope,
-  FaPhone,
-  FaMapMarkerAlt,
-  FaPaperPlane,
-  FaCheckCircle,
-  FaTimesCircle,
-} from "react-icons/fa";
-import "./Contact.css";
+import React from 'react';
+import { motion } from 'framer-motion';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+import { SOCIAL_LINKS, CONTACT_EMAIL } from '../constants/socials';
 
-const EMAILJS_SERVICE_ID  = "service_syr0y8n";
-const EMAILJS_TEMPLATE_ID = "template_9gzctnb";
-const EMAILJS_PUBLIC_KEY  = "glQomZKKnHtZfmoNd";
-
-const Contact = () => {
-  const formRef = useRef(null);
-
-  const [formData, setFormData] = useState({
-    from_name: "",
-    from_email: "",
-    subject: "",
-    message: "",
-  });
-
-  const [status, setStatus] = useState("idle");
-  const [errorMsg, setErrorMsg] = useState("");
-
-  const handleChange = (e) => {
-    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setStatus("sending");
-    setErrorMsg("");
-
-    try {
-      await emailjs.send(
-        EMAILJS_SERVICE_ID,
-        EMAILJS_TEMPLATE_ID,
-        formData,
-        EMAILJS_PUBLIC_KEY
-      );
-
-      setStatus("success");
-      setFormData({ from_name: "", from_email: "", subject: "", message: "" });
-      setTimeout(() => setStatus("idle"), 5000);
-    } catch (err) {
-      console.error("EmailJS error:", err);
-      setErrorMsg(
-        err?.text || err?.message ||
-          "Something went wrong. Please try again or email us directly."
-      );
-      setStatus("error");
-      setTimeout(() => setStatus("idle"), 6000);
-    }
-  };
-
+export default function Contact() {
   return (
-    <div className="contact-page">
-      <section className="contact-hero">
-        <h1 className="gradient-text">Contact Our Club</h1>
-        <p>
-          Have questions, ideas, or want to collaborate with us?
-          We'd love to hear from you.
-        </p>
-      </section>
+    <>
+      <Navbar />
 
-      <section className="contact-section">
-        <div className="contact-info">
-          <h2>Get In Touch</h2>
-
-          <div className="info-card">
-            <FaEnvelope className="contact-icon" />
-            <div>
-              <h4>Email</h4>
-              <p>bashcraft@vitbhopal.ac.in</p>
-            </div>
+      <motion.main
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.4 }}
+        className="bg-pitch-black text-stark-white pt-[68px]"
+      >
+        {/* ==========================================
+            1. HERO TYPOGRAPHIC HOOK
+           ========================================== */}
+        <section className="section-divider space-y-8">
+          <div className="flex items-center space-x-4 border-b border-stark-white pb-6">
+            <span className="font-mono-label text-xs sm:text-sm text-vibrant-scarlet uppercase tracking-widest">
+              [ COMM_LINK // ONLINE ]
+            </span>
           </div>
 
-          <div className="info-card">
-            <FaPhone className="contact-icon" />
-            <div>
-              <h4>Phone</h4>
-              <p>+91 XXXXX XXXXX</p>
-            </div>
+          <div className="space-y-4">
+            <h1 className="font-display-xl text-4xl sm:text-6xl md:text-7xl lg:text-[90px] font-extrabold tracking-tighter uppercase leading-none">
+              TRANSMIT TO<br />
+              <a
+                href={`mailto:${CONTACT_EMAIL}`}
+                className="text-vibrant-scarlet hover:underline break-all"
+              >
+                {CONTACT_EMAIL}
+              </a>
+            </h1>
           </div>
+        </section>
 
-          <div className="info-card">
-            <FaMapMarkerAlt className="contact-icon" />
-            <div>
-              <h4>Location</h4>
-              <p>
-                VIT Bhopal University
-                <br />
-                Kotri Kalan, Madhya Pradesh
-              </p>
-            </div>
-          </div>
-
-          <h3 className="social-heading">Follow Us</h3>
-          <div className="social-links">
-            <a href="https://instagram.com" target="_blank" rel="noreferrer">
-              <FaInstagram />
-            </a>
-            <a href="https://linkedin.com" target="_blank" rel="noreferrer">
-              <FaLinkedin />
-            </a>
-            <a href="https://discord.com/login" target="_blank" rel="noreferrer">
-              <FaDiscord />
-            </a>
-          </div>
-        </div>
-
-        <div className="contact-form">
-          <h2>Send a Message</h2>
-
-          <form ref={formRef} onSubmit={handleSubmit} noValidate>
-            <input
-              type="text"
-              name="from_name"
-              placeholder="Your Name"
-              value={formData.from_name}
-              onChange={handleChange}
-              required
-              disabled={status === "sending"}
-            />
-            <input
-              type="email"
-              name="from_email"
-              placeholder="Your Email"
-              value={formData.from_email}
-              onChange={handleChange}
-              required
-              disabled={status === "sending"}
-            />
-            <input
-              type="text"
-              name="subject"
-              placeholder="Subject"
-              value={formData.subject}
-              onChange={handleChange}
-              required
-              disabled={status === "sending"}
-            />
-            <textarea
-              name="message"
-              placeholder="Tell us about your idea, query, or collaboration..."
-              value={formData.message}
-              onChange={handleChange}
-              required
-              disabled={status === "sending"}
-            />
-
-            {status === "success" && (
-              <div className="form-feedback success">
-                <FaCheckCircle />
-                <span>Message sent! We'll get back to you soon.</span>
+        {/* ==========================================
+            2. 12-COL SPLIT: LEFT PANEL + RIGHT SOCIAL CARDS
+           ========================================== */}
+        <section className="section-divider">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+            {/* Left Column (4-col) */}
+            <div className="lg:col-span-4 space-y-8">
+              <div className="space-y-4">
+                <span className="font-mono-label text-xs text-vibrant-scarlet uppercase">
+                  // INITIATE CONTACT SEQUENCE
+                </span>
+                <h2 className="font-display-xl text-3xl sm:text-4xl font-extrabold uppercase">
+                  DIRECT TRANSMISSION
+                </h2>
+                <p className="font-body-md text-sm text-stark-white/80 leading-relaxed">
+                  Have a question, collaboration idea, or sponsorship inquiry? Connect directly with our team leads via email or our official social channels.
+                </p>
               </div>
-            )}
-            {status === "error" && (
-              <div className="form-feedback error">
-                <FaTimesCircle />
-                <span>{errorMsg}</span>
+
+              {/* Square Image / Art Panel */}
+              <div className="relative border-2 border-stark-white h-64 overflow-hidden group cursor-pointer">
+                <img
+                  src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop&q=80"
+                  alt="Contact Art Panel"
+                  className="w-full h-full object-cover grayscale group-hover:scale-105 transition-all duration-300"
+                />
+                <div className="absolute inset-0 bg-vibrant-scarlet/30 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+                <div className="absolute bottom-4 left-4 font-mono-label text-xs text-stark-white uppercase bg-pitch-black px-2 py-1 border border-stark-white">
+                  [ BASHCRAFT_HQ ]
+                </div>
               </div>
-            )}
+            </div>
 
-            <button
-              type="submit"
-              disabled={status === "sending" || status === "success"}
-              className={status === "sending" ? "btn-loading" : ""}
-            >
-              {status === "sending" ? (
-                <>
-                  <span className="spinner" />
-                  Sending…
-                </>
-              ) : status === "success" ? (
-                <>
-                  <FaCheckCircle />
-                  Sent!
-                </>
-              ) : (
-                <>
-                  <FaPaperPlane />
-                  Send Message
-                </>
-              )}
-            </button>
-          </form>
-        </div>
-      </section>
+            {/* Right Column (8-col): 3 Bordered Social Cards */}
+            <div className="lg:col-span-8 space-y-6">
+              <span className="font-mono-label text-xs text-vibrant-scarlet uppercase block">
+                // EXTERNAL_COMMUNICATION_CHANNELS
+              </span>
 
-      {/* Map — pinned directly to VIT Bhopal University */}
-      <section className="map-section">
-        <h2 className="gradient-text">Find Us Here</h2>
-        <p>Visit our club and become part of our community.</p>
-        <div className="map-container">
-          <iframe
-            title="VIT Bhopal Location"
-             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3670.5355141651153!2d76.84874337500521!3d23.07748451427734!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x397ce9ceaaaaaaab%3A0xa224b6b82b421f83!2sVIT%20Bhopal%20University!5e0!3m2!1sen!2sin!4v1780737626532!5m2!1sen!2sin" 
-            width="100%"
-            height="450"
-            style={{ border: 0 }}
-            loading="lazy"
-            allowFullScreen
-            referrerPolicy="no-referrer-when-downgrade"
-          />
-        </div>
-      </section>
-    </div>
+              <div className="space-y-4">
+                {SOCIAL_LINKS.map((link) => (
+                  <motion.a
+                    key={link.label}
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.02 }}
+                    transition={{ duration: 0.15 }}
+                    className="border-2 border-stark-white p-6 md:p-8 flex items-center justify-between group hover:bg-vibrant-scarlet hover:border-vibrant-scarlet hover:text-pitch-black transition-none cursor-pointer"
+                  >
+                    <div className="space-y-1">
+                      <span className="font-mono-label text-xs text-vibrant-scarlet group-hover:text-pitch-black font-bold uppercase block">
+                        [ {link.tag} ]
+                      </span>
+                      <h3 className="font-display-xl text-3xl sm:text-5xl font-extrabold uppercase">
+                        {link.label}
+                      </h3>
+                    </div>
+                    <span className="material-symbols-outlined text-4xl group-hover:text-pitch-black transition-none">
+                      arrow_outward
+                    </span>
+                  </motion.a>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      </motion.main>
+
+      <Footer />
+    </>
   );
-};
-
-export default Contact;
+}
