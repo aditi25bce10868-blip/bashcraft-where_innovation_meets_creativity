@@ -1,225 +1,111 @@
-#  BashCraft Club
+# BashCraft Club — Website
 
-> Where Innovation Meets Creativity
+A high-impact, brutalist-themed website for **BashCraft Club**, built with React, Tailwind CSS, and Framer Motion. Features a full sketch-draw intro sequence, smooth-scroll (Lenis), and a strict "Obsidian Scarlet" design system (pitch black / vibrant scarlet / stark white — no gradients, no rounded corners, instant hover states).
 
-> Connect with FAANG & Big 4 professionals — mentorship, live sessions, and career guidance.
-
-![Stack](https://img.shields.io/badge/React-18-61DAFB?style=flat&logo=react)
-![Stack](https://img.shields.io/badge/Vite-5-646CFF?style=flat&logo=vite)
-![Stack](https://img.shields.io/badge/Node.js-Express-339933?style=flat&logo=node.js)
-
+> This repo is intended for event/demo purposes but built to production quality.
 
 ---
 
-## 📁 Project Structure
+## Contents
+
 ```
-bashcraft/
-│
-├── 📁 src/                              ← Frontend (React + Vite)
-│   ├── components/
-│   │   ├── Navbar.jsx                   ← Sticky navigation
-│   │   ├── Navbar.module.css
-│   │   ├── modals/
-│   │   │   ├── RegisterModal.jsx        ← Registration form
-│   │   │   ├── LoginModal.jsx           ← User login form
-│   │   │   └── Modal.module.css
-│   │
-│   ├── context/
-│   │   └── ModalContext.jsx             ← Global modal state
-│   │
-│   ├── hooks/
-│   │   └── useAuth.js                   ← Auth utilities
-│   │
-│   ├── services/
-│   │   └── api.js                       ← Backend API calls
-│   │
-│   ├── pages/
-│   │   ├── Home.jsx                     ← Landing page
-│   │   ├── About.jsx                    ← About BashCraft event
-│   │   ├── Speakers.jsx                 ← Speaker showcase section
-│   │   ├── Instructions.jsx             ← Event guidelines & instructions
-│   │   ├── Contact.jsx                  ← Contact details & form
-│   │   └── Login.jsx                    ← Dedicated login page
-│   │
-│   ├── assets/                          ← Images, logos, icons
-│   │
-│   ├── App.jsx                          ← Routes & providers
-│   ├── main.jsx                         ← React entry point
-│   └── index.css                        ← Global styles
-│
-├── 📁 backend/                          ← Backend (Node.js + Express)
-│   ├── config/
-│   │   └── db.js                        ← Database configuration
-│   │
-│   ├── models/
-│   │   └── Attendee.js                  ← name, email, college, etc.
-│   │
-│   ├── routes/
-│   │   └── auth.js                      ← POST /register, POST /login
-│   │
-│   ├── middleware/
-│   │   └── errorHandler.js              ← Global error handler
-│   │
-│   ├── server.js                        ← Express entry point
-│   ├── package.json
-│   └── .env.example                     ← Backend environment template
-│
+├── BASHCRAFT_CLUB_BUILD_PROMPT.md   # Full build spec for AI IDEs (Cursor/Windsurf/Claude Code)
+├── src/
+│   ├── components/                  # Navbar, Footer, IntroLoader, shared UI
+│   ├── pages/                       # Home, About, Events, Team, Contact
+│   ├── constants/                   # events.js, team.js, socials.js — single source of truth for content
+│   ├── lib/
+│   │   ├── motion.js                 # Shared Framer Motion variants (fadeInUp, staggerContainer, popOnHover)
+│   │   └── lenis.js                  # Smooth-scroll init
+│   └── App.jsx                       # Router + route transitions + Lenis lifecycle
 ├── index.html
-├── vite.config.js
-├── package.json
-├── .env.example                         ← Frontend environment template
-├── README.md
-
-
+├── tailwind.config.js
+└── package.json
 ```
+
 ---
 
-## ⚙️ Local Setup
+## Getting Started
 
 ### Prerequisites
-- Node.js v18+
-- A database account (MongoDB Atlas or Firebase — TBD by backend team)
+- Node.js 18+
+- npm (or pnpm/yarn — adjust commands accordingly)
 
-### Step 1 — Clone & install
-
+### Install
 ```bash
-# Frontend dependencies
-cd bashcraft
-npm install
-
-# Backend dependencies
-cd backend
 npm install
 ```
 
-### Step 2 — Environment files
-
-**Frontend** — create `bashcraft/.env`:
-```env
-VITE_API_URL=http://localhost:5000/api
-```
-
-**Backend** — create `bashcraft/backend/.env`:
-```env
-PORT=5000
-DB_URI=<your_database_connection_string>
-CLIENT_URL=http://localhost:5173
-```
-
-> Backend team: fill `DB_URI` based on whichever database is chosen.
-
-### Step 3 — Run (two terminals)
-
+### Run locally
 ```bash
-# Terminal 1 — Backend
-cd bashcraft/backend
-npm run dev        # http://localhost:5000
+npm run dev
+```
+Opens at `http://localhost:5173` by default (Vite).
 
-# Terminal 2 — Frontend
-cd bashcraft
-npm run dev        # http://localhost:5173
+### Build for production
+```bash
+npm run build
+npm run preview   # preview the production build locally
 ```
 
 ---
 
+## Design System — "Obsidian Scarlet"
 
+| Token | Value |
+|---|---|
+| Pitch Black | `#000000` |
+| Vibrant Scarlet | `#FF0000` |
+| Stark White | `#FFFFFF` |
+| Display font | Anybody (700/800) |
+| Body font | Hanken Grotesk |
+| Mono/label font | Space Mono |
 
-## 🎨 Design System
-
-All design tokens live in `src/index.css` as CSS variables.
-
-| Variable | Value | Usage |
-|----------|-------|-------|
-| `--primary` | `#E8430A` | Orange accent, buttons, highlights |
-| `--secondary` | `#F26419` | Gradient end, hover states |
-| `--bg-dark` | `#050505` | Page background |
-| `--bg-charcoal` | `#111111` | Card / modal background |
-| `--text-primary` | `#ffffff` | Main text |
-| `--text-secondary` | `rgba(255,255,255,0.7)` | Muted / subtitle text |
-| `--glass-border` | `rgba(255,255,255,0.1)` | Card borders |
-| `--font-display` | `'Space Grotesk'` | Headings, logo |
-| `--font-body` | `'Inter'` | Body copy, inputs |
-| `--font-accent` | `'Poppins'` | Labels, tags, signatures |
-
-
-
-**Open modals from any component:**
-```jsx
-import { useModal } from '../context/ModalContext'
-
-const { openRegister, openLogin } = useModal()
-<button onClick={openRegister}>Join Us</button>
-```
+Rules:
+- **Sharp corners only** — `border-radius: 0` everywhere except functional circles (status dots).
+- **No gradients, no shadows, no blur.** Depth = tonal layering + 1–2px borders.
+- **Hover states are instant**, not eased — color/background swaps happen with `transition: none`. Only scale, opacity, and scroll-reveal animations are eased.
+- Full token reference and component rules live in `BASHCRAFT_CLUB_BUILD_PROMPT.md` (Section 2).
 
 ---
 
-## 🧩 How to Add a New Page
+## The Intro Sequence
 
-1. Create `src/pages/NewPage.jsx`
-2. Register the route in `src/App.jsx`:
-
-```jsx
-import NewPage from './pages/NewPage.jsx'
-// inside <Routes>:
-<Route path="/new-page" element={<NewPage />} />
-```
-
-## 🧩 How to Add a New Component
-
-```
-src/components/MyComponent.jsx
-src/components/MyComponent.module.css   ← scoped styles
-```
-
-Never use hardcoded hex values — always reference `var(--primary)` etc.
+On first load of `/` in a session, an SVG wireframe sketch draws itself (stroke animation), the BashCraft Club logo pops in with a spring animation, then the loader wipes away to reveal the homepage. It only plays once per session (`sessionStorage`) and respects `prefers-reduced-motion`. Full implementation spec is in the build prompt, Section 5.
 
 ---
 
-## 🚀 Deployment
+## Content Management
 
-### Frontend → Vercel
-1. Push to GitHub
-2. Import repo on [vercel.com](https://vercel.com), set root to `bashcraft/`
-3. Add env var: `VITE_API_URL` = your deployed backend URL
-4. Deploy
+All editable content lives in `src/constants/`, not hardcoded in components:
+- `team.js` — full roster (name, role, photo, bio)
+- `events.js` — upcoming + archived events
+- `socials.js` — Instagram / GitHub / LinkedIn URLs, contact email, newsletter link
 
-### Backend → Render
-1. New Web Service on [render.com](https://render.com), root = `bashcraft/backend`
-2. Build: `npm install` · Start: `node server.js`
-3. Add env vars: `Database_URI`, `CLIENT_URL` (Vercel URL), `PORT=5000`
-4. Deploy
+Update these files to change site content without touching layout/markup.
+
 
 ---
 
-## 🛠️ Available Scripts
+## Tech Stack
 
-### Frontend (`bashcraft/`)
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Start dev server at localhost:5173 |
-| `npm run build` | Production build to `dist/` |
-| `npm run preview` | Preview production build locally |
-
-### Backend (`bashcraft/backend/`)
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Start with nodemon (auto-restart) |
-| `npm start` | Start without nodemon (production) |
+- **React 18 + Vite**
+- **Tailwind CSS** — utility classes, custom design tokens
+- **Framer Motion** — component animation, hover pops, scroll reveals, page transitions
+- **Lenis** — smooth scrolling
+- **react-router-dom** — routing across Home / About / Events / Team / Contact
 
 ---
 
+## Known TODOs
 
-
-## 📚 Tech Stack
-
-| Layer | Technology |
-|-------|------------|
-| Frontend | React 18, Vite 5, React Router 6, Framer Motion |
-| Styling | CSS Modules + CSS Variables |
-| Backend | Node.js, Express 4 |
-| Database | TBD by team |
-| Deployment | Vercel (frontend) + Render (backend) |
+- [ ] Replace placeholder contact email (`HELLO@BASHCRAFT.CLUB`) with the real club email
+- [ ] Add real photos for team members (currently using the bordered-icon fallback avatar)
+- [ ] Confirm/replace sample events in `events.js` with current club events
+- [ ] Confirm final footer sitemap column labels against club structure
 
 ---
 
-*Built with 🔥 by the BashCraft team.*
+## License
+
+Internal club project — all rights reserved, BashCraft Club.
