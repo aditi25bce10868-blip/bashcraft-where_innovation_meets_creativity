@@ -241,14 +241,6 @@ function HeroVideoBackground() {
         className="absolute top-1/2 left-1/2 w-screen h-[56.25vw] min-h-full min-w-[177.78vh] -translate-x-1/2 -translate-y-1/2"
         style={{ filter: "grayscale(1) contrast(1.15) brightness(0.55)" }}
       >
-<<<<<<< HEAD
-        {/* ==========================================
-            1. HERO HEADER
-           ========================================== */}
-        <section className="relative min-h-[716px] flex flex-col justify-end p-gutter border-b-2 border-stark-white overflow-hidden group">
-          {/* Background image */}
-          <div className="absolute inset-0 z-0 opacity-40 group-hover:opacity-60 transition-opacity duration-500">
-=======
         <div ref={mountRef} className="absolute inset-0 h-full w-full" />
       </div>
       {/* Dark scrim — keeps the copy legible over the reel */}
@@ -603,7 +595,6 @@ function VisionSection() {
             ref={logoCardRef}
             className="relative flex items-center justify-center w-full aspect-square max-w-[760px] rounded-2xl border border-[#222222] bg-[#101010] p-16"
           >
->>>>>>> 6bac7d169fe6204e791442aa3d70c7b056876e30
             <img
               ref={logoRef}
               src={logo}
@@ -722,110 +713,6 @@ function CommunitySection() {
           0
         );
 
-<<<<<<< HEAD
-          <div className="relative z-10 max-w-[1440px] w-full mx-auto space-y-6 pb-12">
-            <span className="font-mono-label text-xs sm:text-sm text-vibrant-scarlet uppercase tracking-widest border border-vibrant-scarlet px-4 py-1.5 bg-pitch-black/80 inline-block">
-              ABOUT US
-            </span>
-            <h1 className="font-display-xl text-5xl sm:text-7xl md:text-8xl lg:text-[120px] font-extrabold tracking-tighter uppercase leading-[0.95]">
-              ABOUT <span className="text-vibrant-scarlet">BASHCRAFT</span>
-            </h1>
-            <p className="font-mono-label text-sm sm:text-base text-stark-white/70 max-w-xl uppercase">
-              THE ARCHITECTURE OF CREATIVITY & ENGINEERING
-            </p>
-          </div>
-        </section>
-
-        {/* ==========================================
-            2. MANIFESTO STRIP
-           ========================================== */}
-        <section className="section-divider">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-            <div className="lg:col-span-4 space-y-2">
-              <span className="font-mono-label text-xs text-vibrant-scarlet uppercase">// OUR MISSION</span>
-              <h2 className="font-display-xl text-3xl sm:text-4xl font-extrabold uppercase">
-                OUR MISSION
-              </h2>
-            </div>
-
-            <div className="lg:col-span-8 space-y-8">
-              <h3 className="font-display-xl text-3xl sm:text-5xl font-extrabold uppercase leading-tight">
-                NO FLUFF. <span className="text-vibrant-scarlet">JUST ENGINEERING.</span>
-              </h3>
-              <p className="font-body-md text-xl text-stark-white/90 leading-relaxed">
-                Bashcraft Club is a high-impact creative community focused on building elite UX/UI design, product thinking, and digital creativity skills — bringing together developers, designers, and innovators through workshops, design sprints, hackathons, and speaker sessions.
-              </p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-stark-white/20 font-mono-label text-xs text-stark-white/60 uppercase">
-                <div>
-                  CORE MOTTO<br />
-                  <span className="text-stark-white text-sm font-bold">PRECISION OVER POPULARITY</span>
-                </div>
-                <div>
-                  PRIMARY OUTCOME<br />
-                  <span className="text-stark-white text-sm font-bold">WORLD-CLASS DIGITAL CRAFTSMANSHIP</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ==========================================
-            3. 3-PILLAR BENTO GRID
-           ========================================== */}
-        <section className="section-divider space-y-12">
-          <div className="space-y-2">
-            <span className="font-mono-label text-xs text-vibrant-scarlet uppercase">// FOUNDATIONAL PILLARS</span>
-            <h2 className="font-display-xl text-4xl sm:text-6xl font-extrabold tracking-tighter uppercase">
-              OUR <span className="text-outline">PILLARS</span>
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {pillars.map((pillar) => (
-              <motion.div
-                key={pillar.num}
-                whileHover={{ scale: 1.03 }}
-                transition={{ duration: 0.15 }}
-                className="border-2 border-stark-white bg-surface-container p-8 flex flex-col justify-between min-h-[360px] group hover:bg-vibrant-scarlet hover:border-vibrant-scarlet hover:text-pitch-black transition-none cursor-pointer"
-              >
-                <div className="flex justify-between items-center">
-                  <span className="font-mono-label text-sm text-vibrant-scarlet group-hover:text-pitch-black font-bold">
-                    {pillar.num}
-                  </span>
-                  <span className="material-symbols-outlined text-4xl text-stark-white group-hover:text-pitch-black">
-                    {pillar.icon}
-                  </span>
-                </div>
-
-                <div className="space-y-4 pt-12">
-                  <h3 className="font-display-xl text-2xl sm:text-3xl font-extrabold uppercase">
-                    {pillar.title}
-                  </h3>
-                  <p className="font-body-md text-sm text-stark-white/70 group-hover:text-pitch-black/90">
-                    {pillar.desc}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </section>
-
-        {/* ==========================================
-            4. FULL-WIDTH IMAGE BREAKOUT (BUILD)
-           ========================================== */}
-        <section className="relative h-[614px] w-full border-y-2 border-stark-white overflow-hidden flex items-center justify-center">
-          <img
-            src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1600&auto=format&fit=crop&q=80"
-            alt="Build Breakout"
-            className="absolute inset-0 w-full h-full object-cover grayscale"
-          />
-          <div className="absolute inset-0 bg-pitch-black/50" />
-          <h2 className="relative z-10 font-display-xl text-7xl sm:text-9xl md:text-[180px] font-extrabold text-stark-white uppercase tracking-tighter mix-blend-difference select-none">
-            BUILD
-          </h2>
-        </section>
-      </motion.main>
-=======
         // Words reveal one at a time as the section scrolls into view;
         // earlier words stay dimly visible rather than disappearing.
         gsap.set(wordRefs.current, { opacity: 0, y: 26 });
@@ -1015,7 +902,6 @@ function WhyJoinSection() {
 }
 
 /* ---------------------------------- Page ----------------------------------- */
->>>>>>> 6bac7d169fe6204e791442aa3d70c7b056876e30
 
 export default function AboutBashcraft() {
   return (
