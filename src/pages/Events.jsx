@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import { UPCOMING_EVENTS, ARCHIVED_EVENTS } from '../constants/events';
+import { UPCOMING_EVENTS, PAST_EVENTS } from '../constants/events';
 
 export default function Events() {
   return (
@@ -21,26 +21,26 @@ export default function Events() {
         <section className="section-divider space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-stark-white pb-6">
             <span className="font-mono-label text-xs sm:text-sm text-vibrant-scarlet uppercase tracking-widest">
-              [ SYS.PROTOCOL.ACTIVE ]
+              EVENTS & WORKSHOPS
             </span>
             <span className="font-mono-label text-xs text-stark-white/50 uppercase">
-              STATUS: ONLINE // ACCEPTING_REGISTRATIONS
+              WORKSHOPS // TALKS // HACKATHONS
             </span>
           </div>
 
           <h1 className="font-display-xl text-5xl sm:text-7xl md:text-8xl lg:text-[110px] font-extrabold tracking-tighter uppercase leading-[0.95]">
-            EVENTS_<span className="text-vibrant-scarlet">ARCHIVE</span>
+            CLUB <span className="text-vibrant-scarlet">EVENTS</span>
           </h1>
         </section>
 
         {/* ==========================================
-            2. UPCOMING PROTOCOLS
+            2. UPCOMING EVENTS
            ========================================== */}
         <section className="section-divider space-y-12">
           <div className="space-y-2">
-            <span className="font-mono-label text-xs text-vibrant-scarlet uppercase">// 001 // ACTIVE REGISTRATIONS</span>
+            <span className="font-mono-label text-xs text-vibrant-scarlet uppercase">// UPCOMING EVENTS</span>
             <h2 className="font-display-xl text-3xl sm:text-5xl font-extrabold uppercase">
-              UPCOMING PROTOCOLS
+              UPCOMING EVENTS
             </h2>
           </div>
 
@@ -53,9 +53,9 @@ export default function Events() {
                 transition={{ duration: 0.15 }}
                 className="relative border-2 border-stark-white bg-surface-container p-8 flex flex-col justify-between space-y-8 group"
               >
-                {/* Date Tag Pinned Top-Right */}
+                {/* Date / Status Tag Pinned Top-Right */}
                 <div className="absolute top-0 right-0 bg-stark-white text-pitch-black font-mono-label text-xs font-bold px-4 py-2 uppercase group-hover:bg-vibrant-scarlet group-hover:text-pitch-black transition-none">
-                  {evt.displayDate}
+                  {evt.tentative ? 'TENTATIVE' : evt.displayDate}
                 </div>
 
                 <div className="space-y-4 pt-6">
@@ -70,33 +70,38 @@ export default function Events() {
                   </p>
                 </div>
 
-                {/* Full-width REGISTER_ACCESS button */}
-                <a
-                  href={evt.registrationUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block w-full text-center border-2 border-stark-white py-4 font-mono-label text-sm font-bold text-stark-white uppercase glitch-hover"
-                >
-                  REGISTER_ACCESS ↗
-                </a>
+                {evt.registrationUrl ? (
+                  <a
+                    href={evt.registrationUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block w-full text-center border-2 border-stark-white py-4 font-mono-label text-sm font-bold text-stark-white uppercase glitch-hover"
+                  >
+                    REGISTER NOW ↗
+                  </a>
+                ) : (
+                  <span className="block w-full text-center border border-stark-white/40 py-4 font-mono-label text-sm font-bold text-stark-white/50 uppercase cursor-not-allowed">
+                    REGISTRATION OPENS SOON
+                  </span>
+                )}
               </motion.div>
             ))}
           </div>
         </section>
 
         {/* ==========================================
-            3. ARCHIVED EVENTS TABLE
+            3. PAST EVENTS TABLE
            ========================================== */}
         <section className="section-divider space-y-12">
           <div className="space-y-2">
-            <span className="font-mono-label text-xs text-vibrant-scarlet uppercase">// 002 // HISTORICAL LOGS</span>
+            <span className="font-mono-label text-xs text-vibrant-scarlet uppercase">// PAST EVENTS</span>
             <h2 className="font-display-xl text-3xl sm:text-5xl font-extrabold uppercase">
-              ARCHIVED EVENTS
+              PAST EVENTS
             </h2>
           </div>
 
           <div className="border-t-2 border-b-2 border-stark-white divide-y divide-stark-white/20">
-            {ARCHIVED_EVENTS.map((evt) => (
+            {PAST_EVENTS.map((evt) => (
               <div
                 key={evt.id}
                 className="grid grid-cols-1 md:grid-cols-12 gap-4 py-6 px-4 items-center hover:bg-surface-container transition-none cursor-pointer group"

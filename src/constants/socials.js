@@ -6,17 +6,14 @@ export const SOCIAL_LINKS = [
   {
     label: 'INSTAGRAM',
     url: 'https://www.instagram.com/bashcraft.vit/',
-    tag: 'SYS.LINK.01',
   },
   {
     label: 'GITHUB',
     url: 'https://github.com/BashCraftClub',
-    tag: 'SYS.LINK.02',
   },
   {
     label: 'LINKEDIN',
     url: 'https://www.linkedin.com/company/bashcraft/',
-    tag: 'SYS.LINK.03',
   },
 ];
 

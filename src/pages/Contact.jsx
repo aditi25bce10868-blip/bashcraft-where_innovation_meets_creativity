@@ -21,13 +21,13 @@ export default function Contact() {
         <section className="section-divider space-y-8">
           <div className="flex items-center space-x-4 border-b border-stark-white pb-6">
             <span className="font-mono-label text-xs sm:text-sm text-vibrant-scarlet uppercase tracking-widest">
-              [ COMM_LINK // ONLINE ]
+              GET IN TOUCH
             </span>
           </div>
 
           <div className="space-y-4">
             <h1 className="font-display-xl text-4xl sm:text-6xl md:text-7xl lg:text-[90px] font-extrabold tracking-tighter uppercase leading-none">
-              TRANSMIT TO<br />
+              EMAIL US AT<br />
               <a
                 href={`mailto:${CONTACT_EMAIL}`}
                 className="text-vibrant-scarlet hover:underline break-all"
@@ -47,10 +47,10 @@ export default function Contact() {
             <div className="lg:col-span-4 space-y-8">
               <div className="space-y-4">
                 <span className="font-mono-label text-xs text-vibrant-scarlet uppercase">
-                  // INITIATE CONTACT SEQUENCE
+                  // SEND US A MESSAGE
                 </span>
                 <h2 className="font-display-xl text-3xl sm:text-4xl font-extrabold uppercase">
-                  DIRECT TRANSMISSION
+                  GET IN TOUCH
                 </h2>
                 <p className="font-body-md text-sm text-stark-white/80 leading-relaxed">
                   Have a question, collaboration idea, or sponsorship inquiry? Connect directly with our team leads via email or our official social channels.
@@ -66,7 +66,7 @@ export default function Contact() {
                 />
                 <div className="absolute inset-0 bg-vibrant-scarlet/30 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
                 <div className="absolute bottom-4 left-4 font-mono-label text-xs text-stark-white uppercase bg-pitch-black px-2 py-1 border border-stark-white">
-                  [ BASHCRAFT_HQ ]
+                  BASHCRAFT HQ
                 </div>
               </div>
             </div>
@@ -74,7 +74,7 @@ export default function Contact() {
             {/* Right Column (8-col): 3 Bordered Social Cards */}
             <div className="lg:col-span-8 space-y-6">
               <span className="font-mono-label text-xs text-vibrant-scarlet uppercase block">
-                // EXTERNAL_COMMUNICATION_CHANNELS
+                // OUR SOCIAL CHANNELS
               </span>
 
               <div className="space-y-4">
@@ -90,7 +90,7 @@ export default function Contact() {
                   >
                     <div className="space-y-1">
                       <span className="font-mono-label text-xs text-vibrant-scarlet group-hover:text-pitch-black font-bold uppercase block">
-                        [ {link.tag} ]
+                        FOLLOW US
                       </span>
                       <h3 className="font-display-xl text-3xl sm:text-5xl font-extrabold uppercase">
                         {link.label}

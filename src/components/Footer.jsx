@@ -18,7 +18,7 @@ export default function Footer() {
               no fluff; just engineering
             </p>
             <p className="font-body-md text-base text-stark-white/60 max-w-md">
-              A high-impact creative community focused on building elite UX/UI design, product thinking, and digital creativity skills.
+              A community of engineering students building elite design, product thinking, and digital creativity skills together.
             </p>
             <div className="font-mono-label text-xs text-stark-white/50 pt-4">
               © 2025 BASHCRAFT CLUB. ALL RIGHTS RESERVED.
@@ -28,7 +28,7 @@ export default function Footer() {
           {/* Right Column: Giant Social Links */}
           <div className="lg:col-span-7 flex flex-col space-y-4">
             <span className="font-mono-label text-xs text-vibrant-scarlet uppercase mb-2">
-              // TRANSMISSION_CHANNELS
+              FOLLOW US
             </span>
             {SOCIAL_LINKS.map((item) => (
               <a
@@ -52,7 +52,7 @@ export default function Footer() {
           {FOOTER_SITEMAP.map((col) => (
             <div key={col.title} className="space-y-4">
               <h4 className="font-mono-label text-xs text-vibrant-scarlet uppercase tracking-wider">
-                [ {col.title} ]
+                {col.title}
               </h4>
               <ul className="space-y-2 font-body-md text-sm text-stark-white/70">
                 {col.links.map((link) => (
@@ -80,10 +80,10 @@ export default function Footer() {
             </div>
           ))}
 
-          {/* Location / Status Column */}
+          {/* Location Column */}
           <div className="space-y-4">
             <h4 className="font-mono-label text-xs text-vibrant-scarlet uppercase tracking-wider">
-              [ LOCATION ]
+              LOCATION
             </h4>
             <p className="font-mono-label text-xs text-stark-white/70 leading-relaxed uppercase">
               VIT BHOPAL UNIVERSITY<br />

@@ -1,34 +1,22 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import IntroLoader from '../components/IntroLoader';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { fadeInUp, viewportReveal } from '../lib/motion';
-import { FEATURED_TEAM } from '../constants/team';
-import { UPCOMING_EVENTS, ARCHIVED_EVENTS } from '../constants/events';
-import { SOCIAL_LINKS, GOOGLE_FORM_URL, SUBSTACK_URL, CONTACT_EMAIL } from '../constants/socials';
+import { HOME_TEAM_PREVIEW } from '../constants/team';
+import { UPCOMING_EVENTS, PAST_EVENTS } from '../constants/events';
+import { GOOGLE_FORM_URL } from '../constants/socials';
+import groupPhoto from '../assets/community/group-photo.jpg';
 
 export default function Home() {
   const [introDone, setIntroDone] = useState(false);
-  const [newsletterEmail, setNewsletterEmail] = useState('');
+  const [expandedEventId, setExpandedEventId] = useState(null);
 
-  const sampleProjects = [
-    {
-      id: '001',
-      tag: 'PROJECT_001',
-      title: 'DESIGN SYSTEM // OBSIDIAN',
-      category: 'UI/UX ARCHITECTURE',
-      image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop&q=80',
-    },
-    {
-      id: '002',
-      tag: 'PROJECT_002',
-      title: 'CREATIVE LABS PLATFORM',
-      category: 'FULL-STACK DEVELOPMENT',
-      image: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&auto=format&fit=crop&q=80',
-    },
-  ];
+  const toggleEventExpand = (id) => {
+    setExpandedEventId((prev) => (prev === id ? null : id));
+  };
 
   return (
     <>
@@ -67,7 +55,7 @@ export default function Home() {
               className="inline-block"
             >
               <span className="font-mono-label text-xs sm:text-sm text-vibrant-scarlet uppercase tracking-widest border border-vibrant-scarlet/40 px-4 py-1.5 bg-pitch-black">
-                EST. 2025 // INITIATION PROTOCOL
+                BASHCRAFT CLUB // VIT BHOPAL
               </span>
             </motion.div>
 
@@ -123,7 +111,7 @@ export default function Home() {
         <section className="section-divider">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
             <div className="lg:col-span-4 space-y-2">
-              <span className="font-mono-label text-xs text-vibrant-scarlet uppercase">// 001 // SYSTEM OVERVIEW</span>
+              <span className="font-mono-label text-xs text-vibrant-scarlet uppercase">// ABOUT US</span>
               <h2 className="font-display-xl text-4xl sm:text-5xl font-extrabold tracking-tighter uppercase">
                 ENGINEERING<br />
                 <span className="text-outline">EXCELLENCE</span>
@@ -141,7 +129,7 @@ export default function Home() {
                   We bring together developers, designers, and innovators through workshops, design sprints, hackathons, and speaker sessions.
                 </p>
                 <Link to="/about" className="inline-block text-vibrant-scarlet hover:underline font-bold uppercase pt-2">
-                  READ THE MANIFESTO →
+                  READ OUR STORY →
                 </Link>
               </div>
             </div>
@@ -149,149 +137,218 @@ export default function Home() {
         </section>
 
         {/* ==========================================
-            3. ARCHIVE / PROJECTS GRID
+            3. OUR COMMUNITY (Group Photo cropped from top)
            ========================================== */}
-        <section id="projects" className="section-divider space-y-12">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
-            <div>
-              <span className="font-mono-label text-xs text-vibrant-scarlet uppercase">// 002 // CREATIVE ARCHIVE</span>
-              <h2 className="font-display-xl text-4xl sm:text-6xl font-extrabold tracking-tighter uppercase">
-                ARCHIVE <span className="text-vibrant-scarlet font-mono-label text-2xl">0_19</span>
-              </h2>
-            </div>
-            <span className="font-mono-label text-xs text-stark-white/50 uppercase">
-              SELECTED WORKS & LAB EXPERIMENTS
-            </span>
+        <section className="section-divider space-y-12">
+          <div className="space-y-2">
+            <span className="font-mono-label text-xs text-vibrant-scarlet uppercase">// OUR COMMUNITY</span>
+            <h2 className="font-display-xl text-4xl sm:text-6xl font-extrabold tracking-tighter uppercase">
+              THE PEOPLE BEHIND BASHCRAFT
+            </h2>
+            <p className="font-body-md text-base text-stark-white/70 max-w-2xl">
+              A community of engineering students who build, ship, and learn together.
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {sampleProjects.map((proj) => (
-              <motion.div
-                key={proj.id}
-                whileHover={{ scale: 1.03 }}
-                transition={{ duration: 0.15, ease: 'easeOut' }}
-                className="relative border-2 border-stark-white bg-surface-container group cursor-pointer"
-              >
-                {/* Hanging Mono Tag */}
-                <div className="hanging-label">
-                  [ {proj.tag} ]
-                </div>
-
-                {/* Project Image (grayscale -> color) */}
-                <div className="h-[320px] overflow-hidden border-b border-stark-white">
-                  <img
-                    src={proj.image}
-                    alt={proj.title}
-                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-300"
-                  />
-                </div>
-
-                {/* Card Content */}
-                <div className="p-6 space-y-2 group-hover:bg-vibrant-scarlet group-hover:text-pitch-black transition-none">
-                  <span className="font-mono-label text-xs text-vibrant-scarlet group-hover:text-pitch-black uppercase">
-                    {proj.category}
-                  </span>
-                  <div className="flex justify-between items-center">
-                    <h3 className="font-display-xl text-xl sm:text-2xl font-bold uppercase">
-                      {proj.title}
-                    </h3>
-                    <span className="material-symbols-outlined text-2xl">arrow_forward</span>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+          <div className="border-2 border-stark-white overflow-hidden bg-surface-container">
+            <img
+              src={groupPhoto}
+              alt="BashCraft Club Community"
+              className="w-full h-[320px] sm:h-[450px] md:h-[550px] object-cover object-top"
+            />
           </div>
         </section>
 
         {/* ==========================================
-            4. EVENTS PREVIEW
+            4. EVENTS SECTION (Restructured + Expandable Cards)
            ========================================== */}
         <section className="section-divider space-y-12">
           <div className="flex justify-between items-end">
             <div>
-              <span className="font-mono-label text-xs text-vibrant-scarlet uppercase">// 003 // PROTOCOLS & SESSIONS</span>
+              <span className="font-mono-label text-xs text-vibrant-scarlet uppercase">// EVENTS</span>
               <h2 className="font-display-xl text-4xl sm:text-6xl font-extrabold tracking-tighter uppercase">
-                EVENTS <Link to="/events" className="text-vibrant-scarlet hover:underline">↗</Link>
+                EVENTS
               </h2>
             </div>
             <Link to="/events" className="hidden sm:inline-block font-mono-label text-xs text-stark-white/70 hover:text-vibrant-scarlet uppercase border-b border-stark-white/40 pb-1">
-              VIEW FULL ARCHIVE →
+              VIEW ALL EVENTS →
             </Link>
           </div>
 
-          {/* Upcoming Events List */}
-          <div className="space-y-4">
-            <span className="font-mono-label text-xs text-stark-white/50 uppercase tracking-widest">
-              [ UPCOMING_PROTOCOLS ]
+          {/* Sub-section A: Upcoming Events */}
+          <div className="space-y-6">
+            <span className="font-mono-label text-xs text-stark-white/50 uppercase tracking-widest block">
+              [ UPCOMING EVENTS ]
             </span>
-            {UPCOMING_EVENTS.map((evt) => (
-              <motion.div
-                key={evt.id}
-                whileHover={{ scale: 1.01 }}
-                transition={{ duration: 0.15 }}
-                className="border-2 border-stark-white p-6 md:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 group hover:bg-vibrant-scarlet hover:border-vibrant-scarlet hover:text-pitch-black transition-none"
-              >
-                <div className="space-y-2">
-                  <span className="font-mono-label text-xs text-vibrant-scarlet group-hover:text-pitch-black uppercase">
-                    {evt.displayDate} // {evt.location}
-                  </span>
-                  <h3 className="font-display-xl text-2xl md:text-3xl font-extrabold uppercase">
-                    {evt.title}
-                  </h3>
-                  <p className="font-body-md text-sm text-stark-white/70 group-hover:text-pitch-black/80 max-w-2xl">
-                    {evt.description}
-                  </p>
-                </div>
-                <a
-                  href={evt.registrationUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block border border-stark-white group-hover:border-pitch-black px-6 py-3 font-mono-label text-xs font-bold uppercase shrink-0 text-center"
-                >
-                  REGISTER →
-                </a>
-              </motion.div>
-            ))}
+            <div className="space-y-4">
+              {UPCOMING_EVENTS.map((evt) => {
+                const isExpanded = expandedEventId === evt.id;
+                return (
+                  <motion.div
+                    key={evt.id}
+                    layout
+                    onClick={() => toggleEventExpand(evt.id)}
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        toggleEventExpand(evt.id);
+                      }
+                    }}
+                    className="border-2 border-stark-white p-6 md:p-8 bg-surface-container cursor-pointer select-none space-y-4 hover:border-vibrant-scarlet transition-colors duration-200 outline-none"
+                  >
+                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                      <div className="space-y-2">
+                        <div className="flex items-center space-x-3">
+                          {evt.tentative && (
+                            <span className="font-mono-label text-xs text-vibrant-scarlet border border-vibrant-scarlet px-2 py-0.5 uppercase font-bold">
+                              TENTATIVE
+                            </span>
+                          )}
+                          <span className="font-mono-label text-xs text-stark-white/60 uppercase">
+                            {evt.location}
+                          </span>
+                        </div>
+                        <h3 className="font-display-xl text-2xl md:text-3xl font-extrabold uppercase">
+                          {evt.title}
+                        </h3>
+                      </div>
+
+                      <div className="flex items-center space-x-4">
+                        <span className="inline-block border border-stark-white/40 opacity-50 px-6 py-3 font-mono-label text-xs font-bold uppercase text-stark-white/70 text-center cursor-not-allowed">
+                          REGISTRATION OPENS SOON
+                        </span>
+                        <motion.span
+                          animate={{ rotate: isExpanded ? 180 : 0 }}
+                          transition={{ duration: 0.2 }}
+                          className="material-symbols-outlined text-3xl text-vibrant-scarlet"
+                        >
+                          expand_more
+                        </motion.span>
+                      </div>
+                    </div>
+
+                    <AnimatePresence>
+                      {isExpanded && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: 'auto' }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.3 }}
+                          className="pt-4 border-t border-stark-white/20 space-y-4 overflow-hidden"
+                        >
+                          <p className="font-body-md text-base text-stark-white/80 leading-relaxed">
+                            {evt.description}
+                          </p>
+                          {evt.image && (
+                            <div className="border border-stark-white/30 max-h-80 overflow-hidden">
+                              <img src={evt.image} alt={evt.title} className="w-full h-full object-cover" />
+                            </div>
+                          )}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </motion.div>
+                );
+              })}
+            </div>
           </div>
 
-          {/* Archived Events Short Table */}
-          <div className="space-y-4 pt-6">
-            <span className="font-mono-label text-xs text-stark-white/50 uppercase tracking-widest">
-              [ RECENTLY_ARCHIVED ]
+          {/* Sub-section B: Past Events */}
+          <div className="space-y-6 pt-4">
+            <span className="font-mono-label text-xs text-stark-white/50 uppercase tracking-widest block">
+              [ PAST EVENTS ]
             </span>
-            <div className="divide-y divide-stark-white/20 border-y border-stark-white/20">
-              {ARCHIVED_EVENTS.slice(0, 2).map((evt) => (
-                <div key={evt.id} className="py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2 hover:text-vibrant-scarlet transition-none">
-                  <div className="flex items-center space-x-4">
-                    <span className="font-mono-label text-xs text-vibrant-scarlet">{evt.index}</span>
-                    <span className="font-display-xl text-lg font-bold uppercase">{evt.title}</span>
-                  </div>
-                  <span className="font-mono-label text-xs text-stark-white/60 uppercase">{evt.date}</span>
-                </div>
-              ))}
+            <div className="space-y-4">
+              {PAST_EVENTS.map((evt) => {
+                const isExpanded = expandedEventId === evt.id;
+                return (
+                  <motion.div
+                    key={evt.id}
+                    layout
+                    onClick={() => toggleEventExpand(evt.id)}
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        toggleEventExpand(evt.id);
+                      }
+                    }}
+                    className="border-2 border-stark-white p-6 md:p-8 bg-surface-container cursor-pointer select-none space-y-4 hover:border-vibrant-scarlet transition-colors duration-200 outline-none"
+                  >
+                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                      <div className="flex items-center space-x-4">
+                        <span className="font-mono-label text-xs text-vibrant-scarlet font-bold">{evt.index}</span>
+                        <div>
+                          <span className="font-mono-label text-xs text-stark-white/60 uppercase block">
+                            {evt.date} // {evt.location}
+                          </span>
+                          <h3 className="font-display-xl text-xl sm:text-2xl font-extrabold uppercase">
+                            {evt.title}
+                          </h3>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center space-x-2 shrink-0">
+                        <span className="font-mono-label text-xs text-stark-white/50 uppercase">
+                          {isExpanded ? 'LESS' : 'DETAILS'}
+                        </span>
+                        <motion.span
+                          animate={{ rotate: isExpanded ? 180 : 0 }}
+                          transition={{ duration: 0.2 }}
+                          className="material-symbols-outlined text-3xl text-vibrant-scarlet"
+                        >
+                          expand_more
+                        </motion.span>
+                      </div>
+                    </div>
+
+                    <AnimatePresence>
+                      {isExpanded && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: 'auto' }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.3 }}
+                          className="pt-4 border-t border-stark-white/20 space-y-4 overflow-hidden"
+                        >
+                          <p className="font-body-md text-base text-stark-white/80 leading-relaxed max-w-4xl">
+                            {evt.description}
+                          </p>
+                          {evt.image && (
+                            <div className="border border-stark-white/30 max-h-96 overflow-hidden max-w-3xl">
+                              <img src={evt.image} alt={evt.title} className="w-full h-full object-cover" />
+                            </div>
+                          )}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </motion.div>
+                );
+              })}
             </div>
           </div>
         </section>
 
         {/* ==========================================
-            5. TEAM PREVIEW
+            5. MEET THE TEAM (5 Members with Photos)
            ========================================== */}
         <section className="section-divider space-y-12">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
             <div>
-              <span className="font-mono-label text-xs text-vibrant-scarlet uppercase">// 004 // OPERATIVES</span>
+              <span className="font-mono-label text-xs text-vibrant-scarlet uppercase">// MEET THE TEAM</span>
               <h2 className="font-display-xl text-4xl sm:text-6xl font-extrabold tracking-tighter uppercase">
-                CREATIVE <span className="text-outline">COLLECTIVE</span>
+                MEET THE TEAM
               </h2>
             </div>
             <Link to="/team" className="font-mono-label text-xs text-vibrant-scarlet hover:underline uppercase">
-              MEET ALL 15 OPERATIVES →
+              VIEW FULL 15-MEMBER ROSTER →
             </Link>
           </div>
 
-          {/* 4-col Featured Team Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {FEATURED_TEAM.map((member) => (
+          {/* 5-col Team Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+            {HOME_TEAM_PREVIEW.map((member) => (
               <motion.div
                 key={member.id}
                 whileHover={{ scale: 1.03 }}
@@ -304,7 +361,7 @@ export default function Home() {
                     <img
                       src={member.photo}
                       alt={member.name}
-                      className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-300"
+                      className="w-full h-full object-cover object-top grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-300"
                     />
                   ) : (
                     <span className="material-symbols-outlined text-7xl text-stark-white/20 group-hover:text-vibrant-scarlet transition-colors duration-200">
@@ -316,9 +373,9 @@ export default function Home() {
                 {/* Text Content */}
                 <div className="p-5 space-y-2 group-hover:bg-vibrant-scarlet group-hover:text-pitch-black transition-none">
                   <span className="font-mono-label text-xs text-vibrant-scarlet group-hover:text-pitch-black uppercase font-bold block">
-                    [ {member.role} ]
+                    {member.role}
                   </span>
-                  <h3 className="font-display-xl text-xl font-bold uppercase">
+                  <h3 className="font-display-xl text-lg font-bold uppercase">
                     {member.name}
                   </h3>
                   <p className="font-body-md text-xs text-stark-white/70 group-hover:text-pitch-black/80">
@@ -327,94 +384,6 @@ export default function Home() {
                 </div>
               </motion.div>
             ))}
-          </div>
-        </section>
-
-        {/* ==========================================
-            6. NEWSLETTER STRIP
-           ========================================== */}
-        <section className="section-divider bg-surface-container-lowest">
-          <div className="max-w-4xl mx-auto text-center space-y-8 py-8">
-            <span className="font-mono-label text-xs text-vibrant-scarlet uppercase tracking-widest">
-              [ SIGNAL_SUBSCRIBE ]
-            </span>
-            <h2 className="font-display-xl text-4xl sm:text-6xl font-extrabold tracking-tighter uppercase">
-              JOIN THE TRANSMISSION
-            </h2>
-            <p className="font-body-md text-base text-stark-white/70 max-w-xl mx-auto">
-              Subscribe to our Substack for club announcements, design teardowns, engineering insights, and event drops.
-            </p>
-
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                if (newsletterEmail) window.open(SUBSTACK_URL, '_blank');
-              }}
-              className="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-lg mx-auto pt-4"
-            >
-              <input
-                type="email"
-                required
-                placeholder="ENTER_YOUR_EMAIL@DOMAIN.COM"
-                value={newsletterEmail}
-                onChange={(e) => setNewsletterEmail(e.target.value)}
-                className="w-full bg-transparent border-b-2 border-stark-white focus:border-vibrant-scarlet px-4 py-3 font-mono-label text-sm text-stark-white placeholder-stark-white/40 outline-none transition-none"
-              />
-              <button
-                type="submit"
-                className="w-full sm:w-auto border-2 border-stark-white px-8 py-3 font-mono-label text-sm font-bold text-stark-white uppercase border-box-hover glitch-hover shrink-0"
-              >
-                SUBSCRIBE
-              </button>
-            </form>
-          </div>
-        </section>
-
-        {/* ==========================================
-            7. CONTACT CTA
-           ========================================== */}
-        <section className="section-divider space-y-12">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            <div className="lg:col-span-5 space-y-6">
-              <span className="font-mono-label text-xs text-vibrant-scarlet uppercase">// 005 // DIRECT_COMMUNICATION</span>
-              <h2 className="font-display-xl text-4xl sm:text-6xl font-extrabold tracking-tighter uppercase">
-                GET IN TOUCH
-              </h2>
-              <p className="font-mono-label text-sm text-vibrant-scarlet uppercase">
-                INITIATE A LINK WITH OUR CREATIVE LEADS
-              </p>
-
-              {/* Stacked Social Buttons */}
-              <div className="space-y-3 pt-4">
-                {SOCIAL_LINKS.map((s) => (
-                  <motion.a
-                    key={s.label}
-                    href={s.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.02 }}
-                    transition={{ duration: 0.15 }}
-                    className="flex justify-between items-center border-2 border-stark-white p-4 font-mono-label text-sm font-bold uppercase text-stark-white glitch-hover"
-                  >
-                    <span>{s.label}</span>
-                    <span className="material-symbols-outlined">arrow_outward</span>
-                  </motion.a>
-                ))}
-              </div>
-            </div>
-
-            {/* Giant Mailto Headline */}
-            <div className="lg:col-span-7 flex flex-col items-start lg:items-end justify-center">
-              <a
-                href={`mailto:${CONTACT_EMAIL}`}
-                className="font-display-xl text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-stark-white hover:text-vibrant-scarlet transition-none break-all text-left lg:text-right uppercase leading-none"
-              >
-                {CONTACT_EMAIL}
-              </a>
-              <span className="font-mono-label text-xs text-stark-white/40 uppercase mt-4">
-                CLICK TO INITIATE MAIL PROTOCOL
-              </span>
-            </div>
           </div>
         </section>
       </motion.main>

@@ -39,7 +39,7 @@ export default function About() {
             1. HERO HEADER
            ========================================== */}
         <section className="relative min-h-[716px] flex flex-col justify-end p-gutter border-b-2 border-stark-white overflow-hidden group">
-          {/* Background image (grayscale -> color on hover) */}
+          {/* Background image */}
           <div className="absolute inset-0 z-0 opacity-40 group-hover:opacity-60 transition-opacity duration-500">
             <img
               src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=1600&auto=format&fit=crop&q=80"
@@ -51,13 +51,13 @@ export default function About() {
 
           <div className="relative z-10 max-w-[1440px] w-full mx-auto space-y-6 pb-12">
             <span className="font-mono-label text-xs sm:text-sm text-vibrant-scarlet uppercase tracking-widest border border-vibrant-scarlet px-4 py-1.5 bg-pitch-black/80 inline-block">
-              SYSTEM_INIT // 001
+              ABOUT US
             </span>
             <h1 className="font-display-xl text-5xl sm:text-7xl md:text-8xl lg:text-[120px] font-extrabold tracking-tighter uppercase leading-[0.95]">
-              SYSTEM <span className="text-vibrant-scarlet">OVERVIEW</span>
+              ABOUT <span className="text-vibrant-scarlet">BASHCRAFT</span>
             </h1>
             <p className="font-mono-label text-sm sm:text-base text-stark-white/70 max-w-xl uppercase">
-              // DECODING THE ARCHITECTURE OF CREATIVITY & ENGINEERING
+              THE ARCHITECTURE OF CREATIVITY & ENGINEERING
             </p>
           </div>
         </section>
@@ -68,9 +68,9 @@ export default function About() {
         <section className="section-divider">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
             <div className="lg:col-span-4 space-y-2">
-              <span className="font-mono-label text-xs text-vibrant-scarlet uppercase">// 002 // MANIFESTO</span>
+              <span className="font-mono-label text-xs text-vibrant-scarlet uppercase">// OUR MISSION</span>
               <h2 className="font-display-xl text-3xl sm:text-4xl font-extrabold uppercase">
-                THE_DIRECTIVE
+                OUR MISSION
               </h2>
             </div>
 
@@ -83,11 +83,11 @@ export default function About() {
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-stark-white/20 font-mono-label text-xs text-stark-white/60 uppercase">
                 <div>
-                  [ CORE_MOTTO ]<br />
+                  CORE MOTTO<br />
                   <span className="text-stark-white text-sm font-bold">PRECISION OVER POPULARITY</span>
                 </div>
                 <div>
-                  [ TARGET_OUTCOME ]<br />
+                  PRIMARY OUTCOME<br />
                   <span className="text-stark-white text-sm font-bold">WORLD-CLASS DIGITAL CRAFTSMANSHIP</span>
                 </div>
               </div>
@@ -100,9 +100,9 @@ export default function About() {
            ========================================== */}
         <section className="section-divider space-y-12">
           <div className="space-y-2">
-            <span className="font-mono-label text-xs text-vibrant-scarlet uppercase">// 003 // FOUNDATIONAL PILLARS</span>
+            <span className="font-mono-label text-xs text-vibrant-scarlet uppercase">// FOUNDATIONAL PILLARS</span>
             <h2 className="font-display-xl text-4xl sm:text-6xl font-extrabold tracking-tighter uppercase">
-              THE <span className="text-outline">TRINITY</span>
+              OUR <span className="text-outline">PILLARS</span>
             </h2>
           </div>
 
@@ -114,17 +114,15 @@ export default function About() {
                 transition={{ duration: 0.15 }}
                 className="border-2 border-stark-white bg-surface-container p-8 flex flex-col justify-between min-h-[360px] group hover:bg-vibrant-scarlet hover:border-vibrant-scarlet hover:text-pitch-black transition-none cursor-pointer"
               >
-                {/* Top Row: Numbered Tag + Icon */}
                 <div className="flex justify-between items-center">
                   <span className="font-mono-label text-sm text-vibrant-scarlet group-hover:text-pitch-black font-bold">
-                    [ {pillar.num} ]
+                    {pillar.num}
                   </span>
                   <span className="material-symbols-outlined text-4xl text-stark-white group-hover:text-pitch-black">
                     {pillar.icon}
                   </span>
                 </div>
 
-                {/* Bottom: Heading + Body */}
                 <div className="space-y-4 pt-12">
                   <h3 className="font-display-xl text-2xl sm:text-3xl font-extrabold uppercase">
                     {pillar.title}
@@ -139,17 +137,17 @@ export default function About() {
         </section>
 
         {/* ==========================================
-            4. FULL-WIDTH IMAGE BREAKOUT (EXECUTE)
+            4. FULL-WIDTH IMAGE BREAKOUT (BUILD)
            ========================================== */}
         <section className="relative h-[614px] w-full border-y-2 border-stark-white overflow-hidden flex items-center justify-center">
           <img
             src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1600&auto=format&fit=crop&q=80"
-            alt="Execute Breakout"
+            alt="Build Breakout"
             className="absolute inset-0 w-full h-full object-cover grayscale"
           />
           <div className="absolute inset-0 bg-pitch-black/50" />
           <h2 className="relative z-10 font-display-xl text-7xl sm:text-9xl md:text-[180px] font-extrabold text-stark-white uppercase tracking-tighter mix-blend-difference select-none">
-            EXECUTE
+            BUILD
           </h2>
         </section>
       </motion.main>

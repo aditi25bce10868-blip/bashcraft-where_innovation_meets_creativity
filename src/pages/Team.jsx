@@ -25,15 +25,15 @@ export default function Team() {
         <section className="section-divider space-y-6">
           <div className="flex items-center space-x-4 border-b border-stark-white pb-6">
             <span className="font-mono-label text-xs sm:text-sm text-vibrant-scarlet uppercase tracking-widest">
-              [ INIT : COLLECTIVE_DATA ]
+              MEET THE TEAM
             </span>
           </div>
 
           <h1 className="font-display-xl text-5xl sm:text-7xl md:text-8xl lg:text-[110px] font-extrabold tracking-tighter uppercase leading-[0.95]">
-            CREATIVE <span className="text-outline">COLLECTIVE</span>
+            CLUB <span className="text-outline">TEAM</span>
           </h1>
           <p className="font-body-md text-lg text-stark-white/70 max-w-2xl">
-            Meet the 15 operatives architecting the future of design and engineering at BashCraft Club.
+            Meet the 15 team leads and coordinators driving design, tech, events, and community at BashCraft Club.
           </p>
         </section>
 
@@ -59,7 +59,7 @@ export default function Team() {
 
               <div className="md:col-span-8 space-y-4">
                 <span className="font-mono-label text-xs text-vibrant-scarlet uppercase border border-vibrant-scarlet px-3 py-1 bg-pitch-black inline-block font-bold">
-                  [ {faculty.role} ]
+                  {faculty.role}
                 </span>
                 <h2 className="font-display-xl text-3xl sm:text-5xl font-extrabold uppercase">
                   {faculty.name}
@@ -104,7 +104,7 @@ export default function Team() {
                 {/* Details */}
                 <div className="space-y-2">
                   <span className="font-mono-label text-xs text-vibrant-scarlet group-hover:text-pitch-black font-bold uppercase block">
-                    [ {member.role} ]
+                    {member.role}
                   </span>
                   <h3 className="font-display-xl text-xl sm:text-2xl font-bold uppercase">
                     {member.name}
@@ -116,7 +116,7 @@ export default function Team() {
               </motion.div>
             ))}
 
-            {/* OPEN ROLES CARD (Appended to end of grid) */}
+            {/* OPEN ROLES CARD */}
             <motion.div
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.15 }}
@@ -124,13 +124,13 @@ export default function Team() {
             >
               <div className="space-y-4 pt-4">
                 <span className="font-mono-label text-xs text-vibrant-scarlet uppercase font-bold block">
-                  [ OPEN_ROLES ]
+                  OPEN ROLES
                 </span>
                 <h3 className="font-display-xl text-2xl font-extrabold uppercase">
                   THIS COULD BE YOU
                 </h3>
                 <p className="font-body-md text-sm text-stark-white/70">
-                  We will be hiring new team leads and operatives soon across design, tech, content, and events.
+                  We will be hiring new team leads and executive members soon across design, tech, content, and events.
                 </p>
               </div>
 

@@ -4,6 +4,13 @@
 // To add a photo, set the `photo` field to an imported image path.
 // ============================================================
 
+import vinehaPhoto from '../assets/team/vineha-gupta.jpg';
+import divyanshPhoto from '../assets/team/divyansh-agrawal.jpg';
+import prantikPhoto from '../assets/team/prantik-kesariya.jpg';
+import anushaPhoto from '../assets/team/anusha-singh-rajput.jpg';
+import aryanPhoto from '../assets/team/aryan-chaturvedi.jpg';
+
+// Full 15-member roster for the /team page
 export const TEAM_MEMBERS = [
   {
     id: 1,
@@ -113,7 +120,44 @@ export const TEAM_MEMBERS = [
   },
 ];
 
-// Subset for the Home page team preview
-export const FEATURED_TEAM = TEAM_MEMBERS.filter(m =>
-  ['Founder & President', 'Vice President', 'Design Lead', 'Tech Lead'].includes(m.role)
-);
+// 5-member preview for the Home page (all 5 members now have real photos!)
+export const HOME_TEAM_PREVIEW = [
+  {
+    id: 101,
+    name: 'Vineha Gupta',
+    role: 'President',
+    photo: vinehaPhoto,
+    description: 'Leading the club\'s vision, strategy, and community growth.',
+  },
+  {
+    id: 102,
+    name: 'Aryan Chaturvedi',
+    role: 'Vice President',
+    photo: aryanPhoto,
+    description: 'Supporting strategic initiatives and cross-team coordination.',
+  },
+  {
+    id: 103,
+    name: 'Prantik Kesariya',
+    role: 'Operations Lead',
+    photo: prantikPhoto,
+    description: 'Ensuring seamless execution of all club operations.',
+  },
+  {
+    id: 104,
+    name: 'Anusha Singh Rajput',
+    role: 'Secretary',
+    photo: anushaPhoto,
+    description: 'Managing documentation and organizational workflows.',
+  },
+  {
+    id: 105,
+    name: 'Divyansh Agrawal',
+    role: 'Treasurer',
+    photo: divyanshPhoto,
+    description: 'Overseeing financial planning and budget management.',
+  },
+];
+
+// Legacy export for backward compat
+export const FEATURED_TEAM = HOME_TEAM_PREVIEW;
