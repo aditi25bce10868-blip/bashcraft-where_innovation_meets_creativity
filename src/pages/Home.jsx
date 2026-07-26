@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaLinkedin } from 'react-icons/fa';
+import { Mouse } from 'lucide-react';
 import IntroLoader from '../components/IntroLoader';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -33,7 +34,7 @@ export default function Home() {
         {/* ==========================================
             1. HERO SECTION
            ========================================== */}
-        <section className="relative min-h-[calc(100vh-68px)] flex flex-col justify-center items-center text-center px-gutter py-16 overflow-hidden border-b border-stark-white">
+        <section className="relative min-h-[calc(100vh-68px)] flex flex-col justify-center items-center text-center px-gutter pt-16 pb-24 overflow-hidden border-b border-stark-white">
           {/* Faint Wireframe Backdrop */}
           <div className="absolute inset-0 opacity-15 pointer-events-none flex items-center justify-center">
             <svg viewBox="0 0 1000 1000" className="w-full h-full stroke-stark-white fill-none stroke-[1]">
@@ -104,6 +105,19 @@ export default function Home() {
               </a>
             </motion.div>
           </div>
+
+          <motion.div
+            variants={fadeInUp}
+            initial="hidden"
+            whileInView="visible"
+            custom={0.9}
+            viewport={viewportReveal}
+            className="absolute inset-x-0 bottom-6 z-10 flex flex-col items-center justify-center gap-2 text-stark-white/60"
+            aria-hidden="true"
+          >
+            <Mouse className="h-5 w-5 text-vibrant-scarlet" strokeWidth={1.8} />
+            <span className="font-mono-label text-[10px] uppercase tracking-widest">Scroll</span>
+          </motion.div>
         </section>
 
         {/* ==========================================
@@ -357,12 +371,12 @@ export default function Home() {
                 className="border-2 border-stark-white bg-surface-container overflow-hidden group cursor-pointer"
               >
                 {/* Image / Fallback frame */}
-                <div className="h-64 bg-surface-container-high border-b border-stark-white flex items-center justify-center overflow-hidden">
+                <div className="h-64 bg-pitch-black sm:bg-surface-container-high border-b border-stark-white flex items-center justify-center overflow-hidden">
                   {member.photo ? (
                     <img
                       src={member.photo}
                       alt={member.name}
-                      className="w-full h-full object-cover object-top grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-300"
+                      className="w-full h-full object-contain object-top grayscale transition-all duration-300 group-hover:grayscale-0 sm:object-cover sm:group-hover:scale-105"
                     />
                   ) : (
                     <span className="material-symbols-outlined text-7xl text-stark-white/20 group-hover:text-vibrant-scarlet transition-colors duration-200">
