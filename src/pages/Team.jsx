@@ -7,6 +7,31 @@ import Footer from '../components/Footer';
 import { teamData, getImagePath } from '../constants/teams';
 import styles from './Team.module.css';
 
+// Editorial label + bold tagline shown per team on the hub page.
+// Detailed descriptions still live only on each team's dedicated page.
+const getTeamMeta = (team) => {
+  const name = team.name.toLowerCase();
+  if (name.includes('technical')) {
+    return { label: 'BUILD', tagline: 'We engineer the digital backbone of Bashcraft.' };
+  }
+  if (name.includes('design')) {
+    return { label: 'DESIGN', tagline: 'We design experiences that people remember.' };
+  }
+  if (name.includes('content')) {
+    return { label: 'CREATE', tagline: 'We transform ideas into stories that inspire.' };
+  }
+  if (name.includes('event')) {
+    return { label: 'ORGANIZE', tagline: 'We turn planning into unforgettable experiences.' };
+  }
+  if (name.includes('pr') || name.includes('outreach')) {
+    return { label: 'CONNECT', tagline: 'We build partnerships that expand our impact.' };
+  }
+  if (name.includes('social') || name.includes('photography')) {
+    return { label: 'SHOWCASE', tagline: 'We capture and showcase the Bashcraft journey.' };
+  }
+  return { label: 'TEAM', tagline: team.name };
+};
+
 const Team = () => {
   const location = useLocation();
   const [selectedMember, setSelectedMember] = useState(null);
@@ -33,7 +58,7 @@ const Team = () => {
   }, [selectedMember]);
 
   const sectionVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 24 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' } },
   };
   const modalVariants = {
@@ -58,14 +83,22 @@ const Team = () => {
             Bold ideas, smart execution, and every team moving together.
           </span>
         </motion.div>
+
         <motion.p
           className={styles.pageIntro}
           initial={{ opacity: 0, y: -8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.05 }}
         >
-          Bashcraft is a vibrant club where creativity, technology, and community converge. We build immersive experiences, empower new talent, and deliver events that leave a lasting impact.
+          Six specialized teams.
+          <br />
+          One shared mission.
+          <br />
+          <span className={styles.pageIntroMuted}>
+            Building technology, creating experiences, and empowering innovators.
+          </span>
         </motion.p>
+
         <motion.h1
           className={styles.pageTitle}
           initial={{ opacity: 0, y: -10 }}
@@ -74,37 +107,19 @@ const Team = () => {
         >
           OUR TEAMS
         </motion.h1>
-        <motion.p
-          className={styles.pageSub}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.1, duration: 0.4 }}
-        >
-          From coding and creating to connecting and execution, our specialized teams collaborate to bring ideas to life.
-        </motion.p>
 
         <motion.div
           className={styles.decorativeLines}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.3, duration: 0.6 }}
+          transition={{ delay: 0.2, duration: 0.6 }}
         >
           <motion.div
             className={styles.line}
             initial={{ width: 0 }}
             animate={{ width: '100%' }}
-            transition={{ delay: 0.4, duration: 0.8, ease: 'easeInOut' }}
+            transition={{ delay: 0.3, duration: 0.7, ease: 'easeInOut' }}
           />
-          <div className={styles.dots}>
-            {[0, 1, 2, 3, 4].map((i) => (
-              <motion.span
-                key={i}
-                initial={{ scale: 0, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ delay: 0.5 + i * 0.1, duration: 0.3 }}
-              />
-            ))}
-          </div>
         </motion.div>
 
         <nav className={styles.teamNav}>
@@ -124,168 +139,159 @@ const Team = () => {
           </ul>
         </nav>
 
-        {teamData.map((team, index) => (
-          <motion.section
-            key={team.id}
-            id={team.id}
-            className={styles.teamSection}
-            variants={sectionVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.15 }}
-            transition={{ delay: index * 0.1 }}
-          >
-            <div className={styles.sectionHeader}>
-              <h2>{team.name}</h2>
-              <span className={styles.memberCount}>{team.members.length} members</span>
-            </div>
-            <p className={styles.teamDescription}>{team.description}</p>
+        {teamData.map((team, index) => {
+          const meta = getTeamMeta(team);
+          const indexLabel = `${String(index + 1).padStart(2, '0')} / ${String(
+            teamData.length
+          ).padStart(2, '0')}`;
 
-            <div className={styles.teamGrid}>
-              {team.members.map((member, memberIndex) => {
-                const imageSrc = getImagePath(team.id, member.image);
-                const isSelected = selectedMember?.id === member.id;
-                const isHovered = hoveredMember?.id === member.id;
-                const hasAnyHover = hoveredMember !== null;
-                const isOtherHovered = hasAnyHover && !isHovered;
-                const isTeamLead = member.role.toLowerCase().includes('team lead');
+          return (
+            <motion.section
+              key={team.id}
+              id={team.id}
+              className={styles.teamSection}
+              variants={sectionVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ delay: index * 0.08 }}
+            >
+              <div className={styles.sectionHeader}>
+                <div className={styles.sectionHeaderTop}>
+                  <span className={styles.sectionLabel}>{meta.label}</span>
+                  <span className={styles.sectionIndex}>{indexLabel}</span>
+                </div>
+                <h2>{team.name}</h2>
+                <p className={styles.teamTagline}>{meta.tagline}</p>
+                <Link to={`/team/${team.id}`} className={styles.exploreCta}>
+                  Explore Team <span className={styles.ctaArrow}>→</span>
+                </Link>
+              </div>
 
-                return (
-                  <motion.div
-                    key={member.id}
-                    className={styles.memberWrapper}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 30 }}
-                    viewport={{ once: false, amount: 0.3 }}
-                    animate={{
-                      flex: isHovered ? '1.5' : isOtherHovered ? '0.7' : '1',
-                      opacity: isOtherHovered ? 0.5 : 1,
-                    }}
-                    transition={{
-                      default: { duration: 0.6, delay: memberIndex * 0.1, ease: 'easeOut' },
-                      flex: { duration: 0.4, ease: 'easeOut' },
-                      opacity: { duration: 0.3, ease: 'easeInOut' },
-                    }}
-                  >
+              <div className={styles.teamGrid}>
+                {team.members.map((member, memberIndex) => {
+                  const imageSrc = getImagePath(team.id, member.image);
+                  const isSelected = selectedMember?.id === member.id;
+                  const isHovered = hoveredMember?.id === member.id;
+                  const hasAnyHover = hoveredMember !== null;
+                  const isOtherHovered = hasAnyHover && !isHovered;
+
+                  return (
                     <motion.div
-                      className={`${styles.memberCard} ${isSelected ? styles.selected : ''} ${isHovered ? styles.hovered : ''}`}
-                      onClick={() => handleMemberClick(member, team.id)}
-                      onMouseEnter={() => setHoveredMember({ ...member, teamId: team.id })}
-                      onMouseLeave={() => setHoveredMember(null)}
-                      role="button"
-                      tabIndex={0}
-                      animate={{ scale: isHovered ? 1.15 : 1 }}
-                      transition={{ scale: { duration: 0.4, ease: 'easeOut' } }}
+                      key={member.id}
+                      className={styles.memberWrapper}
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 30 }}
+                      viewport={{ once: false, amount: 0.3 }}
+                      animate={{
+                        flex: isHovered ? '1.5' : isOtherHovered ? '0.7' : '1',
+                        opacity: isOtherHovered ? 0.5 : 1,
+                      }}
+                      transition={{
+                        default: { duration: 0.6, delay: memberIndex * 0.1, ease: 'easeOut' },
+                        flex: { duration: 0.4, ease: 'easeOut' },
+                        opacity: { duration: 0.3, ease: 'easeInOut' },
+                      }}
                     >
-                      <div className={styles.teamTag}>{team.name}</div>
-
-                      {isTeamLead && (
-                        <motion.div
-                          className={styles.leadBadge}
-                          initial={{ opacity: 0, y: -8 }}
-                          animate={isHovered ? { opacity: 1, y: 0 } : { opacity: 0, y: -8 }}
-                          transition={{
-                            opacity: { duration: 0.4, delay: 0.1, ease: 'easeOut' },
-                            y: { duration: 0.5, delay: 0.05, ease: 'easeInOut' },
-                          }}
-                        >
-                          <span className={styles.badgeLabel}>TEAM LEAD</span>
-                        </motion.div>
-                      )}
-
                       <motion.div
-                        className={styles.avatarContainer}
-                        animate={isHovered ? { opacity: 0.7 } : { opacity: 1 }}
-                        transition={{ opacity: { duration: 0.35, ease: 'easeInOut' } }}
+                        className={`${styles.memberCard} ${isSelected ? styles.selected : ''} ${
+                          isHovered ? styles.hovered : ''
+                        }`}
+                        onClick={() => handleMemberClick(member, team.id)}
+                        onMouseEnter={() => setHoveredMember({ ...member, teamId: team.id })}
+                        onMouseLeave={() => setHoveredMember(null)}
+                        role="button"
+                        tabIndex={0}
+                        animate={{ scale: isHovered ? 1.15 : 1 }}
+                        transition={{ scale: { duration: 0.4, ease: 'easeOut' } }}
                       >
-                        <div className={styles.avatar}>
-                          <motion.img
-                            src={imageSrc}
-                            alt={member.fullName}
-                            loading="lazy"
-                            animate={
-                              isHovered
-                                ? {
-                                    scale: 1.06,
-                                    filter: 'brightness(0.65) contrast(1.1) saturate(0.9)',
-                                  }
-                                : {
-                                    scale: 1,
-                                    filter: 'brightness(1) contrast(1) saturate(1)',
-                                  }
-                            }
-                            transition={{
-                              scale: { duration: 0.45, ease: 'easeOut' },
-                              filter: { duration: 0.5, ease: 'easeInOut' },
-                            }}
-                          />
+                        <motion.div
+                          className={styles.avatarContainer}
+                          animate={isHovered ? { opacity: 0.7 } : { opacity: 1 }}
+                          transition={{ opacity: { duration: 0.35, ease: 'easeInOut' } }}
+                        >
+                          <div className={styles.avatar}>
+                            <motion.img
+                              src={imageSrc}
+                              alt={member.fullName}
+                              loading="lazy"
+                              style={
+                                member.imagePosition
+                                  ? { objectPosition: member.imagePosition }
+                                  : undefined
+                              }
+                              animate={
+                                isHovered
+                                  ? {
+                                      scale: 1.06,
+                                      filter: 'brightness(0.65) contrast(1.1) saturate(0.9)',
+                                    }
+                                  : {
+                                      scale: 1,
+                                      filter: 'brightness(1) contrast(1) saturate(1)',
+                                    }
+                              }
+                              transition={{
+                                scale: { duration: 0.45, ease: 'easeOut' },
+                                filter: { duration: 0.5, ease: 'easeInOut' },
+                              }}
+                            />
+                          </div>
+                        </motion.div>
+
+                        <div className={styles.name}>{member.fullName}</div>
+                        <div className={styles.role}>{member.role}</div>
+
+                        <div className={styles.modalWord} style={{ marginTop: '0.25rem' }}>
+                          <span className={styles.wordValue} style={{ fontSize: '1.2rem' }}>
+                            {member.word}
+                          </span>
                         </div>
-                      </motion.div>
 
-                      <div className={styles.name}>{member.fullName}</div>
-                      <div className={styles.role}>{member.role}</div>
-
-                      <div className={styles.modalWord} style={{ marginTop: '0.25rem' }}>
-                        <span className={styles.wordValue} style={{ fontSize: '1.2rem' }}>
-                          {member.word}
-                        </span>
-                      </div>
-
-                      {isHovered && !isSelected && (
-                        <motion.div
-                          className={styles.previewHint}
-                          initial={{ opacity: 0, y: -4 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0 }}
-                          transition={{ duration: 0.15 }}
-                        >
-                          
-                        </motion.div>
-                      )}
-
-                      {isHovered && !isSelected && (
-                        <motion.div
-                          className={styles.clickHint}
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          transition={{ duration: 0.2, delay: 0.05 }}
-                        >
-                          ↕ click to expand
-                        </motion.div>
-                      )}
-
-                      {isSelected && (
-                        <motion.div
-                          className={styles.selectedHint}
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          transition={{ duration: 0.15 }}
-                        >
-                          ✓ expanded
-                        </motion.div>
-                      )}
-
-                      {member.linkedin && (
-                        <div className={styles.modalLinkedin} style={{ marginTop: '0.25rem' }}>
-                          <a
-                            href={member.linkedin}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className={styles.linkedinIcon}
-                            aria-label="LinkedIn profile"
+                        {isHovered && !isSelected && (
+                          <motion.div
+                            className={styles.clickHint}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ duration: 0.2, delay: 0.05 }}
                           >
-                            <FaLinkedin />
-                          </a>
-                        </div>
-                      )}
+                            ↕ click to expand
+                          </motion.div>
+                        )}
+
+                        {isSelected && (
+                          <motion.div
+                            className={styles.selectedHint}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ duration: 0.15 }}
+                          >
+                            ✓ expanded
+                          </motion.div>
+                        )}
+
+                        {member.linkedin && (
+                          <div className={styles.modalLinkedin} style={{ marginTop: '0.25rem' }}>
+                            <a
+                              href={member.linkedin}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className={styles.linkedinIcon}
+                              aria-label="LinkedIn profile"
+                            >
+                              <FaLinkedin />
+                            </a>
+                          </div>
+                        )}
+                      </motion.div>
                     </motion.div>
-                  </motion.div>
-                );
-              })}
-            </div>
-          </motion.section>
-        ))}
+                  );
+                })}
+              </div>
+            </motion.section>
+          );
+        })}
 
         <AnimatePresence>
           {selectedMember && (
@@ -313,6 +319,11 @@ const Team = () => {
                       <img
                         src={getImagePath(selectedMember.teamId, selectedMember.image)}
                         alt={selectedMember.fullName}
+                        style={
+                          selectedMember.imagePosition
+                            ? { objectPosition: selectedMember.imagePosition }
+                            : undefined
+                        }
                       />
                     </div>
                     <div className={styles.modalHeading}>

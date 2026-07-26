@@ -151,6 +151,8 @@ export const teamData = [
         sentence: 'a place to learn.',
         word: 'Meticulous',
         image: 'SUNNY KUMAR YADAV.png',
+        // Photo was cropping the top of the head on narrow/mobile widths — nudge focal point up.
+        imagePosition: 'center 15%',
         linkedin: 'https://www.linkedin.com/in/sunny-yadav-513996338',
       },
       {
@@ -160,6 +162,8 @@ export const teamData = [
         sentence: 'Team.',
         word: 'Persistent',
         image: 'VIPUL DIXIT.png',
+        // Same mobile cropping issue as above — nudge focal point up.
+        imagePosition: 'center 10%',
         linkedin: 'https://www.linkedin.com/in/vipul-dixit-104a493ba?utm_source=share_via&utm_content=profile&utm_medium=member_android',
       },
     ],
@@ -176,7 +180,9 @@ export const teamData = [
         role: 'Team Lead',
         sentence: 'Growth.',
         word: 'Evolving',
-        image: 'SHIVI SANJAY.jpg',
+        image: 'SHIVI SANJAY.jpeg',
+        // Photo was cropping the top of the head on narrow/mobile widths — nudge focal point up.
+        imagePosition: 'center 12%',
         linkedin: 'https://www.linkedin.com/in/shivi-sanjay-326a84324?utm_source=share_via&utm_content=profile&utm_medium=member_android',
       },
       {
