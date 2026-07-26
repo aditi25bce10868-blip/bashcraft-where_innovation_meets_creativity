@@ -1,0 +1,643 @@
+:root {
+  --pitch-black: #000000;
+  --vibrant-scarlet: #ff0000;
+  --stark-white: #ffffff;
+}
+
+.pageWrapper {
+  background: var(--pitch-black);
+  color: var(--stark-white);
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-weight: 400;
+  padding: 80px 1.5rem 4rem; 
+  max-width: 1280px;
+  margin: 0 auto;
+  overflow: visible;
+}
+
+/* ----- Typography helpers ----- */
+.pageTitle {
+  font-family: 'Anybody', sans-serif;
+  font-weight: 800;
+  font-size: 4rem;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.25rem;
+  line-height: 1;
+}
+
+.pageAccent {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+  overflow: visible; 
+}
+
+.accentDot {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--vibrant-scarlet);
+  border: 1px solid rgba(255, 0, 0, 0.65);
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+}
+
+.accentLine {
+  flex: 0 0 auto; 
+  min-width: 64px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.accentText {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.55);
+  letter-spacing: 0.05em;
+  white-space: normal;      
+  word-break: break-word;   
+  flex: 1;                  
+  min-width: 0;             
+}
+
+.pageIntro {
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.75);
+  max-width: 760px;
+  width: 100%;             
+  margin-bottom: 1rem;
+  line-height: 1.75;
+  overflow: visible;        
+  white-space: normal;     
+  word-break: break-word;   
+}
+
+.highlight {
+  color: var(--vibrant-scarlet);
+}
+
+.pageSub {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.55);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 2rem;
+  border-left: 3px solid var(--vibrant-scarlet);
+  padding-left: 1rem;
+}
+
+/* ----- Decorative Lines ----- */
+.decorativeLines {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.line {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--vibrant-scarlet), transparent);
+  max-width: 600px;
+  width: 100%;
+}
+
+.dots {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+.dots span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--vibrant-scarlet);
+  display: block;
+}
+
+/* ----- Team sections ----- */
+.teamSection {
+  margin-bottom: 4rem;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: baseline;
+  gap: 1.5rem;
+  border-bottom: 2px solid var(--vibrant-scarlet);
+  padding-bottom: 0.6rem;
+  margin-bottom: 0.75rem;
+}
+
+.sectionHeader h2 {
+  font-family: 'Anybody', sans-serif;
+  font-weight: 700;
+  font-size: 2rem;
+  letter-spacing: -0.02em;
+  color: var(--stark-white);
+}
+
+.memberCount {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 0.06em;
+}
+
+.teamDescription {
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.7);
+  border-left: 2px solid rgba(255, 0, 0, 0.3);
+  padding-left: 1rem;
+  margin-bottom: 1.75rem;
+  line-height: 1.6;
+}
+
+/* ----- Grid & cards – uniform sizing ----- */
+.teamGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem;
+  align-items: stretch;
+}
+
+.memberWrapper {
+  display: flex;
+  min-width: 0;
+}
+
+.memberCard {
+  background: var(--pitch-black);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 1.25rem 1rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  width: 100%;
+  height: 420px;
+  box-sizing: border-box;
+  border-radius: 0.25rem;
+  transition: opacity 0.3s ease-in-out, border-color 0.2s;
+  overflow: hidden;
+}
+
+.memberCard:hover {
+  border-color: var(--vibrant-scarlet);
+  background: #0a0a0a;
+}
+
+.memberCard.hovered {
+  border-color: var(--vibrant-scarlet);
+  background: #0a0a0a;
+}
+
+.memberCard.selected {
+  border-color: var(--vibrant-scarlet);
+  background: rgba(255, 0, 0, 0.05);
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.1);
+}
+
+.avatarContainer {
+  width: 100%;
+  margin-bottom: 0.75rem;
+  flex-shrink: 0;
+}
+
+.avatar {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: #111;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.125rem;
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  display: block;
+}
+
+.memberCard:hover .avatar {
+  border-color: var(--vibrant-scarlet);
+}
+
+/* ----- Badges ----- */
+.leadBadge {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background: var(--vibrant-scarlet);
+  border-radius: 0.25rem;
+  padding: 0.35rem 0.6rem;
+  z-index: 10;
+}
+
+.badgeLabel {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--pitch-black);
+  font-weight: 600;
+  display: block;
+}
+
+/* ----- Team name tag (top-left corner) ----- */
+.teamTag {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.2rem 0.6rem;
+  border-radius: 0.25rem;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(2px);
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* ----- Card text ----- */
+.name {
+  font-family: 'Anybody', sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: -0.01em;
+  color: var(--stark-white);
+  line-height: 1.2;
+  margin-top: 0.2rem;
+}
+
+.role {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: 0.2rem;
+  margin-bottom: 0.5rem;
+}
+
+/* ----- Word on card (only the word, no label) ----- */
+.modalWord {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 0.25rem;
+}
+
+.wordValue {
+  font-family: 'Anybody', sans-serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+  letter-spacing: -0.02em;
+  color: var(--vibrant-scarlet);
+  text-transform: uppercase;
+}
+
+/* ----- Hover preview (large word overlay) ----- */
+.previewHint {
+  font-family: 'Anybody', sans-serif;
+  font-weight: 700;
+  font-size: 1.35rem;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--vibrant-scarlet);
+  margin-top: 0.5rem;
+}
+
+.clickHint {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.2);
+  margin-top: 0.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding-top: 0.75rem;
+  width: 100%;
+}
+
+.memberCard:hover .clickHint {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.selectedHint {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--vibrant-scarlet);
+  margin-top: 0.75rem;
+  border-top: 1px solid rgba(255, 0, 0, 0.3);
+  padding-top: 0.75rem;
+  width: 100%;
+}
+
+/* ----- LinkedIn icon ----- */
+.linkedinIcon {
+  color: var(--stark-white);
+  font-size: 1.8rem;
+  transition: color 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.linkedinIcon:hover {
+  color: var(--vibrant-scarlet);
+}
+
+.modalLinkedin {
+  margin-top: 0.5rem;
+}
+
+.modalLinkedin a.linkedinIcon {
+  font-size: 1.8rem;
+  border-bottom: none;
+  padding-bottom: 0;
+  gap: 0;
+}
+
+.modalLinkedin a.linkedinIcon:hover {
+  color: var(--vibrant-scarlet);
+}
+
+/* ----- Modal ----- */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1.5rem;
+}
+
+.modal {
+  background: var(--pitch-black);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  max-width: 580px;
+  width: 100%;
+  padding: 2.5rem 2.5rem;
+  position: relative;
+}
+
+.modalClose {
+  position: absolute;
+  top: 0.75rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.3);
+  font-family: 'Space Mono', monospace;
+  font-size: 1.8rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+}
+
+.modalClose:hover {
+  color: var(--vibrant-scarlet);
+}
+
+.modalContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.modalTop {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.modalAvatar {
+  width: 100px;
+  height: 100px;
+  flex-shrink: 0;
+  background: #111;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modalAvatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  display: block;
+}
+
+.modalHeading {
+  flex: 1;
+}
+
+.modalName {
+  font-family: 'Anybody', sans-serif;
+  font-weight: 800;
+  font-size: 1.8rem;
+  letter-spacing: -0.02em;
+  color: var(--stark-white);
+  line-height: 1.1;
+}
+
+.modalRole {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--vibrant-scarlet);
+  margin-top: 0.2rem;
+}
+
+.modalDivider {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  margin: 0.25rem 0 0.5rem;
+}
+
+.modalSentence {
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.5;
+  padding: 0.5rem 0 0.25rem;
+  border-left: 3px solid var(--vibrant-scarlet);
+  padding-left: 1rem;
+}
+
+.modalSentence strong {
+  color: var(--vibrant-scarlet);
+  font-weight: 600;
+}
+
+/* Modal word (with label) */
+.modal .modalWord .wordLabel {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.modal .modalWord .wordValue {
+  font-size: 1.6rem;
+}
+
+/* ----- Sub‑navigation (sticky) ----- */
+.teamNav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--pitch-black);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.75rem 0;
+  margin-bottom: 2rem;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.teamNavList {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 1.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  scrollbar-width: thin;
+  scrollbar-color: var(--vibrant-scarlet) transparent;
+}
+
+.teamNavList::-webkit-scrollbar {
+  height: 3px;
+}
+
+.teamNavList::-webkit-scrollbar-thumb {
+  background: var(--vibrant-scarlet);
+  border-radius: 2px;
+}
+
+.teamNavList::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.teamNavItem {
+  flex-shrink: 0;
+}
+
+.teamNavLink {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  padding: 0.25rem 0.1rem;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+  white-space: nowrap;
+}
+
+.teamNavLink:hover {
+  color: var(--stark-white);
+  border-bottom-color: rgba(255, 255, 255, 0.3);
+}
+
+.teamNavLink.active {
+  color: var(--vibrant-scarlet);
+  border-bottom-color: var(--vibrant-scarlet);
+}
+
+/* ----- Responsive ----- */
+@media (max-width: 700px) {
+  .pageTitle {
+    font-size: 2.8rem;
+  }
+  .teamGrid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1rem;
+  }
+  .memberCard {
+    height: 360px;
+    padding: 1rem 0.75rem;
+  }
+  .modalTop {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .modal {
+    padding: 2rem 1.5rem;
+  }
+  .modalAvatar {
+    width: 80px;
+    height: 80px;
+  }
+  .modalName {
+    font-size: 1.5rem;
+  }
+  .teamNavLink {
+    font-size: 0.65rem;
+  }
+}
+
+@media (max-width: 450px) {
+  .teamGrid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 0.75rem;
+  }
+  .memberCard {
+    height: 320px;
+    padding: 0.75rem 0.5rem;
+  }
+  .name {
+    font-size: 0.9rem;
+  }
+  .role {
+    font-size: 0.6rem;
+  }
+  .pageTitle {
+    font-size: 2.2rem;
+  }
+  .sectionHeader h2 {
+    font-size: 1.5rem;
+  }
+  .modal {
+    padding: 1.5rem 1rem;
+  }
+  .teamNavLink {
+    font-size: 0.55rem;
+  }
+}
