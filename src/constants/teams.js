@@ -70,7 +70,7 @@ export const FEATURED_TEAM = [
   { id: 'megh-joshi', fullName: 'Megh Joshi', role: 'Team Lead', team: 'Design Team', image: 'Megh Joshi.jpg' },
   { id: 'shivi-sanjay', fullName: 'Shivi Sanjay', role: 'Team Lead', team: 'Content Team', image: 'SHIVI SANJAY.jpg' },
   { id: 'arun-chaudhary', fullName: 'Arun Chaudhary', role: 'Team Lead', team: 'Event Management Team', image: 'ARUN CHAUDHARY.jpg' },
-  { id: 'aadhya-shukla', fullName: 'Aadhya Shukla', role: 'Team Lead', team: 'PR & Outreach Team', image: 'AADHYA SHUKLA.jpg' },
+ 
   { id: 'samriddh-sinha', fullName: 'Samriddh Sinha', role: 'Team Lead', team: 'Social Media & Photography Team', image: 'Samriddh Sinha.jpg' },
 ];
 
@@ -156,15 +156,13 @@ export const teamData = [
         linkedin: 'https://www.linkedin.com/in/sunny-yadav-513996338',
       },
       {
-        id: 'vipul-dixit',
-        fullName: 'Vipul Dixit',
+        id: 'saumya-dayal',
+        fullName: 'Saumya Dayal',
         role: 'Core Member',
-        sentence: 'Team.',
-        word: 'Persistent',
-        image: 'VIPUL DIXIT.png',
-        // Same mobile cropping issue as above — nudge focal point up.
-        imagePosition: 'center 10%',
-        linkedin: 'https://www.linkedin.com/in/vipul-dixit-104a493ba?utm_source=share_via&utm_content=profile&utm_medium=member_android',
+        sentence: 'a place to learn grow and explore.',
+        word: 'Curious',
+        image: 'SAUMYA DAYAL.jpg',
+        linkedin: 'https://www.linkedin.com/in/saumya-dayal-8a65a7377',
       },
     ],
   },
@@ -238,15 +236,7 @@ export const teamData = [
         image: 'Harshita  Yadav.jpeg',
         linkedin: 'http://www.linkedin.com/in/harshita-yadav-b4758132a',
       },
-      {
-        id: 'saumya-dayal',
-        fullName: 'Saumya Dayal',
-        role: 'Core Member',
-        sentence: 'a place to learn grow and explore.',
-        word: 'Curious',
-        image: 'SAUMYA DAYAL.jpg',
-        linkedin: 'https://www.linkedin.com/in/saumya-dayal-8a65a7377',
-      },
+     
       {
         id: 'avin-pareek',
         fullName: 'Avin Pareek',
@@ -318,15 +308,7 @@ export const teamData = [
     name: 'PR & Outreach Team',
     description: "Responsible for maintaining the club's image and PR. Correlating with the work of advertising and marketing, the PR and Outreach team also invites suitable sponsors for events, and contacts guests for guest lectures.",
     members: [
-      {
-        id: 'aadhya-shukla',
-        fullName: 'Aadhya Shukla',
-        role: 'Team Lead',
-        sentence: ' A place to learn a lot.',
-        word: 'Passionate',
-        image: 'AADHYA SHUKLA.jpg',
-        linkedin: 'https://www.linkedin.com/in/aadhya-shukla-436757357?utm_source=share_via&utm_content=profile&utm_medium=member_android',
-      },
+     
       {
         id: 'om-shrivastava',
         fullName: 'Om Shrivastava',
@@ -336,15 +318,7 @@ export const teamData = [
         image: 'OM SHRIVASTAVA.jpeg',
         linkedin: 'https://www.linkedin.com/in/omshrivastava/',
       },
-      {
-        id: 'sarthak-shukla',
-        fullName: 'Sarthak Shukla',
-        role: 'Core Member',
-        sentence: ' Team.',
-        word: 'Focused',
-        image: 'SARTHAK SHUKLA.png',
-        linkedin: 'https://www.linkedin.com/in/sarthak-shukla-4145463ba?utm_source=share_via&utm_content=profile&utm_medium=member_android',
-      },
+     
       {
         id: 'hardik-pratap-singh',
         fullName: 'Hardik Pratap Singh',
