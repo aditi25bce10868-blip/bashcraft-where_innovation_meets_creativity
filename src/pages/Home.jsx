@@ -137,7 +137,7 @@ export default function Home() {
         </section>
 
         {/* ==========================================
-            3. OUR COMMUNITY (Group Photo cropped from top)
+            3. OUR COMMUNITY
            ========================================== */}
         <section className="section-divider space-y-12">
           <div className="space-y-2">
@@ -150,11 +150,11 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="border-2 border-stark-white overflow-hidden bg-surface-container">
+          <div className="border-2 border-stark-white overflow-hidden bg-surface-container aspect-[1024/460] sm:aspect-auto">
             <img
               src={groupPhoto}
               alt="BashCraft Club Community"
-              className="w-full h-[320px] sm:h-[450px] md:h-[550px] object-cover object-top"
+              className="w-full h-full sm:h-[450px] md:h-[550px] object-contain sm:object-cover object-top"
             />
           </div>
         </section>
