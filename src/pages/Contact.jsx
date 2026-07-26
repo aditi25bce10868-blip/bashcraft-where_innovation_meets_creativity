@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Navbar from '../components/Navbar';
 
 // --- Official SVG Icons (Monochrome) ---
 const LinkedInIcon = ({ className }) => (
@@ -344,6 +345,7 @@ export default function ContactPage() {
 
   return (
     <div className="relative min-h-screen bg-black text-white font-sans selection:bg-[#FF5500] selection:text-white overflow-hidden">
+      <Navbar />
       <AnimatedBackground />
 
       <main className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 pt-24 pb-20">
