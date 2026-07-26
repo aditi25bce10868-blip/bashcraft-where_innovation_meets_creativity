@@ -7,6 +7,7 @@ import { CursorGlow } from "@/components/events/CursorGlow";
 import { ScrollProgress } from "@/components/events/ScrollProgress";
 import { BackToTop } from "@/components/events/BackToTop";
 import { Marquee } from "@/components/events/Marquee";
+import Navbar from "@/components/Navbar";
 
 /**
  * Events.jsx — Final consolidated Events page for BashCraft Club.
@@ -63,6 +64,7 @@ export default function Events() {
       <SmoothScroll />
       <ScrollProgress />
       <CursorGlow />
+      <Navbar />
       <HeroArchive />
       <EventList
         eyebrow="// 01 · UPCOMING"
