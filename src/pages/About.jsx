@@ -3,6 +3,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion, useReducedMotion } from "framer-motion";
 import logo from '../assets/bsclogo.png'
+import Navbar from '../components/Navbar'
 
 gsap.registerPlugin(ScrollTrigger);
 ScrollTrigger.config({ ignoreMobileResize: true });
@@ -354,11 +355,11 @@ function HeroSection() {
       <HeroVideoBackground />
 
       {/* Faint corner coordinates — reinforces the "blueprint" feel */}
-      <span className="absolute top-8 left-6 md:left-10 flex items-center gap-2 font-mono text-[11px] tracking-[0.25em] text-[#c9c9c9] uppercase">
+      <span className="absolute top-24 md:top-20 left-6 md:left-10 flex items-center gap-2 font-mono text-[11px] tracking-[0.25em] text-[#c9c9c9] uppercase">
         <img src={logo} alt="Bashcraft" className="h-5 w-5 object-contain" />
         Bashcraft / Dev Club
       </span>
-      <span className="absolute top-8 right-6 md:right-10 font-mono text-[11px] tracking-[0.25em] text-[#c9c9c9] uppercase">
+      <span className="hidden md:block absolute top-20 right-6 md:right-10 font-mono text-[11px] tracking-[0.25em] text-[#c9c9c9] uppercase">
         Est. Community
       </span>
 
@@ -905,11 +906,14 @@ function WhyJoinSection() {
 
 export default function AboutBashcraft() {
   return (
-    <main className="bg-[#000000] text-white font-body">
-      <HeroSection />
-      <VisionSection />
-      <CommunitySection />
-      <WhyJoinSection />
-    </main>
+    <>
+      <Navbar />
+      <main className="bg-[#000000] text-white font-body">
+        <HeroSection />
+        <VisionSection />
+        <CommunitySection />
+        <WhyJoinSection />
+      </main>
+    </>
   );
 }
