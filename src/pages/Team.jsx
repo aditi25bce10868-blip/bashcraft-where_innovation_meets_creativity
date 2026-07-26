@@ -175,7 +175,6 @@ const Team = () => {
                   const isHovered = hoveredMember?.id === member.id;
                   const hasAnyHover = hoveredMember !== null;
                   const isOtherHovered = hasAnyHover && !isHovered;
-                  const isTeamLead = member.role.toLowerCase().includes('team lead');
 
                   return (
                     <motion.div
@@ -207,22 +206,6 @@ const Team = () => {
                         animate={{ scale: isHovered ? 1.15 : 1 }}
                         transition={{ scale: { duration: 0.4, ease: 'easeOut' } }}
                       >
-                        <div className={styles.teamTag}>{team.name}</div>
-
-                        {isTeamLead && (
-                          <motion.div
-                            className={styles.leadBadge}
-                            initial={{ opacity: 0, y: -8 }}
-                            animate={isHovered ? { opacity: 1, y: 0 } : { opacity: 0, y: -8 }}
-                            transition={{
-                              opacity: { duration: 0.4, delay: 0.1, ease: 'easeOut' },
-                              y: { duration: 0.5, delay: 0.05, ease: 'easeInOut' },
-                            }}
-                          >
-                            <span className={styles.badgeLabel}>TEAM LEAD</span>
-                          </motion.div>
-                        )}
-
                         <motion.div
                           className={styles.avatarContainer}
                           animate={isHovered ? { opacity: 0.7 } : { opacity: 1 }}
@@ -233,6 +216,11 @@ const Team = () => {
                               src={imageSrc}
                               alt={member.fullName}
                               loading="lazy"
+                              style={
+                                member.imagePosition
+                                  ? { objectPosition: member.imagePosition }
+                                  : undefined
+                              }
                               animate={
                                 isHovered
                                   ? {
@@ -331,6 +319,11 @@ const Team = () => {
                       <img
                         src={getImagePath(selectedMember.teamId, selectedMember.image)}
                         alt={selectedMember.fullName}
+                        style={
+                          selectedMember.imagePosition
+                            ? { objectPosition: selectedMember.imagePosition }
+                            : undefined
+                        }
                       />
                     </div>
                     <div className={styles.modalHeading}>
