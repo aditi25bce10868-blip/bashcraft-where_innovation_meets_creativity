@@ -61,7 +61,7 @@ export function EventPageShell({
 
       <div className="fixed left-4 top-4 z-[65] sm:left-6 sm:top-6">
         <Link
-          to="/"
+          to="/events"
           className="glass-card mono-label inline-flex items-center gap-2 rounded-full px-3 py-2 text-white/80 transition hover:text-flame"
         >
           <ArrowLeft className="h-3.5 w-3.5" />
