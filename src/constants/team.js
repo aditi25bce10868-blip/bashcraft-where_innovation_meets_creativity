@@ -128,6 +128,9 @@ export const HOME_TEAM_PREVIEW = [
     role: 'President',
     photo: vinehaPhoto,
     description: 'Leading the club\'s vision, strategy, and community growth.',
+    vision: '"No fluff, only asli engineering". My vision is to make BashCraft a compass for aspiring engineers, a community where students don\'t just attend events but leave with a clear roadmap, the confidence to begin and the mindset to keep building. Through structured roadmaps, mentorship & workshops we aim to help every student find direction in tech.',
+    trait: 'Resilient',
+    linkedin: 'https://www.linkedin.com/in/vinehagupta',
   },
   {
     id: 102,
@@ -135,6 +138,9 @@ export const HOME_TEAM_PREVIEW = [
     role: 'Vice President',
     photo: aryanPhoto,
     description: 'Supporting strategic initiatives and cross-team coordination.',
+    vision: 'To transform this community into a launchpad for world-class builders, where innovation meets relentless execution.',
+    trait: 'Collaborative',
+    linkedin: 'https://www.linkedin.com/in/aryan-chaturvedi1602?utm_source=share_via&utm_content=profile&utm_medium=member_ios',
   },
   {
     id: 103,
@@ -142,6 +148,9 @@ export const HOME_TEAM_PREVIEW = [
     role: 'Operations Lead',
     photo: prantikPhoto,
     description: 'Ensuring seamless execution of all club operations.',
+    vision: 'My vision is to build a community where everyone gets an opportunity to grow, every voice matters and every contribution leaves a lasting impact.',
+    trait: 'Inquisitive',
+    linkedin: 'https://www.linkedin.com/in/prantik-kesariya',
   },
   {
     id: 104,
@@ -149,6 +158,9 @@ export const HOME_TEAM_PREVIEW = [
     role: 'Secretary',
     photo: anushaPhoto,
     description: 'Managing documentation and organizational workflows.',
+    vision: 'To empower every student to learn about emerging technologies and become leaders in the digital future.',
+    trait: 'Catalyst',
+    linkedin: 'https://www.linkedin.com/in/anusha-singh-rajput-361096340?utm_source=share_via&utm_content=profile&utm_medium=member_android',
   },
   {
     id: 105,
@@ -156,6 +168,9 @@ export const HOME_TEAM_PREVIEW = [
     role: 'Treasurer',
     photo: divyanshPhoto,
     description: 'Overseeing financial planning and budget management.',
+    vision: 'Nothing for the club side but want to organise an successful event under my guidance.',
+    trait: 'Pathfinder',
+    linkedin: 'https://www.linkedin.com/in/divyansh-agrawal-ab9117331/',
   },
 ];
 

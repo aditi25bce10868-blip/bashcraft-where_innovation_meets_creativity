@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { FaLinkedin } from 'react-icons/fa';
 import IntroLoader from '../components/IntroLoader';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -381,6 +382,29 @@ export default function Home() {
                   <p className="font-body-md text-xs text-stark-white/70 group-hover:text-pitch-black/80">
                     {member.description}
                   </p>
+
+                  <div className="max-h-0 overflow-hidden opacity-0 transition-all duration-300 group-hover:max-h-80 group-hover:opacity-100 group-focus-within:max-h-80 group-focus-within:opacity-100">
+                    <div className="mt-4 border-t border-pitch-black/30 pt-4 space-y-3">
+                      <span className="inline-block border border-pitch-black px-3 py-1 font-mono-label text-[10px] uppercase font-bold text-pitch-black">
+                        {member.trait}
+                      </span>
+                      <p className="max-h-44 overflow-y-auto pr-2 font-body-md text-xs leading-relaxed text-pitch-black/85">
+                        {member.vision}
+                      </p>
+                      {member.linkedin && (
+                        <a
+                          href={member.linkedin}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`${member.name} LinkedIn profile`}
+                          className="inline-flex h-10 w-10 items-center justify-center border-2 border-pitch-black text-pitch-black transition-colors duration-200 hover:bg-pitch-black hover:text-vibrant-scarlet"
+                          onClick={(event) => event.stopPropagation()}
+                        >
+                          <FaLinkedin className="h-5 w-5" />
+                        </a>
+                      )}
+                    </div>
+                  </div>
                 </div>
               </motion.div>
             ))}
