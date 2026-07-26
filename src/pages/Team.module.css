@@ -273,45 +273,6 @@
 }
 
 /* ----- Badges ----- */
-.leadBadge {
-  position: absolute;
-  top: 0.75rem;
-  right: 0.75rem;
-  background: var(--vibrant-scarlet);
-  border-radius: 0.25rem;
-  padding: 0.35rem 0.6rem;
-  z-index: 10;
-}
-
-.badgeLabel {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.55rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--pitch-black);
-  font-weight: 600;
-  display: block;
-}
-
-/* ----- Team name tag (top-left corner) ----- */
-.teamTag {
-  position: absolute;
-  top: 0.75rem;
-  left: 0.75rem;
-  font-family: 'Space Mono', monospace;
-  font-size: 0.55rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: rgba(255, 255, 255, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 0.2rem 0.6rem;
-  border-radius: 0.25rem;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(2px);
-  z-index: 5;
-  pointer-events: none;
-}
-
 /* ----- Card text ----- */
 .name {
   font-family: 'Anybody', sans-serif;
