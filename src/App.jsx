@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Events from './pages/Events';
 import Team from './pages/Team';
+import TeamDetail from './pages/TeamDetail';
 import Contact from './pages/Contact';
 import { initLenis } from './lib/lenis';
 
@@ -14,11 +15,10 @@ export default function App() {
   useEffect(() => {
     const lenis = initLenis();
     return () => {
-      // Lenis instance lifecycle
+      // Lenis cleanup
     };
   }, []);
 
-  // Scroll to top on route change
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location.pathname]);
@@ -29,6 +29,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/events" element={<Events />} />
+        <Route path="/team/:teamId" element={<TeamDetail />} />
         <Route path="/team" element={<Team />} />
         <Route path="/contact" element={<Contact />} />
         <Route
