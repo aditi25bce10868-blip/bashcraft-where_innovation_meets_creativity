@@ -22,6 +22,9 @@ export default {
         'secondary': '#c6c6c7',
         'secondary-fixed': '#e2e2e2',
         'outline': '#b18780',
+        // Alias so the event-archive components (which use `flame` as their
+        // accent color name) map onto the site's existing scarlet accent.
+        'flame': '#FF0000',
       },
       fontFamily: {
         'display-xl': ['Anybody', 'sans-serif'],
@@ -30,6 +33,8 @@ export default {
         'body-md': ['Hanken Grotesk', 'sans-serif'],
         'mono-label': ['Space Mono', 'monospace'],
         'button-text': ['Space Mono', 'monospace'],
+        // Alias used by the event-archive components as `font-display`.
+        'display': ['Anybody', 'sans-serif'],
       },
       fontSize: {
         'display-xl': ['120px', { lineHeight: '110px', letterSpacing: '-0.04em', fontWeight: '800' }],

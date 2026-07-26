@@ -1,132 +1,127 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
-import { UPCOMING_EVENTS, PAST_EVENTS } from '../constants/events';
+import { Link } from "react-router-dom";
+import { ArrowUpRight } from "lucide-react";
+import { Reveal } from "@/components/events/Reveal";
+import { HeroArchive } from "@/components/events/HeroArchive";
+import { SmoothScroll } from "@/components/events/SmoothScroll";
+import { CursorGlow } from "@/components/events/CursorGlow";
+import { ScrollProgress } from "@/components/events/ScrollProgress";
+import { BackToTop } from "@/components/events/BackToTop";
+import { Marquee } from "@/components/events/Marquee";
+
+/**
+ * Events.jsx — Final consolidated Events page for BashCraft Club.
+ * Renders the hero + Upcoming / Archive typographic lists.
+ *
+ * Speakers (BashNex'26) with domains:
+ *   UI/UX             → Avinash Bussa
+ *   AI + Prompt       → Mukesh Kala
+ *   Manager/VP/PIS    → Azmina Poddar
+ *   HR                → Dr. Ashish Mittal
+ *   Mechanical        → Mahesh Kumar Singh
+ *   Software          → Saptarshi De
+ *   Quant Finance     → Harshil Chaudhary
+ *   Automobile        → Parul Pradhan
+ */
+
+const upcoming = [
+  {
+    slug: "/events/talent-show",
+    index: "01",
+    title: "Talent Show",
+    category: "Stage · Community Night",
+    date: "TBA",
+  },
+];
+
+const archived = [
+  {
+    slug: "/events/bashnex26",
+    index: "01",
+    title: "BashNex'26",
+    category: "Flagship · The Spectrum Of Tech",
+    date: "13 – 14 JUN · 2026",
+  },
+  {
+    slug: "/events/arpit-bhayani",
+    index: "02",
+    title: "TechTalk with Arpit Bhayani",
+    category: "Guest Session",
+    date: "ARCHIVED",
+  },
+  {
+    slug: "/events/investathon",
+    index: "03",
+    title: "Investathon",
+    category: "Finance Hackathon × Zerodha",
+    date: "26 · MAR",
+  },
+];
 
 export default function Events() {
   return (
-    <>
-      <Navbar />
+    <div className="relative min-h-screen bg-[color:var(--surface)] text-white">
+      <SmoothScroll />
+      <ScrollProgress />
+      <CursorGlow />
+      <HeroArchive />
+      <EventList
+        eyebrow="// 01 · UPCOMING"
+        heading="Upcoming"
+        empty="Nothing on the calendar yet — stay tuned."
+        items={upcoming}
+      />
+      <EventList
+        eyebrow="// 02 · ARCHIVE"
+        heading="Archived"
+        empty="No archived events."
+        items={archived}
+      />
+      <Marquee words={["TALKS", "HACKATHONS", "COMMUNITY", "BUILD", "SHIP", "REPEAT", "SIGNAL", "BASHCRAFT"]} />
+      <BackToTop />
+    </div>
+  );
+}
 
-      <motion.main
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.4 }}
-        className="bg-pitch-black text-stark-white pt-[68px]"
-      >
-        {/* ==========================================
-            1. HERO HEADER
-           ========================================== */}
-        <section className="section-divider space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-stark-white pb-6">
-            <span className="font-mono-label text-xs sm:text-sm text-vibrant-scarlet uppercase tracking-widest">
-              EVENTS & WORKSHOPS
-            </span>
-            <span className="font-mono-label text-xs text-stark-white/50 uppercase">
-              WORKSHOPS // TALKS // HACKATHONS
-            </span>
-          </div>
+function EventList({ eyebrow, heading, items, empty }) {
+  return (
+    <section className="relative border-t hairline bg-[color:var(--surface)] px-6 py-20 sm:px-10 sm:py-28">
+      <div className="mx-auto max-w-5xl">
+        <Reveal className="mb-10">
+          <div className="mono-label mb-3 text-flame">{eyebrow}</div>
+          <h2 className="font-display text-5xl font-bold leading-[0.95] tracking-tight sm:text-6xl">
+            {heading}
+          </h2>
+        </Reveal>
 
-          <h1 className="font-display-xl text-5xl sm:text-7xl md:text-8xl lg:text-[110px] font-extrabold tracking-tighter uppercase leading-[0.95]">
-            CLUB <span className="text-vibrant-scarlet">EVENTS</span>
-          </h1>
-        </section>
-
-        {/* ==========================================
-            2. UPCOMING EVENTS
-           ========================================== */}
-        <section className="section-divider space-y-12">
-          <div className="space-y-2">
-            <span className="font-mono-label text-xs text-vibrant-scarlet uppercase">// UPCOMING EVENTS</span>
-            <h2 className="font-display-xl text-3xl sm:text-5xl font-extrabold uppercase">
-              UPCOMING EVENTS
-            </h2>
-          </div>
-
-          {/* 2-Col Grid of Bordered Event Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {UPCOMING_EVENTS.map((evt) => (
-              <motion.div
-                key={evt.id}
-                whileHover={{ scale: 1.02 }}
-                transition={{ duration: 0.15 }}
-                className="relative border-2 border-stark-white bg-surface-container p-8 flex flex-col justify-between space-y-8 group"
-              >
-                {/* Date / Status Tag Pinned Top-Right */}
-                <div className="absolute top-0 right-0 bg-stark-white text-pitch-black font-mono-label text-xs font-bold px-4 py-2 uppercase group-hover:bg-vibrant-scarlet group-hover:text-pitch-black transition-none">
-                  {evt.tentative ? 'TENTATIVE' : evt.displayDate}
-                </div>
-
-                <div className="space-y-4 pt-6">
-                  <span className="font-mono-label text-xs text-vibrant-scarlet uppercase block">
-                    LOCATION: {evt.location}
-                  </span>
-                  <h3 className="font-display-xl text-2xl sm:text-4xl font-extrabold uppercase">
-                    {evt.title}
-                  </h3>
-                  <p className="font-body-md text-sm text-stark-white/80 leading-relaxed">
-                    {evt.description}
-                  </p>
-                </div>
-
-                {evt.registrationUrl ? (
-                  <a
-                    href={evt.registrationUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block w-full text-center border-2 border-stark-white py-4 font-mono-label text-sm font-bold text-stark-white uppercase glitch-hover"
+        {items.length === 0 ? (
+          <p className="mono-label text-white/50">{empty}</p>
+        ) : (
+          <ul className="divide-y divide-white/10 border-y border-white/10">
+            {items.map((it, i) => (
+              <li key={it.slug}>
+                <Reveal delay={i * 0.05}>
+                  <Link
+                    to={it.slug}
+                    className="group grid grid-cols-[auto_1fr_auto] items-center gap-4 py-6 transition sm:grid-cols-[3rem_1fr_auto_auto] sm:gap-8 sm:py-8"
                   >
-                    REGISTER NOW ↗
-                  </a>
-                ) : (
-                  <span className="block w-full text-center border border-stark-white/40 py-4 font-mono-label text-sm font-bold text-stark-white/50 uppercase cursor-not-allowed">
-                    REGISTRATION OPENS SOON
-                  </span>
-                )}
-              </motion.div>
+                    <span className="mono-label text-flame">{it.index}</span>
+                    <div className="min-w-0">
+                      <h3 className="font-display text-2xl font-semibold leading-tight tracking-tight transition group-hover:text-flame sm:text-4xl">
+                        {it.title}
+                      </h3>
+                      <div className="mono-label mt-2 text-white/50">{it.category}</div>
+                    </div>
+                    <span className="mono-label hidden text-white/60 sm:inline">{it.date}</span>
+                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border hairline transition-all duration-500 group-hover:border-flame group-hover:bg-flame group-hover:text-black">
+                      <ArrowUpRight className="h-4 w-4 transition-transform duration-500 group-hover:-rotate-45" />
+                    </span>
+                  </Link>
+                </Reveal>
+              </li>
             ))}
-          </div>
-        </section>
-
-        {/* ==========================================
-            3. PAST EVENTS TABLE
-           ========================================== */}
-        <section className="section-divider space-y-12">
-          <div className="space-y-2">
-            <span className="font-mono-label text-xs text-vibrant-scarlet uppercase">// PAST EVENTS</span>
-            <h2 className="font-display-xl text-3xl sm:text-5xl font-extrabold uppercase">
-              PAST EVENTS
-            </h2>
-          </div>
-
-          <div className="border-t-2 border-b-2 border-stark-white divide-y divide-stark-white/20">
-            {PAST_EVENTS.map((evt) => (
-              <div
-                key={evt.id}
-                className="grid grid-cols-1 md:grid-cols-12 gap-4 py-6 px-4 items-center hover:bg-surface-container transition-none cursor-pointer group"
-              >
-                <div className="md:col-span-1 font-mono-label text-sm text-vibrant-scarlet font-bold">
-                  {evt.index}
-                </div>
-                <div className="md:col-span-6 font-display-xl text-xl sm:text-2xl font-bold uppercase group-hover:text-vibrant-scarlet transition-none">
-                  {evt.title}
-                </div>
-                <div className="md:col-span-4 font-mono-label text-xs text-stark-white/60 uppercase">
-                  {evt.date} // {evt.location}
-                </div>
-                <div className="md:col-span-1 flex justify-end">
-                  <span className="material-symbols-outlined text-2xl text-stark-white/40 group-hover:text-vibrant-scarlet transition-none">
-                    arrow_forward
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-      </motion.main>
-
-      <Footer />
-    </>
+          </ul>
+        )}
+      </div>
+    </section>
   );
 }
