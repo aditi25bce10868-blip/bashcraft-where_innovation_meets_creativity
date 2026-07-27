@@ -357,7 +357,7 @@ export const teamData = [
       {
         id: 'samriddh-sinha',
         fullName: 'Samriddh Sinha',
-        role: 'Team Lead',
+        role: 'Core Member',
         sentence: ' Responsibility.',
         word: 'Driven',
         image: 'SAMRIDDH SINHA.png',
