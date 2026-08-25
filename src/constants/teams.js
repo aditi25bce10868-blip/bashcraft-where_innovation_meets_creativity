@@ -97,7 +97,7 @@ export const teamData = [
         role: 'Core Member',
         sentence: ' a place to learn, create, and grow together.',
         word: 'Trailblazer',
-        image: 'AMEESHA KUMARI.jpg',
+        image: 'Ameesha Kumari.jpg',
         linkedin: 'https://www.linkedin.com/in/ameesha-kumari-663855411?utm_source=share_via&utm_content=profile&utm_medium=member_android',
       },
       {
@@ -106,7 +106,7 @@ export const teamData = [
         role: 'Core Member',
         sentence: ' a community that inspires me.',
         word: 'Ambitious',
-        image: 'ANUSHKA YADAV.jpg',
+        image: 'Anushka Yadav.jpg',
         linkedin: 'https://www.linkedin.com/in/anushka-yadav-118b14390',
       },
       {
@@ -141,7 +141,7 @@ export const teamData = [
         role: 'Team Lead',
         sentence: 'Passionate and driven.',
         word: 'Motivated',
-        image: 'MEGH SNEHALKUMAR JOSHI.jpg',
+        image: 'Megh Joshi.jpg',
         linkedin: 'http://www.linkedin.com/in/megh-joshi-35a681379',
       },
       {
@@ -150,7 +150,7 @@ export const teamData = [
         role: 'Core Member',
         sentence: 'a place to learn.',
         word: 'Meticulous',
-        image: 'SUNNY KUMAR YADAV.png',
+        image: 'Sunny Yadav.png',
         // Photo was cropping the top of the head on narrow/mobile widths — nudge focal point up.
         imagePosition: 'center 15%',
         linkedin: 'https://www.linkedin.com/in/sunny-yadav-513996338',
@@ -161,7 +161,7 @@ export const teamData = [
         role: 'Core Member',
         sentence: 'a place to learn grow and explore.',
         word: 'Curious',
-        image: 'SAUMYA DAYAL.jpg',
+        image: 'Saumya Dayal.jpg',
         linkedin: 'https://www.linkedin.com/in/saumya-dayal-8a65a7377',
       },
     ],
@@ -178,7 +178,7 @@ export const teamData = [
         role: 'Team Lead',
         sentence: 'Growth.',
         word: 'Evolving',
-        image: 'SHIVI SANJAY.jpeg',
+        image: 'Shivi Sanjay.jpeg',
         // Photo was cropping the top of the head on narrow/mobile widths — nudge focal point up.
         imagePosition: 'center 12%',
         linkedin: 'https://www.linkedin.com/in/shivi-sanjay-326a84324?utm_source=share_via&utm_content=profile&utm_medium=member_android',
@@ -189,7 +189,7 @@ export const teamData = [
         role: 'Core Member',
         sentence: ' a passionate community.',
         word: 'realone',
-        image: 'Yuvraj.jpg',
+        image: 'Yuvraj Rajoriya.jpg',
         linkedin: 'https://www.linkedin.com/in/yuvraj-rajoriya-20b590323?utm_source=share_via&utm_content=profile&utm_medium=member_android',
       },
       {
@@ -198,7 +198,7 @@ export const teamData = [
         role: 'Core Member',
         sentence: 'a place where ideas find their voice.',
         word: 'Curious',
-        image: 'IRFAN ALAM ANSARI.jpg',
+        image: 'Irfan Alam Ansari.jpg',
         linkedin: 'https://www.linkedin.com/in/irfan-a-5440b51b8?utm_source=share_via&utm_content=profile&utm_medium=member_android',
       },
       {
@@ -207,7 +207,7 @@ export const teamData = [
         role: 'Core Member',
         sentence: 'a platform for creativity, learning, and teamwork.',
         word: 'Curious',
-        image: 'SUMIT.jpg',
+        image: 'Sumit.jpg',
         linkedin: 'https://www.linkedin.com/in/sumit-sumit-34b109381?utm_source=share_via&utm_content=profile&utm_medium=member_android',
       },
     ],
@@ -224,7 +224,7 @@ export const teamData = [
         role: 'Team Lead',
         sentence: 'a place to learn and explore.',
         word: 'Versatile',
-        image: 'ARUN CHAUDHARY.jpg',
+        image: 'Arun Chaudhary.jpg',
         linkedin: 'http://linkedin.com/in/arun-chaudhary-9b9547363',
       },
       {
@@ -233,7 +233,7 @@ export const teamData = [
         role: 'Core Member',
         sentence: ' Home.',
         word: 'Curious',
-        image: 'Harshita  Yadav.jpeg',
+        image: 'Harshita Yadav.jpeg',
         linkedin: 'http://www.linkedin.com/in/harshita-yadav-b4758132a',
       },
      
@@ -243,7 +243,7 @@ export const teamData = [
         role: 'Core Member',
         sentence: 'Way to self development.',
         word: 'Passionate',
-        image: 'AVIN PAREEK.jpg',
+        image: 'Avin Pareek.jpg',
         linkedin: 'https://www.linkedin.com/in/avin-pareek-8ba67b3a8?utm_source=share_via&utm_content=profile&utm_medium=member_android',
       },
       {
@@ -252,7 +252,7 @@ export const teamData = [
         role: 'Core Member',
         sentence: 'Amazing.',
         word: 'Management role',
-        image: 'PRIYANSH SAXENA.jpeg',
+        image: 'Priyansh Saxena.jpeg',
         linkedin: 'https://www.linkedin.com/in/priyansh-saxena-45885a37b?utm_source=share_via&utm_content=profile&utm_medium=member_android',
       },
       {
@@ -261,7 +261,7 @@ export const teamData = [
         role: 'Core Member',
         sentence: 'a place where I learned, collaborated, and created unforgettable memories.',
         word: 'Tenacious',
-        image: 'VARDAAN YADAV.png',
+        image: 'Vardaan Yadav.png',
         linkedin: 'https://www.linkedin.com/in/vardaan-yadav-51b5b93ba?utm_source=share_via&utm_content=profile&utm_medium=member_android',
       },
       {
@@ -279,7 +279,7 @@ export const teamData = [
         role: 'Core Member',
         sentence: ' a platform to learn, lead, create impact where ideas turn into memorable experiences.',
         word: 'Versatile',
-        image: 'RISHABH ROHIT KAPOOR.jpeg',
+        image: 'Rishabh Rohit Kapoor.jpeg',
         linkedin: 'https://www.linkedin.com/in/rishabh-kapoor-755a4639b/',
       },
       {
@@ -288,7 +288,7 @@ export const teamData = [
         role: 'Core Member',
         sentence: 'A place to explore.',
         word: 'Determined',
-        image: 'JANVEE GUPTA.jpg',
+        image: 'Janvee Gupta.jpg',
         linkedin: 'https://www.linkedin.com/in/janvee-gupta-57b8b940b',
       },
       {
@@ -315,7 +315,7 @@ export const teamData = [
         role: 'Core Member',
         sentence: 'Aristocratic.',
         word: 'Proactive',
-        image: 'OM SHRIVASTAVA.jpeg',
+        image: 'Om Shrivastava.jpeg',
         linkedin: 'https://www.linkedin.com/in/omshrivastava/',
       },
      
@@ -325,7 +325,7 @@ export const teamData = [
         role: 'Core Member',
         sentence: ' an opportunity to develop my skills, build lasting connections, and contribute to something meaningful.',
         word: 'Earnest',
-        image: 'HARDIK PRATAP SINGH.png',
+        image: 'Hardik Pratap Singh.png',
         linkedin: 'https://www.linkedin.com/in/hardik-pratap-singh-83b809397?utm_source=share_via&utm_content=profile&utm_medium=member_android',
       },
       {
@@ -334,7 +334,7 @@ export const teamData = [
         role: 'Core Member',
         sentence: ' Opportunity.',
         word: 'Adaptable',
-        image: 'ADITYA RAJPUT.png',
+        image: 'Aditya Rajput.png',
         linkedin: 'https://www.linkedin.com/in/aditya-rajput-260191384?utm_source=share_via&utm_content=profile&utm_medium=member_android',
       },
       {
@@ -360,7 +360,7 @@ export const teamData = [
         role: 'Core Member',
         sentence: ' Responsibility.',
         word: 'Driven',
-        image: 'SAMRIDDH SINHA.png',
+        image: 'Samridhh Sinha.png',
         linkedin: 'https://www.linkedin.com/in/samriddh-sinha-65915b313/',
       },
       {
@@ -378,7 +378,7 @@ export const teamData = [
         role: 'Core Member',
         sentence: ' My priority.',
         word: 'Responsive',
-        image: 'MRIDUL SHARMA.jpeg',
+        image: 'Mridul Sharma.jpeg',
         linkedin: 'https://www.linkedin.com/in/mridul-sharma-637160307?utm_source=share_via&utm_content=profile&utm_medium=member_ios',
       },
       {
@@ -387,7 +387,7 @@ export const teamData = [
         role: 'Core Member',
         sentence: ' An opportunity to learn new things and create meaningful memories.',
         word: 'Creative',
-        image: 'SHRIKANT NIMBHORKAR.jpeg',
+        image: 'Shrikant Nimbhorkar.jpeg',
         linkedin: 'https://www.linkedin.com/in/shrikant-nimbhorkar-5a18ba372?utm_source=share_via&utm_content=profile&utm_medium=member_ios',
       },
       {
@@ -396,7 +396,7 @@ export const teamData = [
         role: 'Core Member',
         sentence: ' an opportunity to explore new skills and make meaningful connections.',
         word: 'Curious',
-        image: 'APOORAV RAINA.webp',
+        image: 'Apoorav Raina.webp',
         linkedin: 'https://www.linkedin.com/in/apoorav-raina-82a800343?utm_source=share_via&utm_content=profile&utm_medium=member_android',
       },
       {
@@ -405,7 +405,7 @@ export const teamData = [
         role: 'Core Member',
         sentence: ' A place where my creativity will meet its purpose.',
         word: 'Musician',
-        image: 'KSHITIJ JHA.jpg',
+        image: 'Kshitij Jha.jpg',
         linkedin: 'https://www.linkedin.com/in/kshitij-jha-5b2b48377?utm_source=share_via&utm_content=profile&utm_medium=member_android',
       },
     ],
