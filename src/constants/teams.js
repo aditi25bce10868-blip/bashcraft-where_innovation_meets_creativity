@@ -66,7 +66,7 @@ export const getImagePath = (teamId, imageName) => {
 };
 
 export const FEATURED_TEAM = [
-  { id: 'aditi-singh', fullName: 'ADITI SINGH', role: 'Team Lead', team: 'Technical Team', image: 'Aditi Singh.jpg' },
+  { id: 'aditi-singh', fullName: 'Aditi Singh', role: 'Team Lead', team: 'Technical Team', image: 'Aditi Singh.jpg' },
   { id: 'megh-joshi', fullName: 'Megh Joshi', role: 'Team Lead', team: 'Design Team', image: 'Megh Joshi.jpg' },
   { id: 'shivi-sanjay', fullName: 'Shivi Sanjay', role: 'Team Lead', team: 'Content Team', image: 'SHIVI SANJAY.jpg' },
   { id: 'arun-chaudhary', fullName: 'Arun Chaudhary', role: 'Team Lead', team: 'Event Management Team', image: 'ARUN CHAUDHARY.jpg' },
@@ -84,7 +84,7 @@ export const teamData = [
     members: [
       {
         id: 'aditi-singh',
-        fullName: 'ADITI SINGH',
+        fullName: 'Aditi Singh',
         role: 'Team Lead',
         sentence: 'The collaborative space with safe harbor',
         word: 'Tenacious',
@@ -93,7 +93,7 @@ export const teamData = [
       },
       {
         id: 'ameesha-kumari',
-        fullName: 'AMEESHA KUMARI',
+        fullName: 'Ameesha Kumari',
         role: 'Core Member',
         sentence: ' a place to learn, create, and grow together.',
         word: 'Trailblazer',
@@ -293,7 +293,7 @@ export const teamData = [
       },
       {
         id: 'yashvi-ghaatiya',
-        fullName: 'Yashvi Ghaatiya',
+        fullName: 'Yashvi Ghatiya',
         role: 'Core Member',
         sentence: 'a powerhouse of creativity.',
         word: 'Versatile',
