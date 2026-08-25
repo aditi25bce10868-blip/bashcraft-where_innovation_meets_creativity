@@ -279,7 +279,7 @@ export const teamData = [
         role: 'Core Member',
         sentence: ' a platform to learn, lead, create impact where ideas turn into memorable experiences.',
         word: 'Versatile',
-        image: 'Rishabh Rohit Kapoor.jpeg',
+        image: 'Rishabh Kapoor.jpeg',
         linkedin: 'https://www.linkedin.com/in/rishabh-kapoor-755a4639b/',
       },
       {
