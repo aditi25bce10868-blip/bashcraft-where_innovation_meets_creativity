@@ -293,11 +293,11 @@ export const teamData = [
       },
       {
         id: 'yashvi-ghaatiya',
-        fullName: 'Yashvi Ghatiya',
+        fullName: 'Yashvi Ghaatiya',
         role: 'Core Member',
         sentence: 'a powerhouse of creativity.',
         word: 'Versatile',
-        image: 'YASHVI GHATIYA.jpeg',
+        image: 'Yashvi Ghaatiya.jpeg',
         linkedin: 'https://www.linkedin.com/in/yashvi-ghaatiya-31909a424',
       },
     ],
