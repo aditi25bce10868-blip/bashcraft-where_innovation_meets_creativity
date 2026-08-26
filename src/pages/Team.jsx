@@ -216,6 +216,7 @@ const Team = () => {
                               src={imageSrc}
                               alt={member.fullName}
                               loading="lazy"
+                              decoding="async"
                               style={
                                 member.imagePosition
                                   ? { objectPosition: member.imagePosition }
@@ -319,6 +320,7 @@ const Team = () => {
                       <img
                         src={getImagePath(selectedMember.teamId, selectedMember.image)}
                         alt={selectedMember.fullName}
+                        decoding="async"
                         style={
                           selectedMember.imagePosition
                             ? { objectPosition: selectedMember.imagePosition }
