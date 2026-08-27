@@ -1,8 +1,8 @@
 :root {
   --pitch-black: #0D0D0D;
   --stark-white: #F5F5F0;
-  --vibrant-scarlet: #FF6A00;   /* primary accent – orange */
-  --crimson-red: #B00020;       /* secondary accent – hover, emphasis */
+  --vibrant-scarlet: #FF6A00;
+  --crimson-red: #B00020;
   --navbar-height: 68px;
 }
 
@@ -17,7 +17,6 @@
   overflow: visible;
 }
 
-/* ----- Typography helpers ----- */
 .pageTitle {
   font-family: 'Anybody', sans-serif;
   font-weight: 800;
@@ -93,7 +92,6 @@
   color: var(--vibrant-scarlet);
 }
 
-/* ----- Decorative line ----- */
 .decorativeLines {
   display: flex;
   flex-direction: column;
@@ -109,7 +107,6 @@
   width: 100%;
 }
 
-/* ----- Team sections ----- */
 .teamSection {
   margin-bottom: 2.75rem;
 }
@@ -194,7 +191,6 @@
   transform: translateX(4px);
 }
 
-/* ----- Grid & cards – uniform sizing ----- */
 .teamGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -271,15 +267,19 @@
   border-color: var(--crimson-red);
 }
 
-/* ----- Badges ----- */
+/* ---------- FIXED BADGE (visible, not hidden) ---------- */
 .leadBadge {
   position: absolute;
   top: 0.75rem;
   right: 0.75rem;
   background: var(--crimson-red);
-  border-radius: 0.25rem;
-  padding: 0.35rem 0.6rem;
-  z-index: 10;
+  border-radius: 2rem;
+  padding: 0.4rem 0.8rem;
+  z-index: 20;
+  box-shadow: 0 0 16px rgba(176, 0, 32, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
 }
 
 .badgeLabel {
@@ -290,9 +290,11 @@
   color: var(--stark-white);
   font-weight: 600;
   display: block;
+  line-height: 1.2;
 }
 
-/* ----- Card text ----- */
+/* -------------------------------------------------- */
+
 .name {
   font-family: 'Anybody', sans-serif;
   font-weight: 700;
@@ -359,7 +361,6 @@
   width: 100%;
 }
 
-/* ----- LinkedIn icon ----- */
 .linkedinIcon {
   color: var(--stark-white);
   font-size: 1.8rem;
@@ -389,7 +390,6 @@
   color: var(--vibrant-scarlet);
 }
 
-/* ----- Modal ----- */
 .modalOverlay {
   position: fixed;
   inset: 0;
@@ -516,7 +516,6 @@
   font-size: 1.6rem;
 }
 
-/* ----- Sub-navigation (sticky) ----- */
 .teamNav {
   position: sticky;
   top: var(--navbar-height);
@@ -594,7 +593,6 @@
   transform: scaleX(1);
 }
 
-/* ----- Responsive ----- */
 @media (max-width: 700px) {
   .pageTitle {
     font-size: 2.8rem;
