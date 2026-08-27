@@ -271,23 +271,23 @@
 .leadBadge {
   position: absolute;
   top: 0.5rem;
-  left: 0.5rem;               
-  background: rgba(255, 106, 0, 0.12);  
+  left: 0.5rem;
+  background: transparent;              
   border: 1px solid var(--vibrant-scarlet);
   border-radius: 2rem;
   padding: 0.25rem 0.7rem;
   z-index: 20;
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  box-shadow: 0 0 12px rgba(255, 106, 0, 0.15);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  box-shadow: none;                     
 }
 
 .badgeLabel {
   font-family: 'Space Mono', monospace;
-  font-size: 0.5rem;          
+  font-size: 0.5rem;
   text-transform: uppercase;
   letter-spacing: 0.15em;
-  color: var(--vibrant-scarlet);
+  color: var(--vibrant-scarlet);        
   font-weight: 600;
   display: block;
   line-height: 1.3;
