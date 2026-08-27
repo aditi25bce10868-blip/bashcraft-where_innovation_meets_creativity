@@ -291,15 +291,7 @@ export const teamData = [
         image: 'Janvee Gupta.jpg',
         linkedin: 'https://www.linkedin.com/in/janvee-gupta-57b8b940b',
       },
-      {
-        id: 'yashvi-ghaatiya',
-        fullName: 'Yashvi Ghaatiya',
-        role: 'Core Member',
-        sentence: 'a powerhouse of creativity.',
-        word: 'Versatile',
-        image: 'Yashvi Ghaatiya.jpeg',
-        linkedin: 'https://www.linkedin.com/in/yashvi-ghaatiya-31909a424',
-      },
+      
     ],
   },
   // ----- PR & Outreach Team -----
@@ -308,7 +300,15 @@ export const teamData = [
     name: 'PR & Outreach Team',
     description: "Responsible for maintaining the club's image and PR. Correlating with the work of advertising and marketing, the PR and Outreach team also invites suitable sponsors for events, and contacts guests for guest lectures.",
     members: [
-     
+     {
+        id: 'yashvi-ghaatiya',
+        fullName: 'Yashvi Ghaatiya',
+        role: 'Team Lead',
+        sentence: 'a powerhouse of creativity.',
+        word: 'Versatile',
+        image: 'Yashvi Ghaatiya.jpeg',
+        linkedin: 'https://www.linkedin.com/in/yashvi-ghaatiya-31909a424',
+      },
       {
         id: 'om-shrivastava',
         fullName: 'Om Shrivastava',
