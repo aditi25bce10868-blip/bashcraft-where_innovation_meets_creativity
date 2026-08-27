@@ -1,8 +1,10 @@
 :root {
   --pitch-black: #0D0D0D;
-  --stark-white: #F5F5F0;
   --vibrant-scarlet: #FF6A00;
-  --crimson-red: #B00020;
+  --stark-white: #F5F5F0;
+  --crimson-red: #8A0F1A;
+  --crimson-red-bright: #B00020;
+  /* Matches Navbar.jsx: header className includes h-[68px] and is `fixed`. */
   --navbar-height: 68px;
 }
 
@@ -17,6 +19,7 @@
   overflow: visible;
 }
 
+/* ----- Typography helpers ----- */
 .pageTitle {
   font-family: 'Anybody', sans-serif;
   font-weight: 800;
@@ -41,7 +44,7 @@
   text-transform: uppercase;
   letter-spacing: 0.2em;
   color: var(--vibrant-scarlet);
-  border: 1px solid rgba(255, 106, 0, 0.65);
+  border: 1px solid rgba(255, 0, 0, 0.65);
   padding: 0.35rem 0.8rem;
   border-radius: 999px;
 }
@@ -50,13 +53,13 @@
   flex: 0 0 auto;
   min-width: 64px;
   height: 1px;
-  background: rgba(245, 245, 240, 0.12);
+  background: rgba(255, 255, 255, 0.12);
 }
 
 .accentText {
   font-family: 'Space Mono', monospace;
   font-size: 0.78rem;
-  color: rgba(245, 245, 240, 0.55);
+  color: rgba(255, 255, 255, 0.55);
   letter-spacing: 0.05em;
   white-space: normal;
   word-break: break-word;
@@ -64,6 +67,7 @@
   min-width: 0;
 }
 
+/* Short, punchy statement replacing the old long intro paragraph */
 .pageIntro {
   font-family: 'Anybody', sans-serif;
   font-weight: 700;
@@ -85,13 +89,14 @@
   font-size: 1rem;
   line-height: 1.6;
   letter-spacing: 0;
-  color: rgba(245, 245, 240, 0.6);
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .highlight {
   color: var(--vibrant-scarlet);
 }
 
+/* ----- Decorative line (progress dots removed) ----- */
 .decorativeLines {
   display: flex;
   flex-direction: column;
@@ -107,6 +112,7 @@
   width: 100%;
 }
 
+/* ----- Team sections ----- */
 .teamSection {
   margin-bottom: 2.75rem;
 }
@@ -138,7 +144,7 @@
   font-family: 'Space Mono', monospace;
   font-size: 0.7rem;
   letter-spacing: 0.1em;
-  color: rgba(245, 245, 240, 0.35);
+  color: rgba(255, 255, 255, 0.35);
 }
 
 .sectionHeader h2 {
@@ -156,7 +162,7 @@
   font-size: 1.3rem;
   line-height: 1.3;
   letter-spacing: -0.01em;
-  color: rgba(245, 245, 240, 0.85);
+  color: rgba(255, 255, 255, 0.85);
   max-width: 620px;
   margin: 0.5rem 0 1rem;
 }
@@ -172,7 +178,7 @@
   letter-spacing: 0.12em;
   color: var(--stark-white);
   text-decoration: none;
-  border-bottom: 1px solid rgba(245, 245, 240, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   padding-bottom: 0.2rem;
   transition: color 0.25s ease, border-color 0.25s ease;
 }
@@ -191,6 +197,7 @@
   transform: translateX(4px);
 }
 
+/* ----- Grid & cards – uniform sizing ----- */
 .teamGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -205,7 +212,7 @@
 
 .memberCard {
   background: var(--pitch-black);
-  border: 1px solid rgba(245, 245, 240, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   padding: 1.25rem 1rem;
   cursor: pointer;
   display: flex;
@@ -222,19 +229,19 @@
 }
 
 .memberCard:hover {
-  border-color: var(--crimson-red);
-  background: #1A1A1A;
+  border-color: var(--vibrant-scarlet);
+  background: #0a0a0a;
 }
 
 .memberCard.hovered {
-  border-color: var(--crimson-red);
-  background: #1A1A1A;
+  border-color: var(--vibrant-scarlet);
+  background: #0a0a0a;
 }
 
 .memberCard.selected {
   border-color: var(--vibrant-scarlet);
-  background: rgba(255, 106, 0, 0.05);
-  box-shadow: 0 0 20px rgba(255, 106, 0, 0.1);
+  background: rgba(255, 0, 0, 0.05);
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.1);
 }
 
 .avatarContainer {
@@ -246,8 +253,8 @@
 .avatar {
   width: 100%;
   aspect-ratio: 1 / 1;
-  background: #1A1A1A;
-  border: 1px solid rgba(245, 245, 240, 0.08);
+  background: #111;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -264,36 +271,11 @@
 }
 
 .memberCard:hover .avatar {
-  border-color: var(--crimson-red);
+  border-color: var(--vibrant-scarlet);
 }
 
-/* ---------- FIXED BADGE (visible, not hidden) ---------- */
-.leadBadge {
-  position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;               
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  border-radius: 2rem;
-  padding: 0.25rem 0.7rem;
-  z-index: 20;
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
-  box-shadow: none;
-}
-
-.badgeLabel {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.5rem;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  color: rgba(255, 255, 255, 0.7);
-  font-weight: 600;
-  display: block;
-  line-height: 1.3;
-}
-/* -------------------------------------------------- */
-
+/* ----- Badges ----- */
+/* ----- Card text ----- */
 .name {
   font-family: 'Anybody', sans-serif;
   font-weight: 700;
@@ -309,11 +291,12 @@
   font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: rgba(245, 245, 240, 0.5);
+  color: rgba(255, 255, 255, 0.5);
   margin-top: 0.2rem;
   margin-bottom: 0.5rem;
 }
 
+/* ----- Word on card (only the word, no label) ----- */
 .modalWord {
   display: flex;
   align-items: baseline;
@@ -337,15 +320,15 @@
   font-size: 0.55rem;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: rgba(245, 245, 240, 0.2);
+  color: rgba(255, 255, 255, 0.2);
   margin-top: 0.75rem;
-  border-top: 1px solid rgba(245, 245, 240, 0.06);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
   padding-top: 0.75rem;
   width: 100%;
 }
 
 .memberCard:hover .clickHint {
-  color: rgba(245, 245, 240, 0.4);
+  color: rgba(255, 255, 255, 0.4);
 }
 
 .selectedHint {
@@ -355,11 +338,12 @@
   letter-spacing: 0.1em;
   color: var(--vibrant-scarlet);
   margin-top: 0.75rem;
-  border-top: 1px solid rgba(255, 106, 0, 0.3);
+  border-top: 1px solid rgba(255, 0, 0, 0.3);
   padding-top: 0.75rem;
   width: 100%;
 }
 
+/* ----- LinkedIn icon ----- */
 .linkedinIcon {
   color: var(--stark-white);
   font-size: 1.8rem;
@@ -389,10 +373,11 @@
   color: var(--vibrant-scarlet);
 }
 
+/* ----- Modal ----- */
 .modalOverlay {
   position: fixed;
   inset: 0;
-  background: rgba(13, 13, 13, 0.92);
+  background: rgba(0, 0, 0, 0.92);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -402,7 +387,7 @@
 
 .modal {
   background: var(--pitch-black);
-  border: 1px solid rgba(245, 245, 240, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   max-width: 580px;
   width: 100%;
   padding: 2.5rem 2.5rem;
@@ -415,7 +400,7 @@
   right: 1rem;
   background: none;
   border: none;
-  color: rgba(245, 245, 240, 0.3);
+  color: rgba(255, 255, 255, 0.3);
   font-family: 'Space Mono', monospace;
   font-size: 1.8rem;
   line-height: 1;
@@ -443,8 +428,8 @@
   width: 100px;
   height: 100px;
   flex-shrink: 0;
-  background: #1A1A1A;
-  border: 1px solid rgba(245, 245, 240, 0.08);
+  background: #111;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -483,7 +468,7 @@
 
 .modalDivider {
   border: none;
-  border-top: 1px solid rgba(245, 245, 240, 0.08);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
   margin: 0.25rem 0 0.5rem;
 }
 
@@ -491,7 +476,7 @@
   font-family: 'Hanken Grotesk', sans-serif;
   font-size: 1.05rem;
   font-weight: 400;
-  color: rgba(245, 245, 240, 0.85);
+  color: rgba(255, 255, 255, 0.85);
   line-height: 1.5;
   padding: 0.5rem 0 0.25rem;
   border-left: 3px solid var(--vibrant-scarlet);
@@ -503,24 +488,26 @@
   font-weight: 600;
 }
 
+/* Modal word (with label) */
 .modal .modalWord .wordLabel {
   font-family: 'Space Mono', monospace;
   font-size: 0.65rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: rgba(245, 245, 240, 0.3);
+  color: rgba(255, 255, 255, 0.3);
 }
 
 .modal .modalWord .wordValue {
   font-size: 1.6rem;
 }
 
+/* ----- Sub-navigation (sticky) ----- */
 .teamNav {
   position: sticky;
   top: var(--navbar-height);
   z-index: 50;
   background: var(--pitch-black);
-  border-bottom: 1px solid rgba(245, 245, 240, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   padding: 0.75rem 0;
   margin-bottom: 1.5rem;
   backdrop-filter: blur(6px);
@@ -555,7 +542,7 @@
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: rgba(245, 245, 240, 0.5);
+  color: rgba(255, 255, 255, 0.5);
   text-decoration: none;
   padding: 0.4rem 0.1rem 0.55rem;
   white-space: nowrap;
@@ -585,13 +572,14 @@
 
 .teamNavLink.active {
   color: var(--vibrant-scarlet);
-  text-shadow: 0 0 14px rgba(255, 106, 0, 0.35);
+  text-shadow: 0 0 14px rgba(255, 0, 0, 0.35);
 }
 
 .teamNavLink.active::after {
   transform: scaleX(1);
 }
 
+/* ----- Responsive ----- */
 @media (max-width: 700px) {
   .pageTitle {
     font-size: 2.8rem;
