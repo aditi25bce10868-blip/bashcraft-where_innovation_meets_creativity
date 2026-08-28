@@ -11,15 +11,15 @@ import BashNex26 from './pages/events/BashNex26';
 import ArpitBhayani from './pages/events/ArpitBhayani';
 import Investathon from './pages/events/Investathon';
 import TalentShow from './pages/events/TalentShow';
-import { initLenis } from './lib/lenis';
+import { initLenis, destroyLenis } from './lib/lenis';
 
 export default function App() {
   const location = useLocation();
 
   useEffect(() => {
-    const lenis = initLenis();
+    initLenis();
     return () => {
-      lenis?.destroy?.();
+      destroyLenis();
     };
   }, []);
 

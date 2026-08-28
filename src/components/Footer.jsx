@@ -4,7 +4,7 @@ import { SOCIAL_LINKS, FOOTER_SITEMAP } from '../constants/socials';
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-pitch-black border-t-2 border-stark-white pt-16 pb-12">
+    <footer className="w-full bg-transparent border-t-2 border-stark-white pt-16 pb-12">
       <div className="max-w-[1440px] mx-auto px-gutter space-y-16">
         {/* Main Footer Split */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">

@@ -20,7 +20,7 @@ export default function Investathon() {
         readingMinutes={3}
       >
         <Reveal>
-          <div className="mono-label mb-6 text-flame">// STORY</div>
+          <div className="mono-label mb-6 text-flame">|| STORY</div>
           <p className="text-lg leading-relaxed text-white/85 sm:text-2xl">
             On March 26th, BashCraft hosted an engaging finance event in collaboration with{" "}
             <span className="text-white">Zerodha</span>, where participants learned to build
@@ -34,7 +34,7 @@ export default function Investathon() {
         <div className="my-20 h-px w-full bg-gradient-to-r from-transparent via-white/20 to-transparent" />
 
         <Reveal>
-          <div className="mono-label mb-4 text-flame">// MOMENTS</div>
+          <div className="mono-label mb-4 text-flame">|| MOMENTS</div>
           <h2 className="font-display text-4xl font-bold leading-[0.95] tracking-tight sm:text-6xl">
             The build.
             <br />

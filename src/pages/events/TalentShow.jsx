@@ -122,7 +122,7 @@ export default function TalentShow() {
           </MagneticButton>
         </motion.div>
 
-        <div className="mono-label mt-14 text-white/40">// NO OTHER INFORMATION AVAILABLE</div>
+        <div className="mono-label mt-14 text-white/40">|| NO OTHER INFORMATION AVAILABLE</div>
       </section>
     </div>
   );

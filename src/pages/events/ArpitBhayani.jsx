@@ -18,7 +18,7 @@ export default function ArpitBhayani() {
         readingMinutes={3}
       >
         <Reveal>
-          <div className="mono-label mb-6 text-flame">// SESSION</div>
+          <div className="mono-label mb-6 text-flame">|| SESSION</div>
           <p className="text-lg leading-relaxed text-white/85 sm:text-2xl">
             BashCraft recently hosted a captivating session with{" "}
             <span className="text-white">Arpit Bhayani</span>, Google's Senior Staff Software

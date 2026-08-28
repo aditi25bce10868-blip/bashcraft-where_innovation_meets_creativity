@@ -130,11 +130,11 @@
   /* Outlined / stroke-only text */
   .text-outline {
     -webkit-text-stroke: 2px #FFFFFF;
-    -webkit-text-fill-color: transparent;
+    -webkit-text-fill-color: #000000;
   }
   .text-outline-scarlet {
     -webkit-text-stroke: 2px #FF0000;
-    -webkit-text-fill-color: transparent;
+    -webkit-text-fill-color: #000000;
   }
 }
 
@@ -243,6 +243,22 @@
 }
 .animate-float-slow {
   animation: float-slow 4s ease-in-out infinite;
+}
+
+@keyframes blob {
+  0% { transform: translate(0px, 0px) scale(1); }
+  33% { transform: translate(40px, -60px) scale(1.2); }
+  66% { transform: translate(-30px, 40px) scale(0.8); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+.animate-blob {
+  animation: blob 10s infinite alternate ease-in-out;
+}
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+.animation-delay-4000 {
+  animation-delay: 4s;
 }
 
 /* Reduced motion — disable translates, keep only opacity */

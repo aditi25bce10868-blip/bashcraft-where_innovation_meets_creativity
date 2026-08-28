@@ -5,6 +5,7 @@
 import Lenis from 'lenis';
 
 let lenisInstance = null;
+let rafId = null;
 
 export function initLenis() {
   if (lenisInstance) return lenisInstance;
@@ -18,13 +19,24 @@ export function initLenis() {
   function raf(time) {
     if (lenisInstance) {
       lenisInstance.raf(time);
-      requestAnimationFrame(raf);
+      rafId = requestAnimationFrame(raf);
     }
   }
 
-  requestAnimationFrame(raf);
+  rafId = requestAnimationFrame(raf);
 
   return lenisInstance;
+}
+
+export function destroyLenis() {
+  if (lenisInstance) {
+    lenisInstance.destroy();
+    lenisInstance = null;
+  }
+  if (rafId) {
+    cancelAnimationFrame(rafId);
+    rafId = null;
+  }
 }
 
 export function getLenis() {

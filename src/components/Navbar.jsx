@@ -73,7 +73,7 @@ export default function Navbar() {
             className="fixed inset-0 z-40 bg-pitch-black/95 backdrop-blur-lg border-b-4 border-vibrant-scarlet pt-24 pb-12 px-6 flex flex-col justify-between"
           >
             <div className="space-y-8">
-              <span className="font-mono-label text-xs text-vibrant-scarlet uppercase">// NAVIGATION_MATRIX</span>
+              <span className="font-mono-label text-xs text-vibrant-scarlet uppercase">|| MENU</span>
               <div className="flex flex-col space-y-6">
                 {NAV_LINKS.map((link) => (
                   <Link

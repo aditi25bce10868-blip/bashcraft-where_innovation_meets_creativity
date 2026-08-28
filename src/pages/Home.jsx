@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaLinkedin } from 'react-icons/fa';
@@ -35,8 +35,23 @@ export default function Home() {
             1. HERO SECTION
            ========================================== */}
         <section className="relative min-h-[calc(100vh-68px)] flex flex-col justify-center items-center text-center px-gutter pt-16 pb-24 overflow-hidden border-b border-stark-white">
+          {/* Animated Fluid Glass Background */}
+          <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+            <video 
+              autoPlay 
+              loop
+              muted 
+              playsInline
+              className="absolute inset-0 w-full h-full object-cover scale-[1.08] md:scale-[1.1]"
+            >
+              <source src="/liquid-metal.mp4" type="video/mp4" />
+            </video>
+            {/* Glass Frosted Overlay (slight darken for text legibility) */}
+            <div className="absolute inset-0 bg-pitch-black/40"></div>
+          </div>
+
           {/* Faint Wireframe Backdrop */}
-          <div className="absolute inset-0 opacity-15 pointer-events-none flex items-center justify-center">
+          <div className="absolute inset-0 z-0 opacity-15 pointer-events-none flex items-center justify-center">
             <svg viewBox="0 0 1000 1000" className="w-full h-full stroke-stark-white fill-none stroke-[1]">
               <circle cx="500" cy="500" r="400" />
               <circle cx="500" cy="500" r="250" strokeDasharray="5 5" />
@@ -57,7 +72,7 @@ export default function Home() {
               className="inline-block"
             >
               <span className="font-mono-label text-xs sm:text-sm text-vibrant-scarlet uppercase tracking-widest border border-vibrant-scarlet/40 px-4 py-1.5 bg-pitch-black">
-                BASHCRAFT CLUB // VIT BHOPAL
+                BASHCRAFT CLUB || VIT BHOPAL
               </span>
             </motion.div>
 
@@ -71,7 +86,7 @@ export default function Home() {
               className="font-display-xl text-5xl sm:text-7xl md:text-8xl lg:text-[130px] font-extrabold tracking-tighter uppercase leading-[0.95]"
             >
               WELCOME TO<br />
-              <span className="text-outline">BASHCRAFT CLUB</span>
+              BASHCRAFT <span className="text-vibrant-scarlet">CLUB</span>
             </motion.h1>
 
             {/* Subhead */}
@@ -126,7 +141,7 @@ export default function Home() {
         <section className="section-divider">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
             <div className="lg:col-span-4 space-y-2">
-              <span className="font-mono-label text-xs text-vibrant-scarlet uppercase">// ABOUT US</span>
+              <span className="font-mono-label text-xs text-vibrant-scarlet uppercase">|| ABOUT US</span>
               <h2 className="font-display-xl text-4xl sm:text-5xl font-extrabold tracking-tighter uppercase">
                 ENGINEERING<br />
                 <span className="text-outline">EXCELLENCE</span>
@@ -156,7 +171,7 @@ export default function Home() {
            ========================================== */}
         <section className="section-divider space-y-12">
           <div className="space-y-2">
-            <span className="font-mono-label text-xs text-vibrant-scarlet uppercase">// OUR COMMUNITY</span>
+            <span className="font-mono-label text-xs text-vibrant-scarlet uppercase">|| OUR COMMUNITY</span>
             <h2 className="font-display-xl text-4xl sm:text-6xl font-extrabold tracking-tighter uppercase">
               THE PEOPLE BEHIND BASHCRAFT
             </h2>
@@ -169,7 +184,7 @@ export default function Home() {
             <img
               src={groupPhoto}
               alt="BashCraft Club Community"
-              className="w-full h-full sm:h-[450px] md:h-[550px] object-contain sm:object-cover object-top"
+              className="w-full h-full sm:h-[450px] md:h-[550px] object-contain sm:object-cover object-top grayscale hover:grayscale-0 transition-all duration-500 ease-in-out cursor-pointer hover:scale-[1.02]"
             />
           </div>
         </section>
@@ -180,7 +195,7 @@ export default function Home() {
         <section className="section-divider space-y-12">
           <div className="flex justify-between items-end">
             <div>
-              <span className="font-mono-label text-xs text-vibrant-scarlet uppercase">// EVENTS</span>
+              <span className="font-mono-label text-xs text-vibrant-scarlet uppercase">|| EVENTS</span>
               <h2 className="font-display-xl text-4xl sm:text-6xl font-extrabold tracking-tighter uppercase">
                 EVENTS
               </h2>
@@ -296,7 +311,7 @@ export default function Home() {
                         <span className="font-mono-label text-xs text-vibrant-scarlet font-bold">{evt.index}</span>
                         <div>
                           <span className="font-mono-label text-xs text-stark-white/60 uppercase block">
-                            {evt.date} // {evt.location}
+                            {evt.date} || {evt.location}
                           </span>
                           <h3 className="font-display-xl text-xl sm:text-2xl font-extrabold uppercase">
                             {evt.title}
@@ -351,7 +366,7 @@ export default function Home() {
         <section className="section-divider space-y-12">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
             <div>
-              <span className="font-mono-label text-xs text-vibrant-scarlet uppercase">// MEET THE TEAM</span>
+              <span className="font-mono-label text-xs text-vibrant-scarlet uppercase">|| MEET THE TEAM</span>
               <h2 className="font-display-xl text-4xl sm:text-6xl font-extrabold tracking-tighter uppercase">
                 MEET THE TEAM
               </h2>
@@ -426,7 +441,25 @@ export default function Home() {
         </section>
       </motion.main>
 
-      <Footer />
+      {/* Footer Section with Red Ink Drop Video Background */}
+      <div className="relative overflow-hidden">
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <video 
+            autoPlay 
+            loop 
+            muted 
+            playsInline
+            className="w-full h-full object-cover opacity-30"
+          >
+            <source src="/hero-bg.mp4" type="video/mp4" />
+          </video>
+          {/* Subtle dark overlay for text legibility, but heavily transparent to show video clearly */}
+          <div className="absolute inset-0 bg-pitch-black/30"></div>
+        </div>
+        <div className="relative z-10">
+          <Footer />
+        </div>
+      </div>
     </>
   );
 }

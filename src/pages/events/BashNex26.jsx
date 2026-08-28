@@ -35,7 +35,7 @@ export default function BashNex26() {
         readingMinutes={5}
       >
         <Reveal>
-          <div className="mono-label mb-6 text-flame">// STORY</div>
+          <div className="mono-label mb-6 text-flame">|| STORY</div>
           <p className="text-lg leading-relaxed text-white/85 sm:text-2xl">
             <span className="text-white">BashNex'26</span>, the flagship event of BashCraft Club,
             was successfully conducted on 13th and 14th June 2026 at VIT Bhopal University. Designed
@@ -58,7 +58,7 @@ export default function BashNex26() {
         <Divider />
 
         <Reveal>
-          <div className="mono-label mb-4 text-flame">// GUEST SPEAKERS</div>
+          <div className="mono-label mb-4 text-flame">|| GUEST SPEAKERS</div>
           <h2 className="font-display text-4xl font-bold leading-[0.95] tracking-tight sm:text-6xl">
             Eight speakers.
             <br />
@@ -99,7 +99,7 @@ export default function BashNex26() {
         <Divider />
 
         <Reveal>
-          <div className="mono-label mb-4 text-flame">// COMPETITION WINNERS</div>
+          <div className="mono-label mb-4 text-flame">|| COMPETITION WINNERS</div>
           <h2 className="font-display text-4xl font-bold leading-[0.95] tracking-tight sm:text-6xl">
             Podium.
           </h2>
@@ -136,7 +136,7 @@ export default function BashNex26() {
         <Divider />
 
         <Reveal>
-          <div className="mono-label mb-4 text-flame">// ACKNOWLEDGEMENT</div>
+          <div className="mono-label mb-4 text-flame">|| ACKNOWLEDGEMENT</div>
           <p className="text-lg leading-relaxed text-white/85 sm:text-xl">
             The success of BashNex'26 was made possible through the guidance and support of{" "}
             <span className="text-white">Dr. Dheresh Soni</span> (Faculty Coordinator) and{" "}
@@ -157,7 +157,7 @@ export default function BashNex26() {
         <Divider />
 
         <Reveal>
-          <div className="mono-label mb-4 text-flame">// PHOTO GALLERY</div>
+          <div className="mono-label mb-4 text-flame">|| PHOTO GALLERY</div>
           <h2 className="font-display text-4xl font-bold leading-[0.95] tracking-tight sm:text-6xl">
             The room.
           </h2>

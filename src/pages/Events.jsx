@@ -67,13 +67,13 @@ export default function Events() {
       <Navbar />
       <HeroArchive />
       <EventList
-        eyebrow="// 01 · UPCOMING"
+        eyebrow="|| 01 · UPCOMING"
         heading="Upcoming"
         empty="Nothing on the calendar yet — stay tuned."
         items={upcoming}
       />
       <EventList
-        eyebrow="// 02 · ARCHIVE"
+        eyebrow="|| 02 · ARCHIVE"
         heading="Archived"
         empty="No archived events."
         items={archived}
