@@ -3,6 +3,10 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion, useReducedMotion } from "framer-motion";
 import logo from '../assets/bsclogo.png'
+import heroVideo from '../assets/hero_video5.mp4'
+import pillarBuildImage from '../assets/pillar-build.jpg'
+import pillarCreateImage from '../assets/pillar-create.jpg'
+import pillarInspireImage from '../assets/pillar-inspire.jpg'
 import Navbar from '../components/Navbar'
 
 gsap.registerPlugin(ScrollTrigger);
@@ -15,12 +19,15 @@ ScrollTrigger.config({ ignoreMobileResize: true });
  * motion carry the design — no decoration for its own sake.
  *
  * Palette (use as Tailwind arbitrary values or wire into tailwind.config):
- *   --bg:        #000000   (Pitch Black)
- *   --card:      #0a0a0a
- *   --text:      #FFFFFF   (Stark White)
- *   --secondary: #A0A0A0
- *   --border:    #222222
- *   --accent:    #FF0000   (Vibrant Scarlet — hover-only, never a resting fill)
+ *   --bg:        #0D0D0D   (Black — primary background)
+ *   --text:      #F5F5F0   (White — primary text/light surfaces)
+ *   --accent:    #FF6A00   (Orange — primary accent: CTAs, highlights, active states)
+ *   --accent-2:  #8A0F1A → #B00020 (Crimson Red — secondary accent: hover states, backgrounds, emphasis)
+ *
+ * Rules of thumb:
+ *   - Black + white cover ~85-90% of any screen; orange/red are accents only.
+ *   - Never mix orange and red at equal weight in the same element.
+ *   - No blue, purple, green, or any other hue anywhere.
  *
  * Fonts (load in index.html or via @font-face):
  *   Display:    "Anybody"        (700/800 — headings)
@@ -55,8 +62,8 @@ function Eyebrow({ children }) {
 /**
  * One full-width editorial row in the "Why Join" section, styled after the
  * event cards in the brand reference. Default state is always black with a
- * thin white border — the scarlet accent appears ONLY on hover, never as a
- * resting fill, alongside a slight lift and the arrow sliding right.
+ * thin off-white border — the crimson accent appears ONLY on hover, never as
+ * a resting fill, alongside a slight lift and the arrow sliding right.
  */
 const JoinPanel = React.memo(function JoinPanel({
   index,
@@ -70,24 +77,24 @@ const JoinPanel = React.memo(function JoinPanel({
     <motion.div
       whileHover={prefersReducedMotion ? undefined : { y: -6 }}
       transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-      className="group relative w-full bg-black border border-white/25 transition-colors duration-300 hover:bg-[#FF0000] hover:border-[#FF0000]"
+      className="group relative w-full bg-[#0D0D0D] border border-[#F5F5F0]/25 transition-colors duration-300 hover:bg-[#B00020] hover:border-[#B00020]"
     >
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-8 px-6 md:px-10 py-12 md:py-16">
         <div className="flex items-baseline gap-6 md:gap-10">
-          <span className="font-mono text-xs tracking-[0.3em] text-white/40 transition-colors duration-300 group-hover:text-black/50">
+          <span className="font-mono text-xs tracking-[0.3em] text-[#F5F5F0]/40 transition-colors duration-300 group-hover:text-[#F5F5F0]/60">
             {index}
           </span>
-          <h3 className="font-display font-bold text-5xl md:text-7xl tracking-tight text-white transition-colors duration-300 group-hover:text-black">
+          <h3 className="font-display font-bold text-5xl md:text-7xl tracking-tight text-[#F5F5F0] transition-colors duration-300">
             {title}
           </h3>
         </div>
 
         <div className="flex items-center md:pl-10">
           <div className="max-w-sm">
-            <p className="font-body text-sm md:text-base leading-relaxed text-white/60 transition-colors duration-300 group-hover:text-black/70">
+            <p className="font-body text-sm md:text-base leading-relaxed text-[#F5F5F0]/60 transition-colors duration-300 group-hover:text-[#F5F5F0]/80">
               {description}
             </p>
-            <p className="mt-2 font-mono text-xs md:text-sm leading-relaxed text-white/35 transition-colors duration-300 group-hover:text-black/50">
+            <p className="mt-2 font-mono text-xs md:text-sm leading-relaxed text-[#F5F5F0]/35 transition-colors duration-300 group-hover:text-[#F5F5F0]/60">
               {reveal}
             </p>
           </div>
@@ -105,147 +112,56 @@ const JoinPanel = React.memo(function JoinPanel({
 // HERO_WHITE_LEN characters (both lines, including "ONLY ") stay white; the
 // remainder ("ASLI ENGINEERING.") types in the accent color. A pause lands
 // right after line one, before "ONLY " begins.
-const ACCENT_COLOR = "#FF0000";
+const ACCENT_COLOR = "#FF6A00";
 const HERO_LINE_1 = "NO FLUFF.\n";
 const HERO_WHITE_TAIL = "ONLY ";
 const HERO_ACCENT_WORD = "ASLI ENGINEERING.";
 const HERO_FULL_TEXT = HERO_LINE_1 + HERO_WHITE_TAIL + HERO_ACCENT_WORD;
 const HERO_WHITE_LEN = (HERO_LINE_1 + HERO_WHITE_TAIL).length;
 
-// -----------------------------------------------------------------------
-// Swap in your own YouTube video ID — copy the part of the share URL after
-// "v=" (e.g. https://youtu.be/dQw4w9WgXcQ -> "dQw4w9WgXcQ"). Everything
-// else (autoplay, mute, loop, hiding controls/branding, scaling to fully
-// cover the Hero regardless of viewport shape) is already wired up below.
-// -----------------------------------------------------------------------
-const HERO_YOUTUBE_ID = "Ae80XUIr7Mc";
-
-// -----------------------------------------------------------------------
-// Loads the YouTube IFrame API script once and resolves when window.YT is
-// ready. Safe to call from multiple components — later calls reuse the
-// same in-flight/resolved promise instead of injecting the script twice.
-// -----------------------------------------------------------------------
-let youTubeApiPromise = null;
-function loadYouTubeApi() {
-  if (youTubeApiPromise) return youTubeApiPromise;
-
-  youTubeApiPromise = new Promise((resolve) => {
-    if (window.YT && window.YT.Player) {
-      resolve(window.YT);
-      return;
-    }
-    const previousReady = window.onYouTubeIframeAPIReady;
-    window.onYouTubeIframeAPIReady = () => {
-      if (typeof previousReady === "function") previousReady();
-      resolve(window.YT);
-    };
-    if (!document.querySelector('script[src*="youtube.com/iframe_api"]')) {
-      const tag = document.createElement("script");
-      tag.src = "https://www.youtube.com/iframe_api";
-      document.head.appendChild(tag);
-    }
-  });
-
-  return youTubeApiPromise;
-}
-
 /**
- * Full-bleed YouTube background for the Hero. Muted, chromeless,
+ * Full-bleed, self-hosted background video for the Hero. Muted, chromeless,
  * desaturated to match the monochrome brand, and dimmed under a dark scrim
- * so the terminal headline stays legible on top of it. Autoplay is skipped
- * for people who've asked their OS for reduced motion.
+ * so the terminal headline stays legible on top of it.
  *
- * Looping is handled via the IFrame API rather than the `loop` URL param:
- * a short poll rewinds the video to 0 a fraction of a second before it
- * would actually finish, so it never reaches the native "ended" state and
- * YouTube's own paused/replay/skip overlay never has a chance to flash.
+ * Using a plain <video> tag (instead of an embedded YouTube iframe) means:
+ *   - no native play/pause button can ever flash on top of it,
+ *   - no external API script or postMessage handshake to wait on, so it
+ *     starts as soon as the file itself has enough data buffered,
+ *   - looping is native (`loop`) and gapless — no polling/rewind hack
+ *     needed to avoid an "ended" state.
+ *
+ * Autoplay is skipped (video stays paused on its first frame) for people
+ * who've asked their OS for reduced motion.
  */
 function HeroVideoBackground() {
-  const mountRef = useRef(null);
-  const playerRef = useRef(null);
+  const videoRef = useRef(null);
 
   useEffect(() => {
     const reduceMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
 
-    let pollId = null;
-    let cancelled = false;
-
-    loadYouTubeApi().then((YT) => {
-      if (cancelled || !mountRef.current) return;
-
-      playerRef.current = new YT.Player(mountRef.current, {
-        videoId: HERO_YOUTUBE_ID,
-        playerVars: {
-          autoplay: reduceMotion ? 0 : 1,
-          mute: 1,
-          controls: 0,
-          disablekb: 1,
-          modestbranding: 1,
-          rel: 0,
-          fs: 0,
-          iv_load_policy: 3,
-          playsinline: 1,
-        },
-        events: {
-          onReady: (e) => {
-            if (!reduceMotion) e.target.playVideo();
-          },
-          onStateChange: (e) => {
-            // Belt-and-suspenders: if it ever does reach "ended" (a stray
-            // frame drop in the poll below, a slow tab, etc.) snap it back
-            // to the start immediately rather than showing the end screen.
-            if (e.data === window.YT.PlayerState.ENDED) {
-              e.target.seekTo(0, true);
-              e.target.playVideo();
-            }
-          },
-        },
-      });
-    });
-
-    // Rewind slightly before the natural end, every 250ms — the video
-    // effectively loops seamlessly and never technically "ends".
-    pollId = window.setInterval(() => {
-      const player = playerRef.current;
-      if (
-        !player ||
-        typeof player.getCurrentTime !== "function" ||
-        typeof player.getDuration !== "function"
-      ) {
-        return;
-      }
-      const duration = player.getDuration();
-      const current = player.getCurrentTime();
-      if (duration > 0 && duration - current < 0.4) {
-        player.seekTo(0, true);
-      }
-    }, 250);
-
-    return () => {
-      cancelled = true;
-      if (pollId) window.clearInterval(pollId);
-      if (playerRef.current && typeof playerRef.current.destroy === "function") {
-        playerRef.current.destroy();
-      }
-      playerRef.current = null;
-    };
+    if (reduceMotion && videoRef.current) {
+      videoRef.current.pause();
+    }
   }, []);
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {/* Classic 16:9-cover trick: oversize on whichever axis the viewport
-          is short on, so the frame always fills the section with no
-          letterboxing, then re-center it. */}
-      <div
-        className="absolute top-1/2 left-1/2 w-screen h-[56.25vw] min-h-full min-w-[177.78vh] -translate-x-1/2 -translate-y-1/2"
-        style={{ filter: "grayscale(1) contrast(1.15) brightness(0.55)" }}
-      >
-        <div ref={mountRef} className="absolute inset-0 h-full w-full" />
-      </div>
+      <video
+        ref={videoRef}
+        src={heroVideo}
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        className="absolute inset-0 h-full w-full object-cover"
+      />
+
       {/* Dark scrim — keeps the copy legible over the reel */}
-      <div className="absolute inset-0 bg-black/70" />
+      <div className="absolute inset-0 bg-[#0D0D0D]/70" />
     </div>
   );
 }
@@ -350,7 +266,7 @@ function HeroSection() {
   return (
     <Section
       id="hero"
-      className="h-screen flex flex-col items-center justify-center overflow-hidden bg-[#000000]"
+      className="h-screen flex flex-col items-center justify-center overflow-hidden bg-[#0D0D0D]"
     >
       <HeroVideoBackground />
 
@@ -372,7 +288,7 @@ function HeroSection() {
           aria-label="No fluff. Only asli engineering."
           className="mt-7 font-mono font-bold text-[clamp(1.75rem,5.2vw,3.5rem)] leading-[1.35] tracking-tight whitespace-pre-line"
         >
-          <span ref={whiteRef} aria-hidden="true" className="text-white">
+          <span ref={whiteRef} aria-hidden="true" className="text-[#F5F5F0]">
             {HERO_LINE_1 + HERO_WHITE_TAIL}
           </span>
           <span ref={accentRef} aria-hidden="true" style={{ color: ACCENT_COLOR }}>
@@ -409,12 +325,11 @@ function HeroSection() {
 
 function VisionSection() {
   const sectionRef = useRef(null); // ScrollTrigger root + mouse-tilt target
-  const watermarkRef = useRef(null); // giant background mark — scroll scale
   const eyebrowRef = useRef(null); // "01 — Vision" — first to reveal
   const headingRef = useRef(null); // "VISION" — slides from left
   const paraGroupRef = useRef(null); // paragraphs — fade upward
-  const logoCardRef = useRef(null); // bordered card — fades in
-  const logoRef = useRef(null); // real logo image inside the card — spin + tilt
+  const logoCardRef = useRef(null); // disc wrapper — fades in
+  const logoRef = useRef(null); // the spinning vinyl disc itself — spin + tilt
 
   useEffect(() => {
     const mm = gsap.matchMedia();
@@ -479,27 +394,11 @@ function VisionSection() {
             "-=0.6"
           );
 
-        // Watermark — very slow, subtle scale tied directly to scroll
-        // position as the section passes through the viewport.
-        gsap.fromTo(
-          watermarkRef.current,
-          { scale: 1 },
-          {
-            scale: 1.15,
-            ease: "none",
-            scrollTrigger: {
-              trigger: sectionRef.current,
-              start: "top bottom",
-              end: "bottom top",
-              scrub: true,
-            },
-          }
-        );
-
-        // Main logo — continuous, very slow rotation (one turn / 20s max).
+        // Vinyl disc — continuous, slow rotation like a record on a
+        // turntable (one turn / 12s).
         const spin = gsap.to(logoRef.current, {
           rotate: 360,
-          duration: 20,
+          duration: 12,
           repeat: -1,
           ease: "none",
         });
@@ -548,20 +447,9 @@ function VisionSection() {
     <Section
       ref={sectionRef}
       id="vision"
-      className="flex items-center bg-[#000000] py-24 md:py-28 overflow-hidden"
+      className="flex items-center bg-[#0D0D0D] py-24 md:py-28 overflow-hidden"
     >
-      {/* Giant low-opacity watermark — the real Bashcraft logo, desaturated
-          so it reads as a faint mark rather than a colored graphic */}
-      <img
-        ref={watermarkRef}
-        src={logo}
-        alt=""
-        aria-hidden="true"
-        className="will-change-transform pointer-events-none absolute -right-40 top-1/2 -translate-y-1/2 w-[110vw] max-w-[1200px] opacity-[0.05] object-contain"
-        style={{ filter: "grayscale(1) brightness(2)" }}
-      />
-
-      <div className="relative w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[0.85fr_1.15fr] gap-14 md:gap-10 px-6 md:px-10">
+      <div className="relative w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[0.85fr_1.15fr] md:items-center gap-14 md:gap-10 px-6 md:px-10">
         {/* Left — narrative */}
         <div className="flex flex-col justify-center">
           <span ref={eyebrowRef} className="inline-block">
@@ -569,7 +457,7 @@ function VisionSection() {
           </span>
           <h2
             ref={headingRef}
-            className="mt-8 font-display font-bold text-7xl md:text-9xl leading-[0.92] tracking-tight text-white"
+            className="mt-8 font-display font-bold text-7xl md:text-9xl leading-[0.92] tracking-tight text-[#F5F5F0]"
           >
             VISION
           </h2>
@@ -590,18 +478,58 @@ function VisionSection() {
           </div>
         </div>
 
-        {/* Right — logo mark */}
+        {/* Right — spinning vinyl disc mark, centered cleanly in its
+            column with no external tonearm, so it reads as a self
+            contained record rather than a turntable rig. */}
         <div className="flex items-center justify-center">
           <div
             ref={logoCardRef}
-            className="relative flex items-center justify-center w-full aspect-square max-w-[760px] rounded-2xl border border-[#222222] bg-[#101010] p-16"
+            className="relative w-full max-w-[360px] sm:max-w-[420px] md:max-w-[460px] aspect-square mx-auto"
           >
-            <img
-              ref={logoRef}
-              src={logo}
-              alt="Bashcraft logo"
-              className="will-change-transform w-full h-full object-contain"
+            {/* Soft ambient glow behind the disc — primary orange accent,
+                used sparingly as a glow rather than a fill */}
+            <div
+              className="absolute inset-0 rounded-full opacity-30 blur-3xl"
+              style={{ background: "radial-gradient(circle, #FF6A00 0%, transparent 70%)" }}
             />
+
+            {/* The disc itself — grooves via a repeating radial gradient,
+                a dark vinyl base, and a slim rim highlight. */}
+            <div
+              ref={logoRef}
+              className="will-change-transform relative h-full w-full rounded-full"
+              style={{
+                background:
+                  "repeating-radial-gradient(circle at 50% 50%, #1c1c1c 0px, #1c1c1c 2px, #0a0a0a 2px, #0a0a0a 5px)",
+                boxShadow:
+                  "inset 0 0 3px rgba(245,245,240,0.06), inset 0 0 50px rgba(0,0,0,0.9), 0 25px 70px -25px rgba(0,0,0,0.85), 0 0 0 1px #222222",
+              }}
+            >
+              {/* Rim highlight */}
+              <div className="absolute inset-0 rounded-full border border-[#F5F5F0]/5 pointer-events-none" />
+
+              {/* Center label — crimson red, like a record's paper label —
+                  carrying the real logo, with a couple of faint concentric
+                  rings in the orange accent for authenticity. */}
+              <div className="absolute inset-0 grid place-items-center">
+                <div
+                  className="relative h-[38%] w-[38%] rounded-full grid place-items-center overflow-hidden border-2 border-[#FF6A00]/40"
+                  style={{
+                    background:
+                      "radial-gradient(circle at 35% 30%, #B00020 0%, #8A0F1A 55%, #2b0409 100%)",
+                    boxShadow: "inset 0 0 16px rgba(0,0,0,0.65)",
+                  }}
+                >
+                  <span className="absolute inset-[12%] rounded-full border border-[#FF6A00]/25 pointer-events-none" />
+                  <span className="absolute inset-[20%] rounded-full border border-[#FF6A00]/15 pointer-events-none" />
+                  <img
+                    src={logo}
+                    alt="Bashcraft logo"
+                    className="relative w-full h-full object-cover drop-shadow-[0_2px_5px_rgba(0,0,0,0.55)]"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -609,128 +537,72 @@ function VisionSection() {
   );
 }
 
-// Stand-in for the real photograph — an abstract, monochrome silhouette of a
-// long workspace table with laptop glow, evoking the hackathon/engineering
-// scene the section is about. Swap COMMUNITY_IMAGE_SRC for actual photography
-// once it's available; the lazy-load gate, native `loading="lazy"`, and
-// `decoding="async"` below are already wired up for it.
-const COMMUNITY_SVG = `
-<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000">
-  <defs>
-    <radialGradient id="vignette" cx="50%" cy="32%" r="78%">
-      <stop offset="0%" stop-color="#1c1c1c"/>
-      <stop offset="100%" stop-color="#050505"/>
-    </radialGradient>
-    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#e9e9e9" stop-opacity="0.85"/>
-      <stop offset="100%" stop-color="#e9e9e9" stop-opacity="0"/>
-    </radialGradient>
-  </defs>
-  <rect width="1600" height="1000" fill="url(#vignette)"/>
-  <rect x="0" y="642" width="1600" height="3" fill="#2a2a2a"/>
-  ${[190, 440, 690, 940, 1190, 1430]
-    .map(
-      (x, i) => `
-    <ellipse cx="${x}" cy="565" rx="95" ry="58" fill="url(#glow)" opacity="${
-        i % 2 === 0 ? 0.5 : 0.32
-      }"/>
-    <rect x="${x - 58}" y="560" width="116" height="66" rx="6" fill="#111111"/>
-    <circle cx="${x}" cy="498" r="34" fill="#0b0b0b"/>
-    <rect x="${x - 62}" y="618" width="124" height="190" rx="20" fill="#090909"/>
-  `
-    )
-    .join("")}
-</svg>`;
-const COMMUNITY_IMAGE_SRC = `data:image/svg+xml;utf8,${encodeURIComponent(
-  COMMUNITY_SVG
-)}`;
+// Stand-in visuals for the three pillars — abstract, monochrome/accent
+// vector art generated at build time, standing in for real photography
+// until it's available. Swap BUILD_IMAGE_SRC / CREATE_IMAGE_SRC /
+// INSPIRE_IMAGE_SRC for actual photos later; the panel layout, hover
+// caption, and lazy-load gate below all stay exactly the same.
+// Left-to-right order matters here — it drives the grid below directly.
+// These are your real photos, imported like the logo/hero video above —
+// drop pillar-build.jpg / pillar-create.jpg / pillar-inspire.jpg into
+// src/assets/ (or update the import paths at the top of this file to
+// match whatever filenames you actually used).
+const COMMUNITY_PILLARS = [
+  {
+    index: "01",
+    word: "BUILD.",
+    description: "Real products, real deadlines — no fluff, just asli engineering.",
+    src: pillarBuildImage,
+  },
+  {
+    index: "02",
+    word: "CREATE.",
+    description: "Design systems, reels, and tools members actually reach for.",
+    src: pillarCreateImage,
+  },
+  {
+    index: "03",
+    word: "INSPIRE.",
+    description: "Mentor the next builder — zero gatekeeping, always sharper.",
+    src: pillarInspireImage,
+  },
+];
+
 
 function CommunitySection() {
-  const sectionRef = useRef(null); // ScrollTrigger root for this section
-  const imageWrapRef = useRef(null); // stable target for zoom + parallax
-  const textRef = useRef(null); // overlay copy wrapper — slower parallax
-  const wordRefs = useRef([]); // BUILD / CREATE / INSPIRE — individual fade reveals
-  wordRefs.current = [];
-  const registerWordRef = (el) => {
-    if (el) wordRefs.current.push(el);
+  const sectionRef = useRef(null); // ScrollTrigger root — entrance reveal
+  const panelRefs = useRef([]);
+  panelRefs.current = [];
+  const registerPanelRef = (el) => {
+    if (el) panelRefs.current.push(el);
   };
-  const [shouldLoadImage, setShouldLoadImage] = useState(false);
-
-  // Lazy-load gate: only mount the real <img> once the section is close
-  // to the viewport, instead of paying for it on initial page load.
-  useEffect(() => {
-    if (!sectionRef.current) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setShouldLoadImage(true);
-          observer.disconnect();
-        }
-      },
-      { rootMargin: "300px 0px" }
-    );
-
-    observer.observe(sectionRef.current);
-    return () => observer.disconnect();
-  }, []);
 
   useEffect(() => {
     const mm = gsap.matchMedia();
 
-    mm.add(
-      { reduceMotion: "(prefers-reduced-motion: reduce)" },
-      (context) => {
-        const { reduceMotion } = context.conditions;
-
-        if (reduceMotion) {
-          gsap.set(imageWrapRef.current, { scale: 1, y: 0 });
-          gsap.set(textRef.current, { y: 0 });
-          gsap.set(wordRefs.current, { opacity: 1, y: 0 });
-          return;
-        }
-
-        // One shared, scrubbed timeline drives both the slow entry zoom and
-        // the full-scroll parallax, instead of separate ScrollTriggers —
-        // fewer scroll listeners means less work per frame.
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: true,
-          },
-        });
-
-        tl.fromTo(
-          imageWrapRef.current,
-          { scale: 1 },
-          { scale: 1.08, duration: 1, ease: "none" },
-          0
-        ).fromTo(
-          textRef.current,
-          { y: -22 },
-          { y: 22, duration: 1, ease: "none" },
-          0
-        );
-
-        // Words reveal one at a time as the section scrolls into view;
-        // earlier words stay dimly visible rather than disappearing.
-        gsap.set(wordRefs.current, { opacity: 0, y: 26 });
-        gsap.to(wordRefs.current, {
-          opacity: 1,
-          y: 0,
-          duration: 0.9,
-          ease: "power2.out",
-          stagger: 0.22,
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 65%",
-            toggleActions: "play none none none",
-          },
-        });
+    mm.add({ reduceMotion: "(prefers-reduced-motion: reduce)" }, (context) => {
+      if (context.conditions.reduceMotion) {
+        gsap.set(panelRefs.current, { opacity: 1, y: 0 });
+        return;
       }
-    );
+
+      // Panels fade/slide in left-to-right as the row scrolls into view.
+      // The hover reveal on each word is pure CSS (group-hover), so it
+      // works immediately, independent of this entrance animation.
+      gsap.set(panelRefs.current, { opacity: 0, y: 30 });
+      gsap.to(panelRefs.current, {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: "power2.out",
+        stagger: 0.15,
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 75%",
+          toggleActions: "play none none none",
+        },
+      });
+    });
 
     return () => mm.revert();
   }, []);
@@ -739,52 +611,64 @@ function CommunitySection() {
     <Section
       ref={sectionRef}
       id="community"
-      className="h-[100svh] w-full bg-[#000000]"
+      className="w-full bg-[#0D0D0D]"
     >
-      <div className="relative h-full w-full overflow-hidden">
-        {/* Stable wrapper — zoom + parallax target never changes identity,
-            even as the placeholder is swapped for the lazy-loaded image. */}
-        <div
-          ref={imageWrapRef}
-          className="will-change-transform absolute inset-0 origin-center"
-        >
-          {shouldLoadImage ? (
+      {/* Left to right, one panel per pillar. Stacks on small screens
+          (three narrow columns don't read well on a phone) and sits as a
+          single row from the md breakpoint up. */}
+      <div className="grid grid-cols-1 md:grid-cols-3">
+        {COMMUNITY_PILLARS.map((pillar) => (
+          <div
+            key={pillar.word}
+            ref={registerPanelRef}
+            className="group relative h-[55vh] md:h-[85vh] w-full overflow-hidden border-b md:border-b-0 md:border-r border-[#F5F5F0]/10 last:border-none"
+          >
             <img
-              src={COMMUNITY_IMAGE_SRC}
-              alt="Bashcraft members collaborating during a build session"
+              src={pillar.src}
+              alt={pillar.word}
               loading="lazy"
               decoding="async"
-              className="absolute inset-0 h-full w-full object-cover"
+              className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
               style={{ filter: "grayscale(1) contrast(1.1)" }}
             />
-          ) : (
-            <div className="absolute inset-0 bg-[#0c0c0c]" />
-          )}
-        </div>
 
-        {/* Subtle dark overlay — keeps the image visible while the copy stays readable */}
-        <div className="absolute inset-0 bg-black/30" />
+            {/* Dark overlay — darkens further on hover so the crimson
+                word reads clearly against the image. */}
+            <div className="absolute inset-0 bg-[#0D0D0D]/55 transition-colors duration-500 group-hover:bg-[#0D0D0D]/75" />
 
-        {/* Editorial overlay copy — clean, generously spaced, words don't overlap */}
-        <div
-          ref={textRef}
-          className="will-change-transform relative h-full w-full flex flex-col items-center justify-center gap-5 md:gap-7 px-6"
-        >
-          {["BUILD.", "CREATE.", "INSPIRE."].map((word) => (
-            <span
-              key={word}
-              ref={registerWordRef}
-              className="font-display font-bold uppercase leading-[0.95] text-[clamp(2.75rem,9vw,7rem)] text-white text-center tracking-tight"
-            >
-              {word}
-            </span>
-          ))}
-        </div>
-
-        <span className="absolute bottom-8 left-6 md:left-10 font-mono text-[11px] tracking-[0.25em] text-white/40 uppercase">
-          The Community
-        </span>
+            {/* Hover reveal — a small "01 — Build" style eyebrow above the
+                word (matching the Vision/Membership section labels),
+                the word itself in crimson, then a one-line "no fluff"
+                description. Each rises in with a slightly longer delay
+                than the one before it, so they cascade rather than pop
+                in all at once. */}
+            <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 px-8 text-center">
+              <span
+                className="font-mono text-[11px] tracking-[0.3em] uppercase text-[#F5F5F0]/70 opacity-0 -translate-y-2 transition-all duration-500 ease-out group-hover:opacity-100 group-hover:translate-y-0"
+                style={{ transitionDelay: "0ms" }}
+              >
+                {pillar.index} — {pillar.word.replace(".", "")}
+              </span>
+              <span
+                className="font-display font-bold uppercase tracking-tight text-[clamp(2rem,5vw,3.75rem)] opacity-0 translate-y-3 transition-all duration-500 ease-out group-hover:opacity-100 group-hover:translate-y-0"
+                style={{ color: "#B00020", transitionDelay: "80ms" }}
+              >
+                {pillar.word}
+              </span>
+              <p
+                className="max-w-[230px] font-body text-sm leading-relaxed text-[#F5F5F0]/75 opacity-0 translate-y-3 transition-all duration-500 ease-out group-hover:opacity-100 group-hover:translate-y-0"
+                style={{ transitionDelay: "150ms" }}
+              >
+                {pillar.description}
+              </p>
+            </div>
+          </div>
+        ))}
       </div>
+
+      <span className="absolute bottom-4 left-6 md:left-10 font-mono text-[11px] tracking-[0.25em] text-[#F5F5F0]/40 uppercase">
+        The Community
+      </span>
     </Section>
   );
 }
@@ -867,7 +751,7 @@ function WhyJoinSection() {
     <Section
       ref={sectionRef}
       id="why-join"
-      className="bg-[#000000] py-24 md:py-28"
+      className="bg-[#0D0D0D] py-24 md:py-28"
     >
       <div className="max-w-7xl mx-auto px-6 md:px-10">
         <span ref={eyebrowRef} className="inline-block">
@@ -875,7 +759,7 @@ function WhyJoinSection() {
         </span>
         <h2
           ref={headingRef}
-          className="mt-6 font-display font-bold text-6xl md:text-7xl tracking-tight text-white max-w-2xl"
+          className="mt-6 font-display font-bold text-6xl md:text-7xl tracking-tight text-[#F5F5F0] max-w-2xl"
         >
           WHY JOIN BASHCRAFT
         </h2>
@@ -908,7 +792,7 @@ export default function AboutBashcraft() {
   return (
     <>
       <Navbar />
-      <main className="bg-[#000000] text-white font-body">
+      <main className="bg-[#0D0D0D] text-[#F5F5F0] font-body">
         <HeroSection />
         <VisionSection />
         <CommunitySection />
