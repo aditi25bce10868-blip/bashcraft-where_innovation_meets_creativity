@@ -35,12 +35,12 @@ const AnimatedBackground = () => {
       <div 
         className="absolute inset-0 opacity-[0.03] z-0"
         style={{
-          backgroundImage: `radial-gradient(circle, #ffffff 1px, transparent 1px)`,
+          backgroundImage: `radial-gradient(circle, #F5F5F0 1px, transparent 1px)`,
           backgroundSize: '32px 32px',
         }}
       />
 
-      {/* Floating Ambient Glowing Orbs - Red & Orange */}
+      {/* Floating Ambient Glowing Orbs — one orange, one crimson, never blended */}
       <motion.div
         animate={{
           x: [0, 30, -20, 0],
@@ -52,7 +52,7 @@ const AnimatedBackground = () => {
           repeat: Infinity,
           ease: 'easeInOut',
         }}
-        className="absolute top-1/4 left-1/4 w-[400px] h-[400px] rounded-full bg-[#FF2E2E]/10 blur-[120px]"
+        className="absolute top-1/4 left-1/4 w-[400px] h-[400px] rounded-full bg-[#FF6A00]/10 blur-[120px]"
       />
 
       <motion.div
@@ -66,7 +66,7 @@ const AnimatedBackground = () => {
           repeat: Infinity,
           ease: 'easeInOut',
         }}
-        className="absolute bottom-1/3 right-1/4 w-[500px] h-[500px] rounded-full bg-[#FF5500]/10 blur-[150px]"
+        className="absolute bottom-1/3 right-1/4 w-[500px] h-[500px] rounded-full bg-[#B00020]/10 blur-[150px]"
       />
     </div>
   );
@@ -87,25 +87,25 @@ const FloatingInput = ({ id, label, type = 'text', value, onChange, required = f
         required={required}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
-        className="peer w-full bg-neutral-900/40 backdrop-blur-md text-white px-4 pt-6 pb-2 border border-neutral-800 rounded-lg outline-none transition-all duration-300 focus:border-neutral-500 hover:border-neutral-700"
+        className="peer w-full bg-neutral-900/40 backdrop-blur-md text-[#F5F5F0] px-4 pt-6 pb-2 border border-neutral-800 rounded-lg outline-none transition-all duration-300 focus:border-neutral-500 hover:border-neutral-700"
       />
       <label
         htmlFor={id}
         className={`absolute left-4 transition-all duration-200 pointer-events-none text-xs font-mono tracking-wider ${
           isFocused || hasValue
-            ? 'top-2 text-[#FF5500] scale-90 -translate-x-0.5'
+            ? 'top-2 text-[#FF6A00] scale-90 -translate-x-0.5'
             : 'top-4 text-neutral-500'
         }`}
       >
         {label}
       </label>
       
-      {/* Focus Glow Line (Orange Gradient) */}
+      {/* Focus Glow Line — solid orange, no red/orange blend */}
       <motion.div
         initial={false}
         animate={{ scaleX: isFocused ? 1 : 0 }}
         transition={{ duration: 0.3 }}
-        className="absolute bottom-0 left-2 right-2 h-[2px] bg-gradient-to-r from-[#FF2E2E] to-[#FF5500] origin-left rounded-full shadow-[0_0_8px_#FF5500]"
+        className="absolute bottom-0 left-2 right-2 h-[2px] bg-[#FF6A00] origin-left rounded-full shadow-[0_0_8px_#FF6A00]"
       />
     </div>
   );
@@ -126,25 +126,25 @@ const FloatingTextarea = ({ id, label, value, onChange, required = false, rows =
         required={required}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
-        className="peer w-full bg-neutral-900/40 backdrop-blur-md text-white px-4 pt-6 pb-2 border border-neutral-800 rounded-lg outline-none transition-all duration-300 focus:border-neutral-500 hover:border-neutral-700 resize-none"
+        className="peer w-full bg-neutral-900/40 backdrop-blur-md text-[#F5F5F0] px-4 pt-6 pb-2 border border-neutral-800 rounded-lg outline-none transition-all duration-300 focus:border-neutral-500 hover:border-neutral-700 resize-none"
       />
       <label
         htmlFor={id}
         className={`absolute left-4 transition-all duration-200 pointer-events-none text-xs font-mono tracking-wider ${
           isFocused || hasValue
-            ? 'top-2 text-[#FF5500] scale-90 -translate-x-0.5'
+            ? 'top-2 text-[#FF6A00] scale-90 -translate-x-0.5'
             : 'top-4 text-neutral-500'
         }`}
       >
         {label}
       </label>
 
-      {/* Focus Glow Line (Orange Gradient) */}
+      {/* Focus Glow Line — solid orange, no red/orange blend */}
       <motion.div
         initial={false}
         animate={{ scaleX: isFocused ? 1 : 0 }}
         transition={{ duration: 0.3 }}
-        className="absolute bottom-0 left-2 right-2 h-[2px] bg-gradient-to-r from-[#FF2E2E] to-[#FF5500] origin-left rounded-full shadow-[0_0_8px_#FF5500]"
+        className="absolute bottom-0 left-2 right-2 h-[2px] bg-[#FF6A00] origin-left rounded-full shadow-[0_0_8px_#FF6A00]"
       />
     </div>
   );
@@ -182,18 +182,18 @@ const RefinedContactCard = ({
       onMouseMove={handleMouseMove}
       whileHover={{ y: -6, scale: 1.01 }}
       transition={{ type: 'spring', stiffness: 300, damping: 22 }}
-      className="group relative block bg-neutral-950/80 border border-neutral-800/80 hover:border-neutral-600 rounded-2xl p-7 transition-colors duration-300 overflow-hidden shadow-xl"
+      className="group relative block bg-neutral-950/80 border border-neutral-800/80 hover:border-[#B00020] rounded-2xl p-7 transition-colors duration-300 overflow-hidden shadow-xl"
     >
       {/* Dynamic Cursor Spotlight Effect */}
       <div
         className="pointer-events-none absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"
         style={{
-          background: `radial-gradient(500px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(255,255,255,0.04), transparent 80%)`,
+          background: `radial-gradient(500px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(245,245,240,0.04), transparent 80%)`,
         }}
       />
 
       {/* Huge Watermark in Bottom-Right */}
-      <div className="absolute -bottom-4 -right-4 pointer-events-none text-neutral-100 opacity-[0.025] group-hover:opacity-[0.05] group-hover:scale-105 transition-all duration-500 select-none">
+      <div className="absolute -bottom-4 -right-4 pointer-events-none text-[#F5F5F0] opacity-[0.025] group-hover:opacity-[0.05] group-hover:scale-105 transition-all duration-500 select-none">
         {isWatermarkIcon ? (
           <Icon className="w-32 h-32" />
         ) : (
@@ -207,12 +207,12 @@ const RefinedContactCard = ({
       <div className="flex justify-between items-center mb-8 relative z-10">
         {/* Pill Tag */}
         <div className="inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-full bg-neutral-900/90 border border-neutral-800 text-[10px] font-mono tracking-wider text-neutral-400">
-          <span className="text-[#FF5500] font-semibold">[ {indexStr} ]</span>
+          <span className="text-[#FF6A00] font-semibold">[ {indexStr} ]</span>
           <span className="uppercase text-neutral-300">{category}</span>
         </div>
 
         {/* Action Link */}
-        <div className="flex items-center space-x-1 text-xs font-mono text-neutral-400 group-hover:text-white transition-colors duration-300">
+        <div className="flex items-center space-x-1 text-xs font-mono text-neutral-400 group-hover:text-[#F5F5F0] transition-colors duration-300">
           <span>{actionText}</span>
           <span className="transform group-hover:translate-x-2 transition-transform duration-300 ease-out">
             →
@@ -231,14 +231,14 @@ const RefinedContactCard = ({
           />
           
           {/* Main Icon */}
-          <div className="relative z-10 p-2 rounded-xl bg-neutral-900/60 border border-neutral-800/60 text-neutral-300 group-hover:text-white transition-all duration-300 transform group-hover:scale-[1.08] group-hover:rotate-2">
+          <div className="relative z-10 p-2 rounded-xl bg-neutral-900/60 border border-neutral-800/60 text-neutral-300 group-hover:text-[#F5F5F0] transition-all duration-300 transform group-hover:scale-[1.08] group-hover:rotate-2">
             <Icon className="w-8 h-8" />
           </div>
         </div>
 
         {/* Title and Subtitle */}
         <div className="pt-0.5">
-          <h3 className="text-2xl font-black tracking-tight text-white group-hover:text-white transition-colors">
+          <h3 className="text-2xl font-black tracking-tight text-[#F5F5F0] group-hover:text-[#F5F5F0] transition-colors">
             {title}
           </h3>
           <p className="text-xs text-neutral-400 font-light mt-0.5">
@@ -252,7 +252,7 @@ const RefinedContactCard = ({
         <p className="text-[11px] font-mono text-neutral-500 group-hover:text-neutral-400 transition-colors">
           {bottomText}
         </p>
-        <span className="w-1.5 h-1.5 rounded-full bg-neutral-800 group-hover:bg-[#FF5500] transition-colors duration-300" />
+        <span className="w-1.5 h-1.5 rounded-full bg-neutral-800 group-hover:bg-[#B00020] transition-colors duration-300" />
       </div>
     </motion.a>
   );
@@ -312,7 +312,7 @@ export default function ContactPage() {
       Icon: LinkedInIcon,
       watermarkText: 'in',
       isWatermarkIcon: false,
-      glowColor: 'rgba(10, 102, 194, 0.08)',
+      glowColor: 'rgba(176, 0, 32, 0.08)',
       bottomText: "Let's connect professionally",
     },
     {
@@ -325,7 +325,7 @@ export default function ContactPage() {
       Icon: InstagramIcon,
       watermarkText: '',
       isWatermarkIcon: true,
-      glowColor: 'rgba(255, 85, 0, 0.1)', // Vibrant Warm Glow
+      glowColor: 'rgba(255, 106, 0, 0.1)', // Orange accent glow
       bottomText: 'See our latest work',
     },
     {
@@ -338,13 +338,13 @@ export default function ContactPage() {
       Icon: EmailIcon,
       watermarkText: '',
       isWatermarkIcon: true,
-      glowColor: 'rgba(255, 46, 46, 0.08)',
+      glowColor: 'rgba(138, 15, 26, 0.08)',
       bottomText: 'Usually replies within 24 hours',
     },
   ];
 
   return (
-    <div className="relative min-h-screen bg-black text-white font-sans selection:bg-[#FF5500] selection:text-white overflow-hidden">
+    <div className="relative min-h-screen bg-[#0D0D0D] text-[#F5F5F0] font-sans selection:bg-[#FF6A00] selection:text-[#0D0D0D] overflow-hidden">
       <Navbar />
       <AnimatedBackground />
 
@@ -362,7 +362,7 @@ export default function ContactPage() {
             className="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight leading-none uppercase"
           >
             HELLO@<br />
-            <span className="bg-gradient-to-r from-[#FF2E2E] via-[#FF5500] to-orange-400 bg-clip-text text-transparent hover:opacity-90 transition-opacity duration-500">
+            <span className="text-[#FF6A00] hover:opacity-90 transition-opacity duration-500">
               BASHCRAFT.COM
             </span>
           </motion.h1>
@@ -376,13 +376,13 @@ export default function ContactPage() {
           <motion.div variants={itemVariants} className="mt-12">
             <a 
               href="#form-section" 
-              className="inline-flex items-center space-x-2 text-xs font-mono uppercase tracking-widest text-neutral-400 hover:text-[#FF5500] transition-colors group"
+              className="inline-flex items-center space-x-2 text-xs font-mono uppercase tracking-widest text-neutral-400 hover:text-[#FF6A00] transition-colors group"
             >
               <span>Initiate Connection</span>
               <motion.span 
                 animate={{ y: [0, 4, 0] }}
                 transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-                className="text-[#FF5500] group-hover:translate-y-1 transition-transform"
+                className="text-[#FF6A00] group-hover:translate-y-1 transition-transform"
               >
                 ↓
               </motion.span>
@@ -402,10 +402,10 @@ export default function ContactPage() {
             className="lg:col-span-7 bg-neutral-950/60 border border-neutral-900 backdrop-blur-xl rounded-2xl p-8 md:p-12 shadow-2xl relative"
           >
             {/* Ambient inner card glow */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-[#FF5500]/5 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute top-0 right-0 w-64 h-64 bg-[#FF6A00]/5 rounded-full blur-3xl pointer-events-none" />
 
             <div className="mb-8">
-              <span className="text-xs font-mono uppercase tracking-widest text-[#FF5500] block mb-2">
+              <span className="text-xs font-mono uppercase tracking-widest text-[#FF6A00] block mb-2">
                 // Direct Line
               </span>
               <h2 className="text-2xl md:text-3xl font-bold tracking-tight">
@@ -425,10 +425,10 @@ export default function ContactPage() {
                   exit={{ opacity: 0, scale: 0.95 }}
                   className="py-12 text-center border border-neutral-800 bg-neutral-900/30 rounded-xl p-8"
                 >
-                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-[#FF5500]/10 text-[#FF5500] mb-4">
+                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-[#FF6A00]/10 text-[#FF6A00] mb-4">
                     ✓
                   </div>
-                  <h3 className="text-xl font-semibold text-white mb-2">Connection Request Dispatched</h3>
+                  <h3 className="text-xl font-semibold text-[#F5F5F0] mb-2">Connection Request Dispatched</h3>
                   <p className="text-neutral-400 text-sm max-w-md mx-auto mb-6">
                     Thank you for reaching out. A team member will evaluate your query and get back to you within 24 hours.
                   </p>
@@ -437,7 +437,7 @@ export default function ContactPage() {
                       setFormState('idle');
                       setFormData({ name: '', email: '', subject: '', message: '' });
                     }}
-                    className="text-xs font-mono uppercase tracking-widest text-neutral-400 hover:text-white underline underline-offset-4 transition-colors"
+                    className="text-xs font-mono uppercase tracking-widest text-neutral-400 hover:text-[#F5F5F0] underline underline-offset-4 transition-colors"
                   >
                     Send another message
                   </button>
@@ -491,7 +491,7 @@ export default function ContactPage() {
                       whileTap={{ scale: 0.98 }}
                       type="submit"
                       disabled={formState === 'submitting'}
-                      className="group relative w-full md:w-auto inline-flex items-center justify-center px-8 py-4 bg-white text-black font-semibold text-xs uppercase tracking-widest rounded-lg overflow-hidden transition-all duration-300 hover:bg-[#FF5500] hover:text-white shadow-lg hover:shadow-[#FF5500]/25 disabled:opacity-60"
+                      className="group relative w-full md:w-auto inline-flex items-center justify-center px-8 py-4 bg-[#F5F5F0] text-[#0D0D0D] font-semibold text-xs uppercase tracking-widest rounded-lg overflow-hidden transition-all duration-300 hover:bg-[#FF6A00] hover:text-[#0D0D0D] shadow-lg hover:shadow-[#FF6A00]/25 disabled:opacity-60"
                     >
                       {formState === 'submitting' ? (
                         <div className="flex items-center space-x-2">
@@ -579,7 +579,7 @@ export default function ContactPage() {
               href="#form-section"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
-              className="inline-flex items-center px-10 py-5 bg-gradient-to-r from-[#FF2E2E] to-[#FF5500] text-white font-mono text-xs uppercase tracking-widest rounded-full shadow-[0_0_25px_rgba(255,85,0,0.3)] hover:shadow-[0_0_35px_rgba(255,85,0,0.5)] transition-all duration-300"
+              className="inline-flex items-center px-10 py-5 bg-[#FF6A00] text-[#0D0D0D] font-mono text-xs uppercase tracking-widest rounded-full shadow-[0_0_25px_rgba(255,106,0,0.3)] hover:bg-[#B00020] hover:text-[#F5F5F0] hover:shadow-[0_0_35px_rgba(176,0,32,0.5)] transition-all duration-300"
             >
               Join Bashcraft
             </motion.a>
