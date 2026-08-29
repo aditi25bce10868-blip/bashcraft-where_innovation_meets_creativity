@@ -405,7 +405,7 @@ export const teamData = [
         role: 'Core Member',
         sentence: ' A place where my creativity will meet its purpose.',
         word: 'Musician',
-        image: 'Kshitij Jha.jpg',
+        image: 'Kshitij Jha.jpeg',
         linkedin: 'https://www.linkedin.com/in/kshitij-jha-5b2b48377?utm_source=share_via&utm_content=profile&utm_medium=member_android',
       },
     ],
