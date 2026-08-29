@@ -50,17 +50,6 @@ export default function Home() {
             <div className="absolute inset-0 bg-pitch-black/40"></div>
           </div>
 
-          {/* Faint Wireframe Backdrop */}
-          <div className="absolute inset-0 z-0 opacity-15 pointer-events-none flex items-center justify-center">
-            <svg viewBox="0 0 1000 1000" className="w-full h-full stroke-stark-white fill-none stroke-[1]">
-              <circle cx="500" cy="500" r="400" />
-              <circle cx="500" cy="500" r="250" strokeDasharray="5 5" />
-              <line x1="100" y1="500" x2="900" y2="500" />
-              <line x1="500" y1="100" x2="500" y2="900" />
-              <rect x="250" y="250" width="500" height="500" />
-            </svg>
-          </div>
-
           <div className="relative z-10 max-w-[1200px] space-y-8">
             {/* Eyebrow Label */}
             <motion.div
@@ -124,9 +113,8 @@ export default function Home() {
           <motion.div
             variants={fadeInUp}
             initial="hidden"
-            whileInView="visible"
-            custom={0.9}
-            viewport={viewportReveal}
+            animate="visible"
+            custom={0}
             className="absolute inset-x-0 bottom-6 z-10 flex flex-col items-center justify-center gap-2 text-stark-white/60"
             aria-hidden="true"
           >
