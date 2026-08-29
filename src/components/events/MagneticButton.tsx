@@ -58,8 +58,8 @@ export const MagneticButton = forwardRef<HTMLButtonElement, Props>(function MB(
     "relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full px-6 py-3 text-sm font-medium tracking-wide transition-[background,color,box-shadow] duration-300 will-change-transform";
   const styles =
     variant === "flame"
-      ? "bg-flame text-black hover:shadow-[0_20px_60px_-15px_rgba(249,115,22,0.6)]"
-      : "border hairline text-white hover:border-flame hover:text-flame";
+      ? "bg-flame text-black hover:shadow-[0_20px_60px_-15px_rgba(255,106,0,0.6)]"
+      : "border hairline text-stark-white hover:border-flame hover:text-flame";
 
   return (
     <button

@@ -6,7 +6,7 @@ export function Marquee({ words }: { words: string[] }) {
         {list.map((w, i) => (
           <span
             key={i}
-            className="mx-8 font-display text-3xl font-semibold uppercase tracking-tight text-white/40 sm:text-5xl"
+            className="mx-8 font-display text-3xl font-semibold uppercase tracking-tight text-stark-white/40 sm:text-5xl"
           >
             {w}
             <span className="mx-8 text-flame">✦</span>

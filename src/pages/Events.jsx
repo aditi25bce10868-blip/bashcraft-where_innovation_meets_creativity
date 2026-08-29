@@ -26,11 +26,11 @@ import Navbar from "@/components/Navbar";
 
 const upcoming = [
   {
-    slug: "/events/talent-show",
+    slug: "/events/social-loop",
     index: "01",
-    title: "Talent Show",
-    category: "Stage · Community Night",
-    date: "TBA",
+    title: "Social Loop",
+    category: "Stage · Freshers' Talent Show",
+    date: "13 SEP · 2026",
   },
 ];
 
@@ -60,45 +60,84 @@ const archived = [
 
 export default function Events() {
   return (
-    <div className="relative min-h-screen bg-[color:var(--surface)] text-white">
+    <div
+      className="relative min-h-screen bg-[#0D0D0D] text-[#F5F5F0]"
+      style={{
+        "--surface": "#0D0D0D",
+        "--surface-light": "#F5F5F0",
+        "--flame": "#FF6A00",
+        "--crimson": "#8A0F1A",
+        "--crimson-bright": "#B00020",
+      }}
+    >
       <SmoothScroll />
       <ScrollProgress />
       <CursorGlow />
       <Navbar />
+
       <HeroArchive />
+
       <EventList
-        eyebrow="|| 01 · UPCOMING"
+        eyebrow="// 01 · UPCOMING"
         heading="Upcoming"
         empty="Nothing on the calendar yet — stay tuned."
         items={upcoming}
+        accent="orange"
       />
+
       <EventList
-        eyebrow="|| 02 · ARCHIVE"
+        eyebrow="// 02 · ARCHIVE"
         heading="Archived"
         empty="No archived events."
         items={archived}
+        accent="crimson"
       />
-      <Marquee words={["TALKS", "HACKATHONS", "COMMUNITY", "BUILD", "SHIP", "REPEAT", "SIGNAL", "BASHCRAFT"]} />
+
+      <Marquee
+        words={[
+          "TALKS",
+          "HACKATHONS",
+          "COMMUNITY",
+          "BUILD",
+          "SHIP",
+          "REPEAT",
+          "SIGNAL",
+          "BASHCRAFT",
+        ]}
+      />
+
       <BackToTop />
     </div>
   );
 }
 
-function EventList({ eyebrow, heading, items, empty }) {
+function EventList({ eyebrow, heading, items, empty, accent }) {
+  const isOrange = accent === "orange";
+
+  const accentColor = isOrange ? "#FF6A00" : "#B00020";
+
   return (
-    <section className="relative border-t hairline bg-[color:var(--surface)] px-6 py-20 sm:px-10 sm:py-28">
+    <section className="relative border-t border-[#F5F5F0]/10 bg-[#0D0D0D] px-6 py-20 sm:px-10 sm:py-28">
       <div className="mx-auto max-w-5xl">
         <Reveal className="mb-10">
-          <div className="mono-label mb-3 text-flame">{eyebrow}</div>
-          <h2 className="font-display text-5xl font-bold leading-[0.95] tracking-tight sm:text-6xl">
+          <div
+            className="mono-label mb-3"
+            style={{ color: accentColor }}
+          >
+            {eyebrow}
+          </div>
+
+          <h2 className="font-display text-5xl font-bold leading-[0.95] tracking-tight text-[#F5F5F0] sm:text-6xl">
             {heading}
           </h2>
         </Reveal>
 
         {items.length === 0 ? (
-          <p className="mono-label text-white/50">{empty}</p>
+          <p className="mono-label text-[#F5F5F0]/50">
+            {empty}
+          </p>
         ) : (
-          <ul className="divide-y divide-white/10 border-y border-white/10">
+          <ul className="divide-y divide-[#F5F5F0]/10 border-y border-[#F5F5F0]/10">
             {items.map((it, i) => (
               <li key={it.slug}>
                 <Reveal delay={i * 0.05}>
@@ -106,15 +145,38 @@ function EventList({ eyebrow, heading, items, empty }) {
                     to={it.slug}
                     className="group grid grid-cols-[auto_1fr_auto] items-center gap-4 py-6 transition sm:grid-cols-[3rem_1fr_auto_auto] sm:gap-8 sm:py-8"
                   >
-                    <span className="mono-label text-flame">{it.index}</span>
+                    <span
+                      className="mono-label"
+                      style={{ color: accentColor }}
+                    >
+                      {it.index}
+                    </span>
+
                     <div className="min-w-0">
-                      <h3 className="font-display text-2xl font-semibold leading-tight tracking-tight transition group-hover:text-flame sm:text-4xl">
+                      <h3
+                        className="font-display text-2xl font-semibold leading-tight tracking-tight text-[#F5F5F0] transition sm:text-4xl"
+                        style={{
+                          "--accent-hover": accentColor,
+                        }}
+                      >
                         {it.title}
                       </h3>
-                      <div className="mono-label mt-2 text-white/50">{it.category}</div>
+
+                      <div className="mono-label mt-2 text-[#F5F5F0]/50">
+                        {it.category}
+                      </div>
                     </div>
-                    <span className="mono-label hidden text-white/60 sm:inline">{it.date}</span>
-                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border hairline transition-all duration-500 group-hover:border-flame group-hover:bg-flame group-hover:text-black">
+
+                    <span className="mono-label hidden text-[#F5F5F0]/60 sm:inline">
+                      {it.date}
+                    </span>
+
+                    <span
+                      className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[#F5F5F0]/20 text-[#F5F5F0]/70 transition-all duration-500"
+                      style={{
+                        "--accent-color": accentColor,
+                      }}
+                    >
                       <ArrowUpRight className="h-4 w-4 transition-transform duration-500 group-hover:-rotate-45" />
                     </span>
                   </Link>
@@ -124,6 +186,19 @@ function EventList({ eyebrow, heading, items, empty }) {
           </ul>
         )}
       </div>
+
+      {/* Color-only hover rules */}
+      <style>{`
+        .group:hover h3 {
+          color: ${accentColor};
+        }
+
+        .group:hover span:last-child {
+          border-color: ${accentColor};
+          background-color: ${accentColor};
+          color: #0D0D0D;
+        }
+      `}</style>
     </section>
   );
 }

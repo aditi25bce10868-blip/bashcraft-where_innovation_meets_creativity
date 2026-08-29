@@ -35,9 +35,9 @@ export default function BashNex26() {
         readingMinutes={5}
       >
         <Reveal>
-          <div className="mono-label mb-6 text-flame">|| STORY</div>
-          <p className="text-lg leading-relaxed text-white/85 sm:text-2xl">
-            <span className="text-white">BashNex'26</span>, the flagship event of BashCraft Club,
+          <div className="mono-label mb-6 text-flame">// STORY</div>
+          <p className="text-lg leading-relaxed text-stark-white/85 sm:text-2xl">
+            <span className="text-stark-white">BashNex'26</span>, the flagship event of BashCraft Club,
             was successfully conducted on 13th and 14th June 2026 at VIT Bhopal University. Designed
             to bridge the gap between academics and industry, the two-day event brought together
             students and professionals for insightful sessions, meaningful discussions, and
@@ -58,7 +58,7 @@ export default function BashNex26() {
         <Divider />
 
         <Reveal>
-          <div className="mono-label mb-4 text-flame">|| GUEST SPEAKERS</div>
+          <div className="mono-label mb-4 text-flame">// GUEST SPEAKERS</div>
           <h2 className="font-display text-4xl font-bold leading-[0.95] tracking-tight sm:text-6xl">
             Eight speakers.
             <br />
@@ -74,18 +74,18 @@ export default function BashNex26() {
           {speakers.map((s, i) => (
             <Reveal key={s.name} delay={i * 0.06}>
               <TiltCard intensity={6}>
-                <div className="group relative h-full overflow-hidden rounded-2xl border hairline bg-[color:var(--surface-elev)] p-6 transition-all duration-500 hover:border-flame/60 hover:shadow-[0_20px_60px_-20px_rgba(239,29,42,0.45)]">
-                  <div className="pointer-events-none absolute -right-4 -top-6 select-none font-display text-[7rem] font-black leading-none text-white/[0.05] transition-all duration-700 group-hover:text-flame/25 group-hover:-translate-y-1">
+                <div className="group relative h-full overflow-hidden rounded-2xl border hairline bg-[color:var(--surface-elev)] p-6 transition-all duration-500 hover:border-flame/60 hover:shadow-[0_20px_60px_-20px_rgba(255,106,0,0.45)]">
+                  <div className="pointer-events-none absolute -right-4 -top-6 select-none font-display text-[7rem] font-black leading-none text-stark-white/[0.05] transition-all duration-700 group-hover:text-flame/25 group-hover:-translate-y-1">
                     {s.code}
                   </div>
                   <div className="mono-label relative mb-6 flex items-center justify-between">
                     <span className="text-flame">SPK · {String(i + 1).padStart(2, "0")}</span>
-                    <span className="text-white/40">{s.domain.toUpperCase()}</span>
+                    <span className="text-stark-white/40">{s.domain.toUpperCase()}</span>
                   </div>
                   <div className="relative font-display text-2xl font-semibold leading-tight tracking-tight sm:text-3xl">
                     {s.name}
                   </div>
-                  <div className="relative mono-label mt-4 flex items-center gap-3 text-white/70">
+                  <div className="relative mono-label mt-4 flex items-center gap-3 text-stark-white/70">
                     <span className="h-[2px] w-6 bg-flame transition-all duration-500 group-hover:w-12" />
                     <span>{s.domain}</span>
                   </div>
@@ -99,7 +99,7 @@ export default function BashNex26() {
         <Divider />
 
         <Reveal>
-          <div className="mono-label mb-4 text-flame">|| COMPETITION WINNERS</div>
+          <div className="mono-label mb-4 text-flame">// COMPETITION WINNERS</div>
           <h2 className="font-display text-4xl font-bold leading-[0.95] tracking-tight sm:text-6xl">
             Podium.
           </h2>
@@ -136,11 +136,11 @@ export default function BashNex26() {
         <Divider />
 
         <Reveal>
-          <div className="mono-label mb-4 text-flame">|| ACKNOWLEDGEMENT</div>
-          <p className="text-lg leading-relaxed text-white/85 sm:text-xl">
+          <div className="mono-label mb-4 text-flame">// ACKNOWLEDGEMENT</div>
+          <p className="text-lg leading-relaxed text-stark-white/85 sm:text-xl">
             The success of BashNex'26 was made possible through the guidance and support of{" "}
-            <span className="text-white">Dr. Dheresh Soni</span> (Faculty Coordinator) and{" "}
-            <span className="text-white">Aditya Joshi</span> (Ex-President &amp; Mentor). We also
+            <span className="text-stark-white">Dr. Dheresh Soni</span> (Faculty Coordinator) and{" "}
+            <span className="text-stark-white">Aditya Joshi</span> (Ex-President &amp; Mentor). We also
             extend our sincere gratitude to all the guest speakers and participants whose enthusiasm
             and active involvement made the event a memorable experience.
           </p>
@@ -157,7 +157,7 @@ export default function BashNex26() {
         <Divider />
 
         <Reveal>
-          <div className="mono-label mb-4 text-flame">|| PHOTO GALLERY</div>
+          <div className="mono-label mb-4 text-flame">// PHOTO GALLERY</div>
           <h2 className="font-display text-4xl font-bold leading-[0.95] tracking-tight sm:text-6xl">
             The room.
           </h2>
@@ -180,9 +180,9 @@ export default function BashNex26() {
 function Divider() {
   return (
     <div className="my-24 flex items-center gap-6">
-      <span className="h-px flex-1 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+      <span className="h-px flex-1 bg-gradient-to-r from-transparent via-stark-white/20 to-transparent" />
       <span className="h-1.5 w-1.5 rounded-full bg-flame animate-flame-pulse" />
-      <span className="h-px flex-1 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+      <span className="h-px flex-1 bg-gradient-to-r from-transparent via-stark-white/20 to-transparent" />
     </div>
   );
 }
@@ -191,15 +191,15 @@ function Podium({ place, name, id, icon, height, delay, accent }) {
   return (
     <Reveal delay={delay}>
       <div className="flex flex-col items-center">
-        <div className={`mono-label mb-3 ${accent ? "text-flame" : "text-white/60"}`}>0{place}</div>
-        <div className={`${accent ? "text-flame" : "text-white/80"} mb-4`}>{icon}</div>
+        <div className={`mono-label mb-3 ${accent ? "text-flame" : "text-stark-white/60"}`}>0{place}</div>
+        <div className={`${accent ? "text-flame" : "text-stark-white/80"} mb-4`}>{icon}</div>
         <div className="text-center">
           <div
-            className={`font-display text-xl font-semibold leading-tight ${accent ? "text-white" : "text-white/90"}`}
+            className={`font-display text-xl font-semibold leading-tight ${accent ? "text-stark-white" : "text-stark-white/90"}`}
           >
             {name}
           </div>
-          <div className="mono-label mt-1 text-white/50">#{id}</div>
+          <div className="mono-label mt-1 text-stark-white/50">#{id}</div>
         </div>
         <div
           className={`mt-6 w-full rounded-t-xl border-t hairline bg-[color:var(--surface-elev)] ${height} ${accent ? "flame-glow" : ""}`}

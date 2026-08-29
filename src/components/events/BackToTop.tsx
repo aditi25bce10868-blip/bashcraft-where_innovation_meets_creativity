@@ -17,7 +17,7 @@ export function BackToTop() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 20 }}
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="fixed bottom-6 right-6 z-[65] rounded-full border hairline bg-[color:var(--surface-elev)]/80 p-3 text-white/80 backdrop-blur transition hover:border-flame hover:text-flame"
+          className="fixed bottom-6 right-6 z-[65] rounded-full border hairline bg-[color:var(--surface-elev)]/80 p-3 text-stark-white/80 backdrop-blur transition hover:border-flame hover:text-flame"
           aria-label="Back to top"
         >
           <ArrowUp className="h-5 w-5" />

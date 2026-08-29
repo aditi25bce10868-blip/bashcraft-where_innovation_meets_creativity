@@ -31,7 +31,7 @@ export function HeroArchive() {
         aria-hidden
       />
       <div
-        className="pointer-events-none absolute bottom-[20%] left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent"
+        className="pointer-events-none absolute bottom-[20%] left-0 right-0 h-px bg-gradient-to-r from-transparent via-stark-white/30 to-transparent"
         aria-hidden
       />
 
@@ -46,7 +46,7 @@ export function HeroArchive() {
           <div className="mono-label hidden sm:block">BASHCRAFT / CLUB / VIT BHOPAL</div>
           <div className="mono-label flex items-center gap-2">
             <span className="tabular-nums">v.2026</span>
-            <span className="text-white/30">/</span>
+            <span className="text-stark-white/30">/</span>
             <span className="text-flame">LIVE</span>
           </div>
         </div>
@@ -119,7 +119,7 @@ function TitleLine({
         initial={{ y: "110%" }}
         animate={{ y: "0%" }}
         transition={{ delay, duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-        className={`block ${accent ? "text-white [text-shadow:0_0_60px_rgba(249,115,22,0.35)]" : "text-white"}`}
+        className={`block ${accent ? "text-stark-white [text-shadow:0_0_60px_rgba(255,106,0,0.35)]" : "text-stark-white"}`}
       >
         {text}
       </motion.span>

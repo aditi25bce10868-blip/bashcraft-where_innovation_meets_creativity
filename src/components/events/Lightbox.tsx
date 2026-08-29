@@ -35,14 +35,14 @@ export function Lightbox({
           onClick={onClose}
         >
           <button
-            className="absolute right-4 top-4 z-10 rounded-full border hairline p-3 text-white/80 hover:text-flame"
+            className="absolute right-4 top-4 z-10 rounded-full border hairline p-3 text-stark-white/80 hover:text-flame"
             onClick={onClose}
             aria-label="Close"
           >
             <X className="h-5 w-5" />
           </button>
           <button
-            className="absolute left-4 top-1/2 z-10 -translate-y-1/2 rounded-full border hairline p-3 text-white/80 hover:text-flame"
+            className="absolute left-4 top-1/2 z-10 -translate-y-1/2 rounded-full border hairline p-3 text-stark-white/80 hover:text-flame"
             onClick={(e) => {
               e.stopPropagation();
               onIndex((index - 1 + images.length) % images.length);
@@ -52,7 +52,7 @@ export function Lightbox({
             <ChevronLeft className="h-5 w-5" />
           </button>
           <button
-            className="absolute right-4 top-1/2 z-10 -translate-y-1/2 rounded-full border hairline p-3 text-white/80 hover:text-flame"
+            className="absolute right-4 top-1/2 z-10 -translate-y-1/2 rounded-full border hairline p-3 text-stark-white/80 hover:text-flame"
             onClick={(e) => {
               e.stopPropagation();
               onIndex((index + 1) % images.length);
