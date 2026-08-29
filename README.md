@@ -103,6 +103,7 @@ Update these files to change site content without touching layout/markup.
 - [ ] Add real photos for team members (currently using the bordered-icon fallback avatar)
 - [ ] Confirm/replace sample events in `events.js` with current club events
 - [ ] Confirm final footer sitemap column labels against club structure
+      
 
 ---
 
