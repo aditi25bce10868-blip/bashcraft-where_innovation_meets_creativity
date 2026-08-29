@@ -342,10 +342,22 @@ function VisionSection() {
       (context) => {
         const { reduceMotion, hasMouse } = context.conditions;
 
+        // NOTE: the disc's continuous spin is NOT driven from here anymore —
+        // it's a plain CSS animation (see the `animate-[spin_12s_linear_infinite]`
+        // class on the disc element below). CSS keyframe animations run on
+        // the compositor thread, so they keep playing regardless of JS
+        // timing, requestAnimationFrame throttling, or matchMedia quirks in
+        // in-app/WebView browsers — which is what was causing the spin to
+        // silently never start on some mobile browsers when it was a GSAP
+        // tween. This effect now only handles the enter reveal and the
+        // desktop-only mouse tilt, both of which are fine to skip outright
+        // under reduced motion.
+
         if (reduceMotion) {
           // Skip the slide-in reveal and mouse-tilt — those are the
           // motion patterns that can genuinely bother reduced-motion
-          // users. Show the finished layout immediately.
+          // users. Show the finished layout immediately. The disc still
+          // spins via its own CSS animation regardless of this branch.
           gsap.set(
             [
               eyebrowRef.current,
@@ -355,18 +367,7 @@ function VisionSection() {
             ],
             { clearProps: "all" }
           );
-
-          // The disc's slow, continuous turntable spin is decorative
-          // rather than jarring (no sudden movement, no scroll-jacking),
-          // so it keeps running even under prefers-reduced-motion.
-          const spin = gsap.to(logoRef.current, {
-            rotate: 360,
-            duration: 12,
-            repeat: -1,
-            ease: "none",
-          });
-
-          return () => spin.kill();
+          return;
         }
 
         // Starting states for the staggered enter reveal.
@@ -406,28 +407,22 @@ function VisionSection() {
             "-=0.6"
           );
 
-        // Vinyl disc — continuous, slow rotation like a record on a
-        // turntable (one turn / 12s).
-        const spin = gsap.to(logoRef.current, {
-          rotate: 360,
-          duration: 12,
-          repeat: -1,
-          ease: "none",
-        });
-
-        // Mouse tilt — only on pointer-fine devices. A quickTo setter per
-        // axis avoids allocating a new tween on every mousemove event.
+        // Mouse tilt — only on pointer-fine devices. Applied to the OUTER
+        // wrapper (logoCardRef), not the disc itself (logoRef), so it
+        // doesn't fight with the disc's own CSS spin animation over the
+        // `transform` property. A quickTo setter per axis avoids
+        // allocating a new tween on every mousemove event.
         if (hasMouse) {
           const MAX_TILT = 8; // degrees, kept subtle
-          const setRotationY = gsap.quickTo(logoRef.current, "rotationY", {
+          const setRotationY = gsap.quickTo(logoCardRef.current, "rotationY", {
             duration: 0.7,
             ease: "power3.out",
           });
-          const setRotationX = gsap.quickTo(logoRef.current, "rotationX", {
+          const setRotationX = gsap.quickTo(logoCardRef.current, "rotationX", {
             duration: 0.7,
             ease: "power3.out",
           });
-          gsap.set(logoRef.current, { transformPerspective: 600 });
+          gsap.set(logoCardRef.current, { transformPerspective: 600 });
 
           const handlePointerMove = (e) => {
             const bounds = sectionRef.current.getBoundingClientRect();
@@ -444,11 +439,8 @@ function VisionSection() {
 
           return () => {
             section.removeEventListener("mousemove", handlePointerMove);
-            spin.kill();
           };
         }
-
-        return () => spin.kill();
       }
     );
 
@@ -509,7 +501,7 @@ function VisionSection() {
                 a dark vinyl base, and a slim rim highlight. */}
             <div
               ref={logoRef}
-              className="will-change-transform relative h-full w-full rounded-full"
+              className="will-change-transform relative h-full w-full rounded-full animate-[spin_12s_linear_infinite]"
               style={{
                 background:
                   "repeating-radial-gradient(circle at 50% 50%, #1c1c1c 0px, #1c1c1c 2px, #0a0a0a 2px, #0a0a0a 5px)",
