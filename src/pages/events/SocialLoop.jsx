@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { MapPin, CalendarDays, Clock, Mail, Users, Sparkles, Bell } from "lucide-react";
+import { MapPin, CalendarDays, Clock, Mail, Users, Sparkles, ExternalLink } from "lucide-react";
 import { EventPageShell } from "@/components/events/EventPageShell";
 import { Reveal } from "@/components/events/Reveal";
 import { MagneticButton } from "@/components/events/MagneticButton";
@@ -10,6 +10,8 @@ import cover from "@/assets/events/social-loop-cover.jpeg";
 const EVENT_TARGET = new Date("2026-09-13T14:00:00+05:30").getTime();
 
 const FORMATS = ["Solo", "Duo", "Trio", "Squad", "Squad+"];
+
+const REGISTRATION_LINK = "https://forms.gle/2Ro4kZnY9DGwKabv5";
 
 const CATEGORIES = [
   "Singing",
@@ -25,7 +27,6 @@ const CATEGORIES = [
 export default function SocialLoop() {
   const [{ d, h, m, s }, setC] = useState({ d: 0, h: 0, m: 0, s: 0 });
   const [ended, setEnded] = useState(false);
-  const [notified, setNotified] = useState(false);
 
   useEffect(() => {
     const tick = () => {
@@ -49,7 +50,7 @@ export default function SocialLoop() {
 
   return (
     <EventPageShell
-      eyebrow="UPCOMING · FRESHERS' NIGHT"
+      eyebrow="UPCOMING · FRESHERS' TALENT SHOW"
       title="SOCIAL LOOP"
       date="13 SEP 2026"
       tag="AB-1 AUDI-1"
@@ -148,13 +149,15 @@ export default function SocialLoop() {
               <Mail className="h-3.5 w-3.5" /> REGISTRATION
             </div>
             <p className="max-w-md text-stark-white/80">
-              The registration mail will be shared soon — keep an eye on your
-              inbox. We'll be waiting for you!
+              Spots are filling up — register now and secure your slot on
+              stage. We'll be waiting for you!
             </p>
           </div>
-          <MagneticButton onClick={() => setNotified(true)} disabled={notified}>
-            <Bell className="h-4 w-4" />
-            {notified ? "You'll be the first to know" : "Notify Me"}
+          <MagneticButton
+            onClick={() => window.open(REGISTRATION_LINK, "_blank", "noopener,noreferrer")}
+          >
+            <ExternalLink className="h-4 w-4" />
+            Register Now
           </MagneticButton>
         </div>
       </Reveal>
@@ -174,4 +177,3 @@ function DetailCard({ icon: Icon, label, value }) {
     </motion.div>
   );
 }
-
