@@ -343,8 +343,9 @@ function VisionSection() {
         const { reduceMotion, hasMouse } = context.conditions;
 
         if (reduceMotion) {
-          // Show the finished layout immediately — no slide, no spin,
-          // no scroll-tied scale, no tilt.
+          // Skip the slide-in reveal and mouse-tilt — those are the
+          // motion patterns that can genuinely bother reduced-motion
+          // users. Show the finished layout immediately.
           gsap.set(
             [
               eyebrowRef.current,
@@ -354,7 +355,18 @@ function VisionSection() {
             ],
             { clearProps: "all" }
           );
-          return;
+
+          // The disc's slow, continuous turntable spin is decorative
+          // rather than jarring (no sudden movement, no scroll-jacking),
+          // so it keeps running even under prefers-reduced-motion.
+          const spin = gsap.to(logoRef.current, {
+            rotate: 360,
+            duration: 12,
+            repeat: -1,
+            ease: "none",
+          });
+
+          return () => spin.kill();
         }
 
         // Starting states for the staggered enter reveal.
