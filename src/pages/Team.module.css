@@ -1,9 +1,9 @@
 :root {
   --pitch-black: #0D0D0D;
-  --vibrant-scarlet: #FF6A00;
+  --vibrant-scarlet: #FF6A00; /* now the brand's orange — primary accent: CTAs, hovers, active states */
   --stark-white: #F5F5F0;
-  --crimson-red: #8A0F1A;
-  --crimson-red-bright: #B00020;
+  --crimson-red: #8A0F1A;      /* secondary accent — quieter emphasis (card word values, labels) */
+  --crimson-red-bright: #B00020; /* secondary accent — selected/persistent-state emphasis */
   /* Matches Navbar.jsx: header className includes h-[68px] and is `fixed`. */
   --navbar-height: 68px;
 }
@@ -44,7 +44,7 @@
   text-transform: uppercase;
   letter-spacing: 0.2em;
   color: var(--vibrant-scarlet);
-  border: 1px solid rgba(255, 0, 0, 0.65);
+  border: 1px solid rgba(255, 106, 0, 0.5);
   padding: 0.35rem 0.8rem;
   border-radius: 999px;
 }
@@ -53,13 +53,13 @@
   flex: 0 0 auto;
   min-width: 64px;
   height: 1px;
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(245, 245, 240, 0.12);
 }
 
 .accentText {
   font-family: 'Space Mono', monospace;
   font-size: 0.78rem;
-  color: rgba(255, 255, 255, 0.55);
+  color: rgba(245, 245, 240, 0.55);
   letter-spacing: 0.05em;
   white-space: normal;
   word-break: break-word;
@@ -89,7 +89,7 @@
   font-size: 1rem;
   line-height: 1.6;
   letter-spacing: 0;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(245, 245, 240, 0.6);
 }
 
 .highlight {
@@ -144,7 +144,7 @@
   font-family: 'Space Mono', monospace;
   font-size: 0.7rem;
   letter-spacing: 0.1em;
-  color: rgba(255, 255, 255, 0.35);
+  color: rgba(245, 245, 240, 0.35);
 }
 
 .sectionHeader h2 {
@@ -162,7 +162,7 @@
   font-size: 1.3rem;
   line-height: 1.3;
   letter-spacing: -0.01em;
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(245, 245, 240, 0.85);
   max-width: 620px;
   margin: 0.5rem 0 1rem;
 }
@@ -178,7 +178,7 @@
   letter-spacing: 0.12em;
   color: var(--stark-white);
   text-decoration: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(245, 245, 240, 0.2);
   padding-bottom: 0.2rem;
   transition: color 0.25s ease, border-color 0.25s ease;
 }
@@ -212,7 +212,7 @@
 
 .memberCard {
   background: var(--pitch-black);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(245, 245, 240, 0.12);
   padding: 1.25rem 1rem;
   cursor: pointer;
   display: flex;
@@ -224,10 +224,11 @@
   height: 420px;
   box-sizing: border-box;
   border-radius: 0.25rem;
-  transition: opacity 0.3s ease-in-out, border-color 0.2s;
+  transition: opacity 0.3s ease-in-out, border-color 0.2s, background 0.2s;
   overflow: hidden;
 }
 
+/* Hover = orange (transient interaction state, matches the rest of the site) */
 .memberCard:hover {
   border-color: var(--vibrant-scarlet);
   background: #0a0a0a;
@@ -238,10 +239,12 @@
   background: #0a0a0a;
 }
 
+/* Selected = crimson (persistent state), deliberately a different accent
+   from hover so the two states never look identical mid-interaction */
 .memberCard.selected {
-  border-color: var(--vibrant-scarlet);
-  background: rgba(255, 0, 0, 0.05);
-  box-shadow: 0 0 20px rgba(255, 0, 0, 0.1);
+  border-color: var(--crimson-red-bright);
+  background: rgba(176, 0, 32, 0.06);
+  box-shadow: 0 0 20px rgba(176, 0, 32, 0.15);
 }
 
 .avatarContainer {
@@ -254,7 +257,7 @@
   width: 100%;
   aspect-ratio: 1 / 1;
   background: #111;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(245, 245, 240, 0.08);
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -291,7 +294,7 @@
   font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(245, 245, 240, 0.5);
   margin-top: 0.2rem;
   margin-bottom: 0.5rem;
 }
@@ -299,19 +302,21 @@
 /* ----- Word on card (only the word, no label) ----- */
 .modalWord {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: 0.5rem;
   flex-wrap: wrap;
   justify-content: center;
-  margin-top: 0.25rem;
+  margin-top: 0.5rem;
 }
 
+/* Plain text, same orange as the "BUILD" tag — one consistent accent
+   instead of a separate crimson badge. */
 .wordValue {
-  font-family: 'Anybody', sans-serif;
+  font-family: 'Space Mono', monospace;
   font-weight: 700;
-  font-size: 1.2rem;
-  letter-spacing: -0.02em;
-  color: var(--crimson-red);
+  font-size: 0.85rem;
+  letter-spacing: 0.14em;
+  color: var(--vibrant-scarlet);
   text-transform: uppercase;
 }
 
@@ -320,15 +325,15 @@
   font-size: 0.55rem;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: rgba(255, 255, 255, 0.2);
+  color: rgba(245, 245, 240, 0.2);
   margin-top: 0.75rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-top: 1px solid rgba(245, 245, 240, 0.06);
   padding-top: 0.75rem;
   width: 100%;
 }
 
 .memberCard:hover .clickHint {
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(245, 245, 240, 0.4);
 }
 
 .selectedHint {
@@ -336,9 +341,9 @@
   font-size: 0.65rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--vibrant-scarlet);
+  color: var(--crimson-red-bright);
   margin-top: 0.75rem;
-  border-top: 1px solid rgba(255, 0, 0, 0.3);
+  border-top: 1px solid rgba(176, 0, 32, 0.35);
   padding-top: 0.75rem;
   width: 100%;
 }
@@ -377,7 +382,7 @@
 .modalOverlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.92);
+  background: rgba(13, 13, 13, 0.92);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -387,7 +392,7 @@
 
 .modal {
   background: var(--pitch-black);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(245, 245, 240, 0.15);
   max-width: 580px;
   width: 100%;
   padding: 2.5rem 2.5rem;
@@ -400,7 +405,7 @@
   right: 1rem;
   background: none;
   border: none;
-  color: rgba(255, 255, 255, 0.3);
+  color: rgba(245, 245, 240, 0.3);
   font-family: 'Space Mono', monospace;
   font-size: 1.8rem;
   line-height: 1;
@@ -429,7 +434,7 @@
   height: 100px;
   flex-shrink: 0;
   background: #111;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(245, 245, 240, 0.08);
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -468,7 +473,7 @@
 
 .modalDivider {
   border: none;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(245, 245, 240, 0.08);
   margin: 0.25rem 0 0.5rem;
 }
 
@@ -476,7 +481,7 @@
   font-family: 'Hanken Grotesk', sans-serif;
   font-size: 1.05rem;
   font-weight: 400;
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(245, 245, 240, 0.85);
   line-height: 1.5;
   padding: 0.5rem 0 0.25rem;
   border-left: 3px solid var(--vibrant-scarlet);
@@ -488,17 +493,18 @@
   font-weight: 600;
 }
 
-/* Modal word (with label) */
+/* Modal word (with label) — kept in crimson to match the card's wordValue,
+   so the "word" motif reads as one consistent accent wherever it appears */
 .modal .modalWord .wordLabel {
   font-family: 'Space Mono', monospace;
   font-size: 0.65rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: rgba(255, 255, 255, 0.3);
+  color: rgba(245, 245, 240, 0.3);
 }
 
 .modal .modalWord .wordValue {
-  font-size: 1.6rem;
+  font-size: 1.1rem;
 }
 
 /* ----- Sub-navigation (sticky) ----- */
@@ -507,7 +513,7 @@
   top: var(--navbar-height);
   z-index: 50;
   background: var(--pitch-black);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(245, 245, 240, 0.08);
   padding: 0.75rem 0;
   margin-bottom: 1.5rem;
   backdrop-filter: blur(6px);
@@ -542,7 +548,7 @@
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(245, 245, 240, 0.5);
   text-decoration: none;
   padding: 0.4rem 0.1rem 0.55rem;
   white-space: nowrap;
@@ -572,7 +578,7 @@
 
 .teamNavLink.active {
   color: var(--vibrant-scarlet);
-  text-shadow: 0 0 14px rgba(255, 0, 0, 0.35);
+  text-shadow: 0 0 14px rgba(255, 106, 0, 0.35);
 }
 
 .teamNavLink.active::after {
