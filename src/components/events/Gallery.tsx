@@ -34,7 +34,7 @@ export function Gallery({
                   style={{ aspectRatio: "4/3" }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                <span className="mono-label absolute bottom-3 left-3 text-white/90 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+                <span className="mono-label absolute bottom-3 left-3 text-stark-white/90 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
                   {String(i + 1).padStart(2, "0")} · VIEW
                 </span>
               </button>

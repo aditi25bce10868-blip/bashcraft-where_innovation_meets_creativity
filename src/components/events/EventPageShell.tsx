@@ -55,14 +55,14 @@ export function EventPageShell({
   };
 
   return (
-    <div className="relative min-h-screen bg-[color:var(--surface)] text-white">
+    <div className="relative min-h-screen bg-[color:var(--surface)] text-stark-white">
       <ScrollProgress />
       <CursorGlow />
 
       <div className="fixed left-4 top-4 z-[65] sm:left-6 sm:top-6">
         <Link
           to="/events"
-          className="glass-card mono-label inline-flex items-center gap-2 rounded-full px-3 py-2 text-white/80 transition hover:text-flame"
+          className="glass-card mono-label inline-flex items-center gap-2 rounded-full px-3 py-2 text-stark-white/80 transition hover:text-flame"
         >
           <ArrowLeft className="h-3.5 w-3.5" />
           <span>Archive</span>
@@ -70,13 +70,13 @@ export function EventPageShell({
       </div>
 
       <div className="fixed right-4 top-4 z-[65] flex items-center gap-2 sm:right-6 sm:top-6">
-        <div className="glass-card mono-label hidden items-center gap-2 rounded-full px-3 py-2 text-white/70 sm:inline-flex">
+        <div className="glass-card mono-label hidden items-center gap-2 rounded-full px-3 py-2 text-stark-white/70 sm:inline-flex">
           <Clock className="h-3.5 w-3.5" />
           <span>{readingMinutes} min read</span>
         </div>
         <button
           onClick={share}
-          className="glass-card mono-label inline-flex items-center gap-2 rounded-full px-3 py-2 text-white/80 transition hover:text-flame"
+          className="glass-card mono-label inline-flex items-center gap-2 rounded-full px-3 py-2 text-stark-white/80 transition hover:text-flame"
         >
           <Share2 className="h-3.5 w-3.5" />
           <span>{copied ? "Copied" : "Share"}</span>
@@ -108,9 +108,9 @@ export function EventPageShell({
               <span className="h-1.5 w-1.5 rounded-full bg-flame animate-flame-pulse" />
               {eyebrow}
             </span>
-            {date && <span className="hidden sm:inline text-white/40">/</span>}
+            {date && <span className="hidden sm:inline text-stark-white/40">/</span>}
             {date && <span>{date}</span>}
-            {tag && <span className="hidden sm:inline text-white/40">/</span>}
+            {tag && <span className="hidden sm:inline text-stark-white/40">/</span>}
             {tag && <span className="text-flame">{tag}</span>}
           </motion.div>
           <motion.h1

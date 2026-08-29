@@ -5,17 +5,19 @@
 
 import techtalkImg from '../assets/events/techtalk-arpit-bhayani.png';
 import investathonImg from '../assets/events/investathon.png';
+import socialLoopImg from '../assets/events/social-loop-cover.jpeg';
 
 export const UPCOMING_EVENTS = [
   {
     id: 'evt-001',
-    title: 'FRESHERS GOT TALENT',
-    date: null,
-    displayDate: 'TBA',
-    location: 'VIT BHOPAL',
-    tentative: true,
-    description: 'An open talent showcase for first-year students — performances, skits, and creative acts. Date to be announced.',
-    image: null,
+    slug: '/events/social-loop',
+    title: 'SOCIAL LOOP',
+    date: '2026-09-13T14:00:00+05:30',
+    displayDate: '13 SEP · 2026',
+    location: 'AB-1 AUDI-1, VIT BHOPAL',
+    tentative: false,
+    description: "Presented by BashCraft Club — VIT Bhopal's freshers' talent show. Singing, dance, stand-up, acting, storytelling, poetry, beatboxing, and more. Solo, Duo, Trio, Squad, or Squad+. 2 PM – 7 PM at AB-1 Audi-1. Registration mail will be shared soon.",
+    image: socialLoopImg,
     registrationUrl: null,
   },
 ];
