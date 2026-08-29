@@ -10,16 +10,16 @@ import Contact from './pages/Contact';
 import BashNex26 from './pages/events/BashNex26';
 import ArpitBhayani from './pages/events/ArpitBhayani';
 import Investathon from './pages/events/Investathon';
-import TalentShow from './pages/events/TalentShow';
-import { initLenis, destroyLenis } from './lib/lenis';
+import SocialLoop from './pages/events/SocialLoop';
+import { initLenis } from './lib/lenis';
 
 export default function App() {
   const location = useLocation();
 
   useEffect(() => {
-    initLenis();
+    const lenis = initLenis();
     return () => {
-      destroyLenis();
+      lenis?.destroy?.();
     };
   }, []);
 
@@ -36,7 +36,7 @@ export default function App() {
         <Route path="/events/bashnex26" element={<BashNex26 />} />
         <Route path="/events/arpit-bhayani" element={<ArpitBhayani />} />
         <Route path="/events/investathon" element={<Investathon />} />
-        <Route path="/events/talent-show" element={<TalentShow />} />
+        <Route path="/events/social-loop" element={<SocialLoop />} />
         <Route path="/team/:teamId" element={<TeamDetail />} />
         <Route path="/team" element={<Team />} />
         <Route path="/contact" element={<Contact />} />
