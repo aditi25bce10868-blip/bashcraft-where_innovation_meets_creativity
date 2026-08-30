@@ -554,19 +554,19 @@ function VisionSection() {
 const COMMUNITY_PILLARS = [
   {
     index: "01",
-    word: "BUILD.",
+    word: "BUILD",
     description: "Real products, real deadlines — no fluff, just asli engineering.",
     src: pillarBuildImage,
   },
   {
     index: "02",
-    word: "CREATE.",
+    word: "CREATE",
     description: "Design systems, reels, and tools members actually reach for.",
     src: pillarCreateImage,
   },
   {
     index: "03",
-    word: "INSPIRE.",
+    word: "INSPIRE",
     description: "Mentor the next builder — zero gatekeeping, always sharper.",
     src: pillarInspireImage,
   },
