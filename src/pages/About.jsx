@@ -273,10 +273,10 @@ function HeroSection() {
       {/* Faint corner coordinates — reinforces the "blueprint" feel */}
       <span className="absolute top-24 md:top-20 left-6 md:left-10 flex items-center gap-2 font-mono text-[11px] tracking-[0.25em] text-[#c9c9c9] uppercase">
         <img src={logo} alt="Bashcraft" className="h-5 w-5 object-contain" />
-        Bashcraft / Dev Club
+        Bashcraft 
       </span>
       <span className="hidden md:block absolute top-20 right-6 md:right-10 font-mono text-[11px] tracking-[0.25em] text-[#c9c9c9] uppercase">
-        Est. Community
+        Bashcraft Community
       </span>
 
       <div className="relative flex flex-col items-center text-center px-6">
@@ -640,12 +640,11 @@ function CommunitySection() {
                 word reads clearly against the image. */}
             <div className="absolute inset-0 bg-[#0D0D0D]/55 transition-colors duration-500 group-hover:bg-[#0D0D0D]/75" />
 
-            {/* Hover reveal — a small "01 — Build" style eyebrow above the
-                word (matching the Vision/Membership section labels),
-                the word itself in crimson, then a one-line "no fluff"
-                description. Each rises in with a slightly longer delay
-                than the one before it, so they cascade rather than pop
-                in all at once. */}
+            {/* The word itself is ALWAYS visible — it's the label for the
+                panel, not part of the reveal. Only the eyebrow index and
+                description below fade in on hover/tap, so on mobile
+                (where there's no real hover) every panel still reads as
+                BUILD / CREATE / INSPIRE without needing to be tapped. */}
             <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 px-8 text-center">
               <span
                 className="font-mono text-[11px] tracking-[0.3em] uppercase text-[#F5F5F0]/70 opacity-0 -translate-y-2 transition-all duration-500 ease-out group-hover:opacity-100 group-hover:translate-y-0"
@@ -654,8 +653,8 @@ function CommunitySection() {
                 {pillar.index} — {pillar.word.replace(".", "")}
               </span>
               <span
-                className="font-display font-bold uppercase tracking-tight text-[clamp(2rem,5vw,3.75rem)] opacity-0 translate-y-3 transition-all duration-500 ease-out group-hover:opacity-100 group-hover:translate-y-0"
-                style={{ color: "#B00020", transitionDelay: "80ms" }}
+                className="font-display font-bold uppercase tracking-tight text-[clamp(2rem,5vw,3.75rem)] transition-transform duration-500 ease-out group-hover:scale-105"
+                style={{ color: "#B00020" }}
               >
                 {pillar.word}
               </span>
@@ -759,7 +758,7 @@ function WhyJoinSection() {
     >
       <div className="max-w-7xl mx-auto px-6 md:px-10">
         <span ref={eyebrowRef} className="inline-block">
-          <Eyebrow>02 — Membership</Eyebrow>
+          <Eyebrow></Eyebrow>
         </span>
         <h2
           ref={headingRef}
@@ -771,7 +770,7 @@ function WhyJoinSection() {
           ref={introParaRef}
           className="mt-6 font-body text-sm md:text-base text-[#7a7a7a] max-w-xl"
         >
-          Four reasons members stay long after their first semester.
+          Where slide decks go to die and real engineering actually happens
         </p>
       </div>
 
