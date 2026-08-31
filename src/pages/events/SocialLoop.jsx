@@ -104,7 +104,7 @@ export default function SocialLoop() {
       <Reveal className="mb-16 grid grid-cols-1 gap-4 sm:grid-cols-3" delay={0.1}>
         <DetailCard icon={CalendarDays} label="Date" value="13th September, 2026" />
         <DetailCard icon={MapPin} label="Venue" value="AB-1 AUDI-1, VIT Bhopal" />
-        <DetailCard icon={Clock} label="Time" value="2:00 PM – 7:00 PM" />
+        <DetailCard icon={Clock} label="Time" value="2:00 PM – 6:00 PM" />
       </Reveal>
 
       {/* Categories */}
