@@ -51,15 +51,6 @@ export function HeroArchive() {
           </div>
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 40, filter: "blur(20px)" }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-          className="mono-label mb-4 text-flame"
-        >
-          — EVENT LOG · 004 ENTRIES ARCHIVED
-        </motion.div>
-
         <h1 className="font-display font-bold uppercase leading-[0.85] tracking-tight text-[clamp(4rem,18vw,14rem)]">
           <TitleLine text="EVENTS" delay={0.2} />
           <TitleLine text="ARCHIVE" delay={0.5} accent />
