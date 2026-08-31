@@ -6,7 +6,6 @@ import { SmoothScroll } from "@/components/events/SmoothScroll";
 import { CursorGlow } from "@/components/events/CursorGlow";
 import { ScrollProgress } from "@/components/events/ScrollProgress";
 import { BackToTop } from "@/components/events/BackToTop";
-import { Marquee } from "@/components/events/Marquee";
 import Navbar from "@/components/Navbar";
 
 /**
@@ -91,19 +90,6 @@ export default function Events() {
         empty="No archived events."
         items={archived}
         accent="crimson"
-      />
-
-      <Marquee
-        words={[
-          "TALKS",
-          "HACKATHONS",
-          "COMMUNITY",
-          "BUILD",
-          "SHIP",
-          "REPEAT",
-          "SIGNAL",
-          "BASHCRAFT",
-        ]}
       />
 
       <BackToTop />
