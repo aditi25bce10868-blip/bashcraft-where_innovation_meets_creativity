@@ -65,7 +65,7 @@ export default function Home() {
               </span>
             </motion.div>
 
-            {/* Giant Headline */}
+            {/* Giant Headline */}f
             <motion.h1
               variants={fadeInUp}
               initial="hidden"
@@ -233,9 +233,15 @@ export default function Home() {
                       </div>
 
                       <div className="flex items-center space-x-4">
-                        <span className="inline-block border border-stark-white/40 opacity-50 px-6 py-3 font-mono-label text-xs font-bold uppercase text-stark-white/70 text-center cursor-not-allowed">
-                          REGISTRATION OPENS SOON
-                        </span>
+                        <a
+                          href="https://forms.gle/2Ro4kZnY9DGwKabv5"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="inline-block border-2 border-vibrant-scarlet bg-vibrant-scarlet px-6 py-3 font-mono-label text-xs font-bold uppercase text-stark-white text-center transition-all duration-200 hover:bg-pitch-black hover:text-vibrant-scarlet hover:scale-105"
+                        >
+                          REGISTRATIONS OPEN
+                        </a>
                         <motion.span
                           animate={{ rotate: isExpanded ? 180 : 0 }}
                           transition={{ duration: 0.2 }}
@@ -258,11 +264,6 @@ export default function Home() {
                           <p className="font-body-md text-base text-stark-white/80 leading-relaxed">
                             {evt.description}
                           </p>
-                          {evt.image && (
-                            <div className="border border-stark-white/30 max-h-80 overflow-hidden">
-                              <img src={evt.image} alt={evt.title} className="w-full h-full object-cover" />
-                            </div>
-                          )}
                         </motion.div>
                       )}
                     </AnimatePresence>
